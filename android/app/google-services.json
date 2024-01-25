@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "811446032101",
+    "project_id": "musang-syncronizehub-odyssey",
+    "storage_bucket": "musang-syncronizehub-odyssey.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811446032101:android:d5f2347d478d542856660c",
+        "android_client_info": {
+          "package_name": "com.musang.teknologi.nusantara.musang_syncronizehub_odyssey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811446032101-arl4da16d99ovfdnmn26keja5mk04lk9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.musang.teknologi.nusantara.musang_syncronizehub_odyssey",
+            "certificate_hash": "14201b6292b742899c7612a117b99653f269dccc"
+          }
+        },
+        {
+          "client_id": "811446032101-j2mfg41k03q2hc2pf7r0an3qlpb24q5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpEvC2hVTUhqHc1tqP6OTOEf4GH7xka4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811446032101-j2mfg41k03q2hc2pf7r0an3qlpb24q5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
