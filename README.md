@@ -1,6 +1,6 @@
 # musang_syncronizehub_odyssey
 
-an Admin management Dashboard project.
+A new Flutter project.
 
 ## Getting Started
 

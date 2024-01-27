@@ -7,7 +7,7 @@ project(runner LANGUAGES CXX)
 set(BINARY_NAME "musang_syncronizehub_odyssey")
 # The unique GTK application identifier for this application. See:
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
-set(APPLICATION_ID "com.musang.teknologi.nusantara.musang_syncronizehub_odyssey")
+set(APPLICATION_ID "com.musang_teknologi_nusantara.musang_syncronizehub_odyssey")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
