@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:musang_syncronizehub_odyssey/fade_in_animation/fade_in_animation_model.dart';
 
 import 'fade_in_animation_controller.dart';

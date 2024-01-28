@@ -5,3 +5,7 @@
     -->
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
+
+<!--<application android:usesCleartextTraffic="true">-->
+<!--  &lt;!&ndash; possibly other elements &ndash;&gt;-->
+<!--</application>-->

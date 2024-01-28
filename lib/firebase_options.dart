@@ -17,10 +17,11 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
+      // throw UnsupportedError(
+      //   'DefaultFirebaseOptions have not been configured for web - '
+      //   'you can reconfigure this by running the FlutterFire CLI again.',
+      // );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -53,11 +54,18 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDakOxx0FwqpIbo6z5G0v-INhxwExp3HbE',
-    appId: '1:304325698899:android:ad5f58162d2bd4ce64eda6',
-    messagingSenderId: '304325698899',
-    projectId: 'flutter-login-app-f6e5f',
-    storageBucket: 'flutter-login-app-f6e5f.appspot.com',
+    apiKey: 'AIzaSyBEPgpgSf2PgB5EeYrjlhNMLev2LgAaAGA',
+    appId: '1:181801802533:android:01d1de7d98915410a718cc',
+    messagingSenderId: '181801802533',
+    projectId: 'musang-syncronizehub-ody-3091b',
+    storageBucket: 'musang-syncronizehub-ody-3091b.appspot.com',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+      apiKey: 'AIzaSyBO8OdeiQhqLzTV8MEHJBm9vI_34grTL0w',
+      appId: '1:181801802533:web:af11db5ed29407cca718cc',
+      messagingSenderId: '181801802533',
+      projectId: 'musang-syncronizehub-ody-3091b'
   );
 
   // static const FirebaseOptions ios = FirebaseOptions(
