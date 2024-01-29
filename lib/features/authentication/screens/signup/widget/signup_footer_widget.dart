@@ -15,12 +15,16 @@ class SignUpFooterWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const Text('OR'),
-        const SizedBox(height: 15,),
+        const SizedBox(
+          height: 15,
+        ),
         SizedBox(
           width: double.infinity,
           child: OutlinedButton.icon(
-            icon: const Image(image: AssetImage('assets/google.png'),
-              width: 20,),
+            icon: const Image(
+              image: AssetImage('assets/google.png'),
+              width: 20,
+            ),
             onPressed: () => controller.googleSignIn(),
             label: const Text('Sign In With Google'),
             style: OutlinedButton.styleFrom(
@@ -33,14 +37,25 @@ class SignUpFooterWidget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 15,),
-        TextButton(onPressed: (){}, child:
-        Text.rich(TextSpan(text: 'Already have an account? ',
-          style: Theme.of(context).textTheme.bodyMedium,
-          children:  [
-            TextSpan(text: 'Login'.toUpperCase(),
-              style: const TextStyle(color: Colors.blue,),),
-          ],),),
+        const SizedBox(
+          height: 15,
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Text.rich(
+            TextSpan(
+              text: 'Already have an account? ',
+              style: Theme.of(context).textTheme.bodyMedium,
+              children: [
+                TextSpan(
+                  text: 'Login'.toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.blue,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );

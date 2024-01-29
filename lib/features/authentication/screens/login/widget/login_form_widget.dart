@@ -74,7 +74,7 @@ class LoginForm extends StatelessWidget {
                     foregroundColor: Colors.white,
                     backgroundColor: const Color(0xff272727),
                     side: const BorderSide(
-                      color: Color(0xff272727),
+                      color: Colors.white,
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 5),
                   ),

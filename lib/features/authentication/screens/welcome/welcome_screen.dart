@@ -8,7 +8,7 @@ import '../login/login_screen.dart';
 import '../signup/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-   const WelcomeScreen({super.key});
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor:
-          isDarkMode ? const Color(0xff272727) : const Color(0xFFFFE082),
+          isDarkMode ? const Color(0xff272727) : const Color(0xFFDC143C),
       body: Stack(
         children: [
           TFadeInAnimation(
@@ -50,14 +50,18 @@ class WelcomeScreen extends StatelessWidget {
                       const Text(
                         'Building Awesome Apps',
                         style: TextStyle(
+                          color: Color(0xFF4CC3D9),
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
+                      const Text(
                         "Let's start your journey with us on this "
                         "amazing and easy platform",
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: TextStyle(
+                          color: Color(0xFF4CC3D9),
+                          fontSize: 15,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -65,13 +69,14 @@ class WelcomeScreen extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: OutlinedButton(
-                          onPressed: () => Get.to(()=>const LoginScreen()),
-                          style: OutlinedButton.styleFrom(
+                        child: ElevatedButton(
+                          onPressed: () => Get.to(() => const LoginScreen()),
+                          style: ElevatedButton.styleFrom(
                             shape: const RoundedRectangleBorder(),
-                            foregroundColor: const Color(0xff272727),
+                            foregroundColor: Color(0xFF4CC3D9),
+                            backgroundColor: const Color(0xff272727),
                             side: const BorderSide(
-                              color: Color(0xff272727),
+                              color: Colors.white,
                             ),
                             padding: const EdgeInsets.symmetric(vertical: 5),
                           ),
@@ -83,14 +88,14 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () => Get.to(()=>const SignUpScreen()),
+                          onPressed: () => Get.to(() => const SignUpScreen()),
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             shape: const RoundedRectangleBorder(),
-                            foregroundColor: Colors.white,
+                            foregroundColor: Color(0xFF4CC3D9),
                             backgroundColor: const Color(0xff272727),
                             side: const BorderSide(
-                              color: Color(0xff272727),
+                              color: Colors.white,
                             ),
                             padding: const EdgeInsets.symmetric(vertical: 5),
                           ),
