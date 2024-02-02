@@ -40,7 +40,7 @@ class DashboardBanner extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  'Android For Beginners',
+                  'ATG',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -49,7 +49,7 @@ class DashboardBanner extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '10 Lessons',
+                  'This example data',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 15),
                 ),
@@ -92,7 +92,7 @@ class DashboardBanner extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        'JAVA',
+                        'Flow Meter',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 18,
@@ -100,7 +100,7 @@ class DashboardBanner extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '10 Lessons',
+                        'This example data',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 15),
                       ),

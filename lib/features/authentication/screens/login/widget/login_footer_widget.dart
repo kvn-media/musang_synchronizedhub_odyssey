@@ -41,7 +41,7 @@ class LoginFooterWidget extends StatelessWidget {
           height: 15,
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () => controller.loginUser(),
           child: Text.rich(
             TextSpan(
               text: 'Dont have an account? ',

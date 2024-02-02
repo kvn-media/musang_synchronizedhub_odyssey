@@ -15,7 +15,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget{
         color: Colors.black,
       ),
       title: const Text(
-        'Programming',
+        'Dashboard Report',
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musang_syncronizehub_odyssey/features/authentication/controllers/login_controller.dart';
+import 'package:musang_syncronizehub_odyssey/features/authentication/screens/signup/signup_screen.dart';
 
 class SignUpFooterWidget extends StatelessWidget {
   const SignUpFooterWidget({
@@ -41,7 +42,7 @@ class SignUpFooterWidget extends StatelessWidget {
           height: 15,
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () => Get.to(() => const SignUpScreen()),
           child: Text.rich(
             TextSpan(
               text: 'Already have an account? ',

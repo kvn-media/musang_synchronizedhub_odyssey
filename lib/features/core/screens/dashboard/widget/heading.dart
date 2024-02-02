@@ -13,11 +13,11 @@ class DashboardHeading extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Hey, Coding with ',
+          'Hey, lorem ipsum dolores ',
           style: txtTheme.bodyLarge,
         ),
         const Text(
-          'Explore Courses',
+          'Explore Dashboard',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w800,

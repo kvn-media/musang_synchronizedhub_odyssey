@@ -46,7 +46,7 @@ class DashBoard extends StatelessWidget {
 
               //Top course
               const Text(
-                'Top Courses',
+                'Example data',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,

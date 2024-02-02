@@ -59,14 +59,14 @@ class ProfileScreen extends StatelessWidget {
                 height: 10,
               ),
               const Text(
-                'Coding with',
+                'Admin Support',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
                 ),
               ),
               const Text(
-                'support@codingwith.com',
+                'support@musang.com',
                 style: TextStyle(
                   fontSize: 16,
                 ),
