@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/appbar.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/banners.dart';
+// import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/banners.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/categories.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/flowmeter_list.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/heading.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/search.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/top_courses.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_list.dart';
 
 class DashBoard extends StatelessWidget {
   const DashBoard({super.key});
@@ -38,21 +39,45 @@ class DashBoard extends StatelessWidget {
                 height: 20,
               ),
 
-              //Banner
-              const DashboardBanner(),
-              const SizedBox(
-                height: 20,
-              ),
+              // //Banner
+              // const DashboardBanner(),
+              // const SizedBox(
+              //   height: 20,
+              // ),
 
-              //Top course
+              // ATG data
               const Text(
-                'Example data',
+                'ATG data',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              const DashboardTopCourses(),
+
+              const SizedBox(
+                height: 10,
+              ),
+
+              const ATGDashboardData(),
+
+              const SizedBox(
+                height: 20,
+              ),
+
+              // Flow Meter data
+              const Text(
+                'Flow Meter data',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+
+              const SizedBox(
+                height: 10,
+              ),
+
+              const FlowMeterDashboardData(),
             ],
           ),
         ),

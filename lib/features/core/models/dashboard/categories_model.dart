@@ -14,8 +14,8 @@ class CategoriesModel {
   static List<CategoriesModel> list = [
     CategoriesModel('FM', 'Flow Meter', 'Download', null),
     CategoriesModel('ATG', 'Automatic Tank Gauge', 'Download', null),
-    CategoriesModel('H', 'HTML', 'Download', null),
-    CategoriesModel('k', 'Kotlin', 'Download', null),
-    CategoriesModel('P', 'Python', 'Download', null),
+    // CategoriesModel('H', 'HTML', 'Download', null),
+    // CategoriesModel('k', 'Kotlin', 'Download', null),
+    // CategoriesModel('P', 'Python', 'Download', null),
   ];
 }

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/repos/auth_repo/auth_repo.dart';

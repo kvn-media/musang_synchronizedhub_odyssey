@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../controllers/login_controller.dart';
 import '../../forget_password/forget_password_options/forget_password_model_bottom_sheet.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(LoginController());
-    final formKey = GlobalKey<FormState>();
+  State<LoginForm> createState() => _LoginFormState();
+}
 
+class _LoginFormState extends State<LoginForm> {
+  final controller = Get.put(LoginController());
+  final formKey = GlobalKey<FormState>();
+  bool isPasswordVisible = false;
+
+  @override
+  Widget build(BuildContext context) {
     return Form(
       key: formKey,
       child: Container(
@@ -34,15 +41,24 @@ class LoginForm extends StatelessWidget {
             ),
             TextFormField(
               controller: controller.password,
+              obscureText: !isPasswordVisible,
               decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock),
-                  labelText: 'Password',
-                  hintText: 'Password',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.remove_red_eye_sharp),
-                  )),
+                prefixIcon: const Icon(Icons.lock),
+                labelText: 'Password',
+                hintText: 'Password',
+                border: const OutlineInputBorder(),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isPasswordVisible = !isPasswordVisible;
+                    });
+                  },
+                  child: Icon(
+                    // ignore: dead_code
+                    isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -85,6 +101,4 @@ class LoginForm extends StatelessWidget {
       ),
     );
   }
-
 }
-
