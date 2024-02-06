@@ -10,8 +10,13 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
     var height = mediaQuery.size.height;
+    var brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
+
     return SafeArea(
       child: Scaffold(
+        backgroundColor:
+            isDarkMode ? const Color(0xff272727) : const Color(0xFFDC143C),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(30),
@@ -29,4 +34,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-

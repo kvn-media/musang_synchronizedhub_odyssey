@@ -8,12 +8,19 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    // var height = mediaQuery.size.height;
+    var brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
+
     return SafeArea(
       child: Scaffold(
+        backgroundColor:
+            isDarkMode ? const Color(0xff272727) : const Color(0xFFDC143C),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(30),
-            child:  const Column(
+            child: const Column(
               children: [
                 FormHeaderWidget(
                   image: 'assets/welcome.png',
@@ -30,5 +37,3 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-
-

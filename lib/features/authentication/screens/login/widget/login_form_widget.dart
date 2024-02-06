@@ -30,7 +30,10 @@ class _LoginFormState extends State<LoginForm> {
             TextFormField(
               controller: controller.email,
               decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.person_outline_outlined),
+                prefixIcon: Icon(
+                  Icons.person_outline_outlined,
+                  color: Colors.white,
+                ),
                 labelText: 'Email',
                 hintText: 'Email',
                 border: OutlineInputBorder(),
@@ -43,7 +46,10 @@ class _LoginFormState extends State<LoginForm> {
               controller: controller.password,
               obscureText: !isPasswordVisible,
               decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.lock),
+                prefixIcon: const Icon(
+                  Icons.lock,
+                  color: Colors.white,
+                ),
                 labelText: 'Password',
                 hintText: 'Password',
                 border: const OutlineInputBorder(),
@@ -71,7 +77,7 @@ class _LoginFormState extends State<LoginForm> {
                   },
                   child: const Text(
                     'Forget Password?',
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(color: Color(0xFF4CC3D9)),
                   )),
             ),
             SizedBox(
@@ -87,7 +93,7 @@ class _LoginFormState extends State<LoginForm> {
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     shape: const RoundedRectangleBorder(),
-                    foregroundColor: Colors.white,
+                    foregroundColor: Color(0xFF4CC3D9),
                     backgroundColor: const Color(0xff272727),
                     side: const BorderSide(
                       color: Colors.white,

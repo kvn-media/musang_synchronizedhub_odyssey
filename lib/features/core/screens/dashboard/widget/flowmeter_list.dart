@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../models/dashboard/flowmeter_model.dart';
 
@@ -17,6 +17,28 @@ class FlowMeterDashboardData extends StatefulWidget {
 class _FlowMeterDashboardDataState extends State<FlowMeterDashboardData> {
   late List<FlowmeterModel> list;
   late Timer timer;
+
+  final List<Gradient> gradients = [
+    LinearGradient(
+      colors: [Color(0xFF4CC3D9), Color(0xFF357EA6)],
+      stops: [0.0, 1.0],
+    ),
+  ];
+
+  final List<StackedBarSeries<FlowmeterModel, String>> _detailedChartData = [
+    StackedBarSeries<FlowmeterModel, String>(
+      dataSource: FlowmeterModel.list,
+      xValueMapper: (FlowmeterModel data, _) => data.timestamp,
+      yValueMapper: (FlowmeterModel data, _) => data.flowRateGpm,
+      name: 'Level Barrel',
+    ),
+    StackedBarSeries<FlowmeterModel, String>(
+      dataSource: FlowmeterModel.list,
+      xValueMapper: (FlowmeterModel data, _) => data.timestamp,
+      yValueMapper: (FlowmeterModel data, _) => data.totalFlowGalon,
+      name: 'Volume Change Barrel',
+    ),
+  ];
 
   @override
   void initState() {
@@ -62,133 +84,155 @@ class _FlowMeterDashboardDataState extends State<FlowMeterDashboardData> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: list.length,
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: list[index].onPress,
-          child: SizedBox(
-            width: 390,
-            height: 200,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10, top: 5),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.shade400.withOpacity(0.2),
-                  image: DecorationImage(
-                    opacity: 0.5,
-                    image: Svg(list[index].image),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            list[index].timestamp,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        // ElevatedButton(
-                        //   onPressed: () {},
-                        //   style: ElevatedButton.styleFrom(
-                        //     shape: const CircleBorder(),
-                        //     foregroundColor: Colors.white,
-                        //     backgroundColor: const Color(0xff272727),
-                        //   ),
-                        //   child: const Icon(
-                        //     Icons.play_arrow,
-                        //   ),
-                        // ),
-                        // const SizedBox(
-                        //   width: 10,
-                        // ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                list[index].flowRateGpm?.toString() ?? "",
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                list[index].totalFlowGalon?.toString() ?? "",
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                list[index].tempFahrenheit?.toString() ?? "",
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                list[index].pressurePsi?.toString() ?? "",
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                list[index].densitylbGal?.toString() ?? "",
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                list[index].viscosityCp?.toString() ?? "",
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                list[index].apiGravity?.toString() ?? "",
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    Color textColor = isDarkMode ? Colors.white : Colors.black;
+    Color chartContainerColor =
+        (isDarkMode ? Colors.grey[800] : Colors.white) as Color;
+
+    return Column(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width * 0.8,
+          height: 200,
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: chartContainerColor,
+            boxShadow: [
+              BoxShadow(
+                color: isDarkMode
+                    ? Colors.transparent
+                    : Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 10,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: SfCartesianChart(
+            series: _detailedChartData,
+            primaryXAxis: CategoryAxis(
+              labelStyle: TextStyle(
+                color: textColor,
+              ),
+            ),
+            primaryYAxis: NumericAxis(
+              labelStyle: TextStyle(
+                color: textColor,
               ),
             ),
           ),
         ),
-      ),
+        // DataTable
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: chartContainerColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: DataTable(
+              headingTextStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              dataTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : Colors.black,
+              ),
+              columnSpacing: 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: isDarkMode ? Colors.black : Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              columns: [
+                DataColumn(
+                  label: Text(
+                    'Timestamp',
+                    style: TextStyle(color: textColor),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Flow Rate (GPM)',
+                    style: TextStyle(color: textColor),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Total Flow (Gallon)',
+                    style: TextStyle(color: textColor),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Temperature (°F)',
+                    style: TextStyle(color: textColor),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Pressure (PSI)',
+                    style: TextStyle(color: textColor),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Density (lb/Gal)',
+                    style: TextStyle(color: textColor),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Viscosity (cP)',
+                    style: TextStyle(color: textColor),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'API Gravity',
+                    style: TextStyle(color: textColor),
+                  ),
+                ),
+              ],
+              rows: list.map((item) {
+                return DataRow(
+                  cells: [
+                    DataCell(Text(item.timestamp)),
+                    DataCell(Text(item.flowRateGpm?.toString() ?? "")),
+                    DataCell(Text(item.totalFlowGalon?.toString() ?? "")),
+                    DataCell(Text(item.tempFahrenheit?.toString() ?? "")),
+                    DataCell(Text(item.pressurePsi?.toString() ?? "")),
+                    DataCell(Text(item.densitylbGal?.toString() ?? "")),
+                    DataCell(Text(item.viscosityCp?.toString() ?? "")),
+                    DataCell(Text(item.apiGravity?.toString() ?? "")),
+                  ],
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

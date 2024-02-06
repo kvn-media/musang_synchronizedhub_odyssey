@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ATGModel {
-  String timestamp, alarm, image;
+  String timestamp, alarm;
   final VoidCallback? onPress;
   int? levelBarrel;
   int? volumeChangeBarrel;
@@ -12,7 +12,6 @@ class ATGModel {
   ATGModel(
     this.timestamp,
     this.alarm,
-    this.image,
     this.levelBarrel,
     this.volumeChangeBarrel,
     this.avgTempCelcius,
@@ -25,7 +24,6 @@ class ATGModel {
     ATGModel(
       '2024-01-10 10:00:00',
       'None',
-      'assets/images/flat-geometry.svg',
       1000,
       0,
       20,
@@ -36,7 +34,6 @@ class ATGModel {
     ATGModel(
       '2024-01-10 11:00:00',
       'None',
-      'assets/images/flat-geometry.svg',
       980,
       -20,
       21,
@@ -47,7 +44,6 @@ class ATGModel {
     ATGModel(
       '2024-01-10 12:00:00',
       'High temperature',
-      'assets/images/flat-geometry.svg',
       950,
       -30,
       22,
@@ -58,7 +54,6 @@ class ATGModel {
     ATGModel(
       '2024-01-10 13:00:00',
       'High temperature',
-      'assets/images/flat-geometry.svg',
       950,
       0,
       22,
@@ -69,7 +64,6 @@ class ATGModel {
     ATGModel(
       '2024-01-10 14:00:00',
       'High temperature cleared',
-      'assets/images/flat-geometry.svg',
       930,
       -20,
       21,

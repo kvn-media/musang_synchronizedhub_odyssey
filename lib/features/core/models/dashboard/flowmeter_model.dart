@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FlowmeterModel {
-  String timestamp, image;
+  String timestamp;
   final VoidCallback? onPress;
   int? flowRateGpm;
   int? totalFlowGalon;
@@ -13,7 +13,6 @@ class FlowmeterModel {
 
   FlowmeterModel(
     this.timestamp,
-    this.image,
     this.flowRateGpm,
     this.totalFlowGalon,
     this.tempFahrenheit,
@@ -27,7 +26,6 @@ class FlowmeterModel {
   static List<FlowmeterModel> list = [
     FlowmeterModel(
       '2024-01-10 10:00:00',
-      'assets/images/abstract-fluid-shapes.svg',
       50,
       1000,
       70,
@@ -39,7 +37,6 @@ class FlowmeterModel {
     ),
     FlowmeterModel(
       '2024-01-10 10:15:00',
-      'assets/images/abstract-fluid-shapes.svg',
       52,
       1052,
       72,
@@ -51,7 +48,6 @@ class FlowmeterModel {
     ),
     FlowmeterModel(
       '2024-01-10 10:30:00',
-      'assets/images/abstract-fluid-shapes.svg',
       48,
       1100,
       74,

@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/signup_controller.dart';
 
-class SignUpFormWidget extends StatelessWidget {
+class SignUpFormWidget extends StatefulWidget {
   const SignUpFormWidget({
     super.key,
   });
 
   @override
+  State<SignUpFormWidget> createState() => _SignUpFormWidgetState();
+}
+
+class _SignUpFormWidgetState extends State<SignUpFormWidget> {
+  @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
     final formKey = GlobalKey<FormState>();
+    bool isPasswordVisible = false;
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -57,10 +63,21 @@ class SignUpFormWidget extends StatelessWidget {
             ),
             TextFormField(
               controller: controller.password,
-              decoration: const InputDecoration(
-                label: Text('Password'),
-                prefixIcon: Icon(
-                  Icons.lock,
+              obscureText: !isPasswordVisible,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.lock),
+                labelText: 'Password',
+                border: const OutlineInputBorder(),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isPasswordVisible = !isPasswordVisible;
+                    });
+                  },
+                  child: Icon(
+                    // ignore: dead_code
+                    isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                  ),
                 ),
               ),
             ),

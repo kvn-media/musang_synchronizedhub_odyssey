@@ -29,7 +29,7 @@ class LoginFooterWidget extends StatelessWidget {
             label: const Text('Sign In With Google'),
             style: OutlinedButton.styleFrom(
               shape: const RoundedRectangleBorder(),
-              foregroundColor: const Color(0xff272727),
+              foregroundColor: Colors.white,
               side: const BorderSide(
                 color: Color(0xff272727),
               ),
@@ -45,12 +45,15 @@ class LoginFooterWidget extends StatelessWidget {
           child: Text.rich(
             TextSpan(
               text: 'Dont have an account? ',
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: Colors.white),
               children: [
                 TextSpan(
                   text: 'Sign Up'.toUpperCase(),
                   style: const TextStyle(
-                    color: Colors.blue,
+                    color: Color(0xFF4CC3D9),
                   ),
                 ),
               ],
