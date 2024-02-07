@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ATGModel {
-  String timestamp, alarm;
+  String timestamp, alarm, category;
   final VoidCallback? onPress;
   int? levelBarrel;
   int? volumeChangeBarrel;
@@ -17,6 +17,7 @@ class ATGModel {
     this.avgTempCelcius,
     this.waterLevelMeter,
     this.productTempCelcius,
+    this.category,
     this.onPress,
   );
 
@@ -29,6 +30,7 @@ class ATGModel {
       20,
       0.1,
       null,
+      'Category 1',
       null,
     ),
     ATGModel(
@@ -39,6 +41,7 @@ class ATGModel {
       21,
       0.1,
       null,
+      'Category 1',
       null,
     ),
     ATGModel(
@@ -49,6 +52,7 @@ class ATGModel {
       22,
       0.1,
       30,
+      'Category 1',
       null,
     ),
     ATGModel(
@@ -59,6 +63,7 @@ class ATGModel {
       22,
       0.1,
       30,
+      'Category 1',
       null,
     ),
     ATGModel(
@@ -69,6 +74,7 @@ class ATGModel {
       21,
       0.1,
       28,
+      'Category 1',
       null,
     ),
   ];
