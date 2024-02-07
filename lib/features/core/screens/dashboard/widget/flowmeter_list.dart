@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/controllers/flowmeter_business_logic.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../models/dashboard/flowmeter_model.dart';
 
 class FlowMeterDashboardData extends StatefulWidget {
+  final FlowMeterBusinessLogic logic;
   const FlowMeterDashboardData({
     super.key,
+    required this.logic,
   });
 
   @override
@@ -77,7 +80,7 @@ class _FlowMeterDashboardDataState extends State<FlowMeterDashboardData> {
 
     // Set up the timer
     timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
-      updateData();
+      widget.logic.updateData();
     });
   }
 

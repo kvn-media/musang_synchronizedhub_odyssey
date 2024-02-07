@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/controllers/flowmeter_business_logic.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/appbar.dart';
 // import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/banners.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/categories.dart';
@@ -7,12 +8,17 @@ import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/wid
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/search.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_list.dart';
 
+import '../../controllers/atg_business_logic.dart';
+
 class DashBoard extends StatelessWidget {
   const DashBoard({super.key});
 
   @override
   Widget build(BuildContext context) {
     final txtTheme = Theme.of(context).textTheme;
+    // final ATGBusinessLogic atgLogic = ATGBusinessLogic();
+    final FlowMeterBusinessLogic flowmeterLogic = FlowMeterBusinessLogic();
+
     return Scaffold(
       appBar: const DashboardAppBar(),
       body: SingleChildScrollView(
@@ -58,7 +64,7 @@ class DashBoard extends StatelessWidget {
                 height: 10,
               ),
 
-              const ATGDashboardData(),
+              // ATGDashboardData(logic: atgLogic),
 
               const SizedBox(
                 height: 20,
@@ -77,7 +83,7 @@ class DashBoard extends StatelessWidget {
                 height: 10,
               ),
 
-              const FlowMeterDashboardData(),
+              FlowMeterDashboardData(logic: flowmeterLogic),
             ],
           ),
         ),
