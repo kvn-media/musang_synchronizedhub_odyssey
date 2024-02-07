@@ -37,7 +37,31 @@ class MyDatabase extends _$MyDatabase {
             // Perform migration from version 1 to version 2
             await migrator.addColumn(
               table,
+              table.alarm,
+            );
+            await migrator.addColumn(
+              table,
+              table.category,
+            );
+            await migrator.addColumn(
+              table,
+              table.levelBarrel,
+            );
+            await migrator.addColumn(
+              table,
+              table.volumeChangeBarrel,
+            );
+            await migrator.addColumn(
+              table,
+              table.avgTempCelcius,
+            );
+            await migrator.addColumn(
+              table,
               table.waterLevelMeter,
+            );
+            await migrator.addColumn(
+              table,
+              table.productTempCelcius,
             );
           }
           // Add more migration steps as needed for other versions
