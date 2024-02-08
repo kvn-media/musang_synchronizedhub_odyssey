@@ -1,79 +1,36 @@
-// import 'package:drift/drift.dart';
+// import 'package:flutter/material.dart';
 
-// @DataClassName('ATGModel')
-// class ATGModels extends Table {
-//   TextColumn get timestamp => text()();
-//   TextColumn get alarm => text()();
-//   TextColumn get category => text()();
-//   IntColumn get levelBarrel => integer().nullable()();
-//   IntColumn get volumeChangeBarrel => integer().nullable()();
-//   IntColumn get avgTempCelcius => integer().nullable()();
-//   RealColumn get waterLevelMeter => real().nullable()();
-//   IntColumn get productTempCelcius => integer().nullable()();
-// }
-
-// class ATGModel extends DataClass {
-//   final String timestamp;
-//   final String alarm;
-//   final String category;
-//   final int? levelBarrel;
-//   final int? volumeChangeBarrel;
-//   final int? avgTempCelcius;
-//   final double? waterLevelMeter;
-//   final int? productTempCelcius;
+// class ATGModel {
+//   final DateTime timestamp;
+//   final VoidCallback? onPress;
+//   final double levelBarrel;
+//   final double volumeChangeBarrel;
+//   final double avgTempCelcius;
+//   final double waterLevelMeter;
+//   final double productTempCelcius;
+//   final String alarm, category;
+//   final int siteId;
 
 //   ATGModel({
 //     required this.timestamp,
+//     required this.levelBarrel,
+//     required this.volumeChangeBarrel,
+//     required this.avgTempCelcius,
+//     required this.waterLevelMeter,
+//     required this.productTempCelcius,
 //     required this.alarm,
 //     required this.category,
-//     this.levelBarrel,
-//     this.volumeChangeBarrel,
-//     this.avgTempCelcius,
-//     this.waterLevelMeter,
-//     this.productTempCelcius,
+//     required this.siteId,
+//     this.onPress,
 //   });
 
-//   factory ATGModel.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-//       {String? prefix}) {
-//     return ATGModel(
-//       timestamp: data['${prefix}timestamp'] as String,
-//       alarm: data['${prefix}alarm'] as String,
-//       category: data['${prefix}category'] as String,
-//       levelBarrel: data['${prefix}levelBarrel'] as int?,
-//       volumeChangeBarrel: data['${prefix}volumeChangeBarrel'] as int?,
-//       avgTempCelcius: data['${prefix}avgTempCelcius'] as int?,
-//       waterLevelMeter: data['${prefix}waterLevelMeter'] as double?,
-//       productTempCelcius: data['${prefix}productTempCelcius'] as int?,
-//     );
-//   }
-
-//   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-//     return {
-//       'timestamp': timestamp,
-//       'alarm': alarm,
-//       'category': category,
-//       'levelBarrel': levelBarrel,
-//       'volumeChangeBarrel': volumeChangeBarrel,
-//       'avgTempCelcius': avgTempCelcius,
-//       'waterLevelMeter': waterLevelMeter,
-//       'productTempCelcius': productTempCelcius,
-//     };
-//   }
-
-//   @override
-//   String toString() {
-//     return 'ATGModel(timestamp: $timestamp, alarm: $alarm, category: $category, levelBarrel: $levelBarrel, volumeChangeBarrel: $volumeChangeBarrel, avgTempCelcius: $avgTempCelcius, waterLevelMeter: $waterLevelMeter, productTempCelcius: $productTempCelcius)';
-//   }
 // }
-
-
-
 
 
 import 'package:flutter/material.dart';
 
 class ATGModel {
-  String timestamp, alarm, category;
+  String timestamp, alarm;
   final VoidCallback? onPress;
   int? levelBarrel;
   int? volumeChangeBarrel;
@@ -89,7 +46,6 @@ class ATGModel {
     this.avgTempCelcius,
     this.waterLevelMeter,
     this.productTempCelcius,
-    this.category,
     this.onPress,
   );
 
@@ -102,7 +58,6 @@ class ATGModel {
       20,
       0.1,
       null,
-      'Category 1',
       null,
     ),
     ATGModel(
@@ -113,7 +68,6 @@ class ATGModel {
       21,
       0.1,
       null,
-      'Category 1',
       null,
     ),
     ATGModel(
@@ -124,7 +78,6 @@ class ATGModel {
       22,
       0.1,
       30,
-      'Category 1',
       null,
     ),
     ATGModel(
@@ -135,7 +88,6 @@ class ATGModel {
       22,
       0.1,
       30,
-      'Category 1',
       null,
     ),
     ATGModel(
@@ -146,7 +98,6 @@ class ATGModel {
       21,
       0.1,
       28,
-      'Category 1',
       null,
     ),
   ];

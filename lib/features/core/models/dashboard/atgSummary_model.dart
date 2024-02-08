@@ -1,23 +1,18 @@
-import 'package:musang_syncronizehub_odyssey/features/core/models/dashboard/atg_model.dart';
-
 // Access the ATGModel class.
 class ATGSummary {
-  int initialLevel = 0;
-  int finalLevel = 0;
-  int totalVolumeChange = 0;
+  int id;
+  DateTime? from_date;
+  DateTime? to_date;
+  double? from_tank_position;
+  double? last_tank_position;
+  double? change;
 
-  ATGSummary(List<ATGModel> atgData) {
-    // Calculate initial and final levels, and total volume change.
-    initialLevel = atgData.first.levelBarrel!;
-    finalLevel = atgData.last.levelBarrel!;
-    totalVolumeChange = finalLevel - initialLevel;
-  }
-
-  // Function to display the summary in a user-friendly format.
-  void displaySummary() {
-    print('**Summary Data for Level and Volume Change**');
-    print('Initial Level (Barrels): $initialLevel');
-    print('Final Level (Barrels): $finalLevel');
-    print('Total Volume Change (Barrels): $totalVolumeChange');
-  }
+  ATGSummary({
+    required this.id,
+    this.from_date,
+    this.to_date,
+    this.from_tank_position,
+    this.last_tank_position,
+    this.change,
+  });
 }

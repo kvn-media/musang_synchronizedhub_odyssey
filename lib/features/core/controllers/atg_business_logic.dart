@@ -9,19 +9,19 @@ class ATGBusinessLogic {
   final List<StackedBarSeries<ATGSummary, String>> summaryChartData = [];
 
   void initializeChartData() {
-    try {
-      ATGSummary summary = ATGSummary(listData);
-      summaryChartData.add(
-        StackedBarSeries(
-          dataSource: [summary],
-          xValueMapper: (ATGSummary data, _) => "Summary",
-          yValueMapper: (ATGSummary data, _) => data.finalLevel,
-          name: "Final Level",
-        ),
-      );
-    } catch (error) {
-      //_showErrorDialog(error);
-    }
+    // try {
+    //   ATGSummary summary = ATGSummary(listData);
+    //   summaryChartData.add(
+    //     StackedBarSeries(
+    //       dataSource: [summary],
+    //       xValueMapper: (ATGSummary data, _) => "Summary",
+    //       yValueMapper: (ATGSummary data, _) => data.finalLevel,
+    //       name: "Final Level",
+    //     ),
+    //   );
+    // } catch (error) {
+    //   //_showErrorDialog(error);
+    // }
 
     updateChartData();
   }

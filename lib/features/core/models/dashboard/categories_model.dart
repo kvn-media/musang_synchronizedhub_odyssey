@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_details.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/flowmeter_details.dart';
+// import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_details.dart';
+// import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/flowmeter_details.dart';
 
 class CategoriesModel {
   final String title, heading;
@@ -17,21 +17,21 @@ class CategoriesModel {
     CategoriesModel('ATG', 'Automatic Tank Gauge', null),
   ];
 
-  static void onTapATG(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ATGDetailsPage(),
-      ),
-    );
-  }
+  // static void onTapATG(BuildContext context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => ATGDetailsPage(),
+  //     ),
+  //   );
+  // }
 
-  static void onTapFlowmeter(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FlowmeterDetailsPage(),
-      ),
-    );
-  }
+  // static void onTapFlowmeter(BuildContext context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => FlowmeterDetailsPage(),
+  //     ),
+  //   );
+  // }
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/models/dashboard/atg_model.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share/share.dart';
+import 'package:csv/csv.dart';
+import 'dart:io';
 
 class ATGDetailsPage extends StatelessWidget {
   const ATGDetailsPage({super.key});
@@ -54,6 +58,34 @@ class ATGDetailsPage extends StatelessWidget {
           }).toList(),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _downloadCSV,
+        child: Icon(Icons.download),
+      ),
     );
+  }
+
+  void _downloadCSV() async {
+    List<List<dynamic>> rows = ATGModel.list.map((item) {
+      return [
+        item.timestamp,
+        item.alarm,
+        item.levelBarrel?.toString() ?? '',
+        item.volumeChangeBarrel?.toString() ?? '',
+        item.avgTempCelcius?.toString() ?? '',
+        item.waterLevelMeter?.toString() ?? '',
+        item.productTempCelcius?.toString() ?? '',
+      ];
+    }).toList();
+
+    String csv = const ListToCsvConverter().convert(rows);
+
+    final directory = await getApplicationDocumentsDirectory();
+    final path = directory.path;
+    final file = File('$path/export.csv');
+
+    await file.writeAsString(csv);
+
+    Share.shareFiles([file.path], text: 'Your CSV file');
   }
 }
