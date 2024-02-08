@@ -5,7 +5,7 @@ import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/wid
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/categories.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/flowmeter_list.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/heading.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/search.dart';
+// import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/search.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_list.dart';
 
 import '../../controllers/atg_business_logic.dart';
@@ -16,7 +16,7 @@ class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final txtTheme = Theme.of(context).textTheme;
-    // final ATGBusinessLogic atgLogic = ATGBusinessLogic();
+    final ATGBusinessLogic atgLogic = ATGBusinessLogic();
     final FlowMeterBusinessLogic flowmeterLogic = FlowMeterBusinessLogic();
 
     return Scaffold(
@@ -34,10 +34,10 @@ class DashBoard extends StatelessWidget {
               ),
 
               //Search
-              const DashboardSearch(),
-              const SizedBox(
-                height: 20,
-              ),
+              // const DashboardSearch(),
+              // const SizedBox(
+              //   height: 20,
+              // ),
 
               //Categories
               const DashboardCategories(),
@@ -64,7 +64,7 @@ class DashBoard extends StatelessWidget {
                 height: 10,
               ),
 
-              // ATGDashboardData(logic: atgLogic),
+              ATGDashboardData(logic: atgLogic),
 
               const SizedBox(
                 height: 20,

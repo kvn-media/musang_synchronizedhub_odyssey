@@ -3,4 +3,4 @@ targets:
     builders:
       drift_dev:
         options:
-          generate_connect_constructor: true
+          # generate_connect_constructor: true
