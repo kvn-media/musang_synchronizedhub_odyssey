@@ -1,24 +1,20 @@
-import 'package:drift_postgres/drift_postgres.dart';
 import 'package:firebase_auth/firebase_auth.dart' as Auth;
 import 'package:postgres/postgres.dart' as pg;
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:musang_syncronizehub_odyssey/data/drift/database.dart';
 import 'package:musang_syncronizehub_odyssey/features/authentication/screens/mail_verification/mail_verification.dart';
 import 'package:musang_syncronizehub_odyssey/repos/auth_repo/exceptions/t_exceptions.dart';
 
 import '../../features/authentication/screens/welcome/welcome_screen.dart';
-import '../../features/core/controllers/atg_business_logic.dart';
-import '../../features/core/controllers/flowmeter_business_logic.dart';
+import '../../features/core/controllers/atg_controller.dart';
+import '../../features/core/controllers/flowmeter_controller.dart';
 import '../../features/core/screens/dashboard/dashboard.dart';
 
 class AuthRepo extends GetxController {
   static AuthRepo get instance => Get.find();
 
-
   // variable
-  late final DriftPostgresDatabase database;
   late final ATGBusinessLogic atgLogic;
   late final FlowMeterBusinessLogic flowMeterLogic;
   final auth = Auth.FirebaseAuth.instance;
@@ -30,22 +26,6 @@ class AuthRepo extends GetxController {
   void onReady() {
     super.onReady();
 
-    database = DriftPostgresDatabase(
-      PgDatabase(
-        endpoint: pg.Endpoint(
-          host: getHost(),
-          database: 'musangten',
-          username: 'postgres',
-          password: 'LycoReco',
-        ),
-        settings: pg.ConnectionSettings(
-          sslMode: pg.SslMode.disable,
-        ),
-        logStatements: true,
-      ),
-    );
-
-    atgLogic = ATGBusinessLogic(database);
     flowMeterLogic = FlowMeterBusinessLogic();
     // Future.delayed(const Duration(seconds: 6));
     firebaseUser = Rx<Auth.User?>(auth.currentUser);

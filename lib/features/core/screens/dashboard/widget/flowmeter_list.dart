@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/controllers/flowmeter_business_logic.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/controllers/flowmeter_controller.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../models/dashboard/flowmeter_model.dart';

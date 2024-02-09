@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_business_logic.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_controller.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ATGDashboardData extends StatefulWidget {

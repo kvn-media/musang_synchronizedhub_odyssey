@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:musang_syncronizehub_odyssey/repos/auth_repo/auth_repo.dart';
 
-import '../../core/controllers/atg_business_logic.dart';
-import '../../core/controllers/flowmeter_business_logic.dart';
+import '../../core/controllers/atg_controller.dart';
+import '../../core/controllers/flowmeter_controller.dart';
 import '../../core/screens/dashboard/dashboard.dart';
 
 class OTPController extends GetxController {

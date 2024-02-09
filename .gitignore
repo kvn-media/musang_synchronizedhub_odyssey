@@ -7,6 +7,8 @@
 .atom/
 .buildlog/
 .history
+.lib/src/generated/prisma/prisma_client.dart
+.env
 .svn/
 migrate_working_dir/
 .google-services.json

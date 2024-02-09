@@ -25,14 +25,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.2.0"
-  analyzer_plugin:
-    dependency: transitive
-    description:
-      name: analyzer_plugin
-      sha256: "9661b30b13a685efaee9f02e5d01ed9f2b423bd889d28a304d02d704aee69161"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.11.3"
   ansicolor:
     dependency: transitive
     description:
@@ -273,30 +265,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.4"
-  drift:
-    dependency: "direct main"
-    description:
-      name: drift
-      sha256: b50a8342c6ddf05be53bda1d246404cbad101b64dc73e8d6d1ac1090d119b4e2
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.15.0"
-  drift_dev:
-    dependency: "direct dev"
-    description:
-      name: drift_dev
-      sha256: c037d9431b6f8dc633652b1469e5f53aaec6e4eb405ed29dd232fa888ef10d88
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.15.0"
-  drift_postgres:
-    dependency: "direct main"
-    description:
-      name: drift_postgres
-      sha256: "53970a18e2a30ab67acb804cecd79b4e81b3f92c31d5db027acdedab3374e8be"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -432,6 +400,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: c3fd9336eb55a38cc1bbd79ab17573113a8deccd0ecbbf926cca3c62803b5c2d
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -584,6 +560,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.1"
+  json_rpc_2:
+    dependency: transitive
+    description:
+      name: json_rpc_2
+      sha256: "5e469bffa23899edacb7b22787780068d650b106a21c76db3c49218ab7ca447e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
   line_awesome_flutter:
     dependency: "direct main"
     description:
@@ -648,6 +632,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  orm:
+    dependency: "direct main"
+    description:
+      name: orm
+      sha256: ee65ad62915e72b138d3f4f708c8b6a6864c016bf77d8300802384a9720e10f0
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.8"
   package_config:
     dependency: transitive
     description:
@@ -808,6 +800,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  retry:
+    dependency: transitive
+    description:
+      name: retry
+      sha256: "822e118d5b3aafed083109c72d5f484c6dc66707885e07c0fbcb8b986bba7efc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
   sasl_scram:
     dependency: transitive
     description:
@@ -861,14 +861,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
-  source_gen:
-    dependency: transitive
-    description:
-      name: source_gen
-      sha256: "14658ba5f669685cd3d63701d01b31ea748310f7ab854e471962670abcf57832"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.5.0"
   source_span:
     dependency: transitive
     description:
@@ -885,14 +877,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
-  sqlite3:
-    dependency: transitive
-    description:
-      name: sqlite3
-      sha256: c4a4c5a4b2a32e2d0f6837b33d7c91a67903891a5b7dbe706cf4b1f6b0c798c5
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
   sqlite3_flutter_libs:
     dependency: "direct main"
     description:
@@ -901,14 +885,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.20"
-  sqlparser:
-    dependency: transitive
-    description:
-      name: sqlparser
-      sha256: dc384bb1f56d1384ce078edb5ff8247976abdab79d0c83e437210c85f06ecb61
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.34.0"
   stack_trace:
     dependency: transitive
     description:

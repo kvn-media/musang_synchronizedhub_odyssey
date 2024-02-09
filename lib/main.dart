@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musang_syncronizehub_odyssey/common_widgets/theme/theme.dart';
 import 'package:musang_syncronizehub_odyssey/repos/auth_repo/auth_repo.dart';
-import 'package:musang_syncronizehub_odyssey/data/drift/database.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
@@ -13,8 +11,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value) => Get.put(AuthRepo()));
 
-  await initializeDatabase();
-  
   runApp(const MyApp());
 }
 

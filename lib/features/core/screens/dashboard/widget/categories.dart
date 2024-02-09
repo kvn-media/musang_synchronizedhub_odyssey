@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_business_logic.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_controller.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_details.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/flowmeter_details.dart';
 
@@ -27,14 +27,14 @@ class DashboardCategories extends StatelessWidget {
             // Check if the category is 'ATG'
             if (list[index].title == 'ATG') {
               // Navigate to the ATGDetailsPage
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ATGDetailsPage(
-                    atgLogic: atgLogic,
-                  ),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => ATGDetailsPage(
+              //       atgLogic: atgLogic,
+              //     ),
+              //   ),
+              // );
             } else if (list[index].title == 'FM') {
               Navigator.push(
                 context,

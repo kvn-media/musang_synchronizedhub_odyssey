@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../data/drift/database.dart';
 
 class ATGModel {
   final DateTime timestamp;
@@ -26,19 +25,19 @@ class ATGModel {
     this.onPress,
   });
 
-  factory ATGModel.fromATG(ATG atg) {
-    return ATGModel(
-      timestamp: atg.atgTimestamp,
-      levelBarrel: atg.levelBarrel,
-      volumeChangeBarrel: atg.volumeChangeBarrel ?? 0.0,
-      avgTempCelcius: atg.avgTempCelcius ?? 0.0,
-      waterLevelMeter: atg.waterLevelMeter ?? 0.0,
-      productTempCelcius: atg.productTempCelcius ?? 0.0,
-      alarm: atg.alarm ?? '',
-      category: '',
-      siteId: atg.siteId ?? 0,
-    );
-  }
+  // factory ATGModel.fromATG(ATG atg) {
+  //   return ATGModel(
+  //     timestamp: atg.atgTimestamp,
+  //     levelBarrel: atg.levelBarrel,
+  //     volumeChangeBarrel: atg.volumeChangeBarrel ?? 0.0,
+  //     avgTempCelcius: atg.avgTempCelcius ?? 0.0,
+  //     waterLevelMeter: atg.waterLevelMeter ?? 0.0,
+  //     productTempCelcius: atg.productTempCelcius ?? 0.0,
+  //     alarm: atg.alarm ?? '',
+  //     category: '',
+  //     siteId: atg.siteId ?? 0,
+  //   );
+  // }
 }
 
 // import 'package:flutter/material.dart';
