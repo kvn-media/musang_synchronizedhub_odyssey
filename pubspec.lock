@@ -265,6 +265,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.4"
+  decimal:
+    dependency: transitive
+    description:
+      name: decimal
+      sha256: "24a261d5d5c87e86c7651c417a5dbdf8bcd7080dd592533910e8d0505a279f21"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.3"
   fake_async:
     dependency: transitive
     description:
@@ -400,14 +408,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  freezed_annotation:
-    dependency: transitive
-    description:
-      name: freezed_annotation
-      sha256: c3fd9336eb55a38cc1bbd79ab17573113a8deccd0ecbbf926cca3c62803b5c2d
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -636,10 +636,10 @@ packages:
     dependency: "direct main"
     description:
       name: orm
-      sha256: ee65ad62915e72b138d3f4f708c8b6a6864c016bf77d8300802384a9720e10f0
+      sha256: "2e84e9b7a51734a41ffc1950e20552f7651c872afd0171dbc2115831fceb201c"
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.8"
+    version: "4.0.0-beta.3"
   package_config:
     dependency: transitive
     description:
@@ -792,6 +792,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      sha256: ba58e9e18df9abde280e8b10051e4bce85091e41e8e7e411b6cde2e738d357cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
   recase:
     dependency: transitive
     description:
@@ -1045,6 +1053,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
+  webfetch:
+    dependency: transitive
+    description:
+      name: webfetch
+      sha256: "08cb156e0b476447da5c9d2cd30a4ca7d63270310153fc351aa536217d73d859"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.15"
   win32:
     dependency: transitive
     description:

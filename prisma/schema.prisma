@@ -3,9 +3,43 @@
 
 generator client {
   provider = "dart run orm"
+  output = "../lib/src/generated/prisma_client"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+    id BigInt @id @default(autoincrement())
+    user_login String? 
+    user_pass String? 
+    user_nicename String?
+    user_email String? @unique 
+    user_url String? 
+    user_registered DateTime? @default(now())
+    user_activation_key String? 
+    user_status Int?
+    display_name String? 
+}
+
+model ATG {
+    atg_timestamp DateTime @id
+    level_barrel Float? @default(0)
+    volume_change_barrel Float?
+    avg_temp_celcius Float?
+    water_level_meter Float?
+    product_temp_celcius Float?
+    alarm String? 
+    site_id BigInt?
+}
+
+model AtgSummary {
+    id Int @id @default(autoincrement())
+    from_date DateTime?
+    to_date DateTime?
+    from_tank_position Float?   @default(0)
+    last_tank_position Float?   @default(0)
+    change             Float?   @default(0)
 }

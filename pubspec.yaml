@@ -55,7 +55,7 @@ dependencies:
   cloud_firestore: ^4.13.6
   google_sign_in: ^6.2.1
   share: ^2.0.4
-  orm: ^3.4.8
+  orm: ^4.0.0-beta
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
