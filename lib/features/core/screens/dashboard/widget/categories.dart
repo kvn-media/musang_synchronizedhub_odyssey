@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_business_logic.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_details.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/flowmeter_details.dart';
 
 import '../../../models/dashboard/categories_model.dart';
 
 class DashboardCategories extends StatelessWidget {
+  final ATGBusinessLogic atgLogic;
+
   const DashboardCategories({
+    required this.atgLogic,
     super.key,
   });
 
@@ -26,7 +30,9 @@ class DashboardCategories extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ATGDetailsPage(),
+                  builder: (context) => ATGDetailsPage(
+                    atgLogic: atgLogic,
+                  ),
                 ),
               );
             } else if (list[index].title == 'FM') {

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_business_logic.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -76,7 +77,7 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
             child: SfCartesianChart(
               series: [
                 // ...widget.logic.detailedChartData,
-                ...widget.logic.summaryChartData
+                ...widget.logic.detailedChartData
               ],
               primaryXAxis: CategoryAxis(
                 labelStyle: TextStyle(
