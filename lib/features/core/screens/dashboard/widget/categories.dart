@@ -30,9 +30,7 @@ class DashboardCategories extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ATGDetailsPage(
-                    atgLogic: atgLogic,
-                  ),
+                  builder: (context) => ATGDetailsPage(),
                 ),
               );
             } else if (list[index].title == 'FM') {
@@ -93,6 +91,3 @@ class DashboardCategories extends StatelessWidget {
     );
   }
 }
-
-
-
