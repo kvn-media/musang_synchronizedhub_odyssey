@@ -2,7 +2,7 @@ import '../src/generated/prisma_client/client.dart';
 import '../src/generated/prisma_client/prisma.dart';
 import 'package:orm/orm.dart';
 
-createMultipleRecords(PrismaClient prisma) async {
+createAtgMultipleRecords(PrismaClient prisma) async {
   final affectedRows = await prisma.atg.createMany(
     data: PrismaUnion.$2([
       ATGCreateManyInput(
@@ -117,4 +117,10 @@ createMultipleRecords(PrismaClient prisma) async {
       ),
     ]),
   );
+
+  print({
+    "count": affectedRows.count,
+  });
+
+  final atgs = await prisma.atg.findMany();
 }

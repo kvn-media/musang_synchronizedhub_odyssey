@@ -2,7 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musang_syncronizehub_odyssey/common_widgets/theme/theme.dart';
+import 'package:musang_syncronizehub_odyssey/dao/atg_dao.dart';
+import 'package:musang_syncronizehub_odyssey/dao/atg_summary_dao.dart';
+import 'package:musang_syncronizehub_odyssey/dao/user_dao.dart';
 import 'package:musang_syncronizehub_odyssey/repos/auth_repo/auth_repo.dart';
+import 'package:musang_syncronizehub_odyssey/src/generated/prisma_client/client.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -10,6 +14,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value) => Get.put(AuthRepo()));
+
+  final prisma = PrismaClient();
+  await createUserMultipleRecords(prisma);
+  await createAtgMultipleRecords(prisma);
+  await createAtgSumMultipleRecords(prisma);
 
   runApp(const MyApp());
 }

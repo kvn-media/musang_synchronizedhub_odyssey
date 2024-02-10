@@ -2,7 +2,7 @@ import '../src/generated/prisma_client/client.dart';
 import '../src/generated/prisma_client/prisma.dart';
 import 'package:orm/orm.dart';
 
-createMultipleRecords(PrismaClient prisma) async {
+createUserMultipleRecords(PrismaClient prisma) async {
   final affectedRows = await prisma.user.createMany(
     data: PrismaUnion.$2(
       [
@@ -69,4 +69,6 @@ createMultipleRecords(PrismaClient prisma) async {
   print({
     "count": affectedRows.count,
   });
+
+  final users = await prisma.user.findMany();
 }

@@ -2,23 +2,9 @@
 
 library prisma.namespace.prisma; // ignore_for_file: no_leading_underscores_for_library_prefixes
 
-import 'dart:async';
-
 import 'package:orm/orm.dart' as _i1;
 
-import 'client.dart';
 import 'prisma.dart' as _i2;
-
-final _client = PrismaClient();
-
-FutureOr<T> providePrisma<T>(
-    FutureOr<T> Function(PrismaClient prisma) main) async {
-  try {
-    return await main(_client);
-  } finally {
-    await _client.$disconnect();
-  }
-}
 
 class NestedBigIntFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
   const NestedBigIntFilter({
