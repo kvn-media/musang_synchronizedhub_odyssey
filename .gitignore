@@ -1,5 +1,6 @@
 # Miscellaneous
 .node_modules
+.lib/node_modules
 .package-lock.json
 *.class
 *.log
@@ -9,11 +10,10 @@
 .atom/
 .buildlog/
 .history
-.lib/src/generated/prisma/prisma_client.dart
 .env
 .svn/
 migrate_working_dir/
-.google-services.json
+.android/app/google-services.json
 
 # IntelliJ related
 *.iml

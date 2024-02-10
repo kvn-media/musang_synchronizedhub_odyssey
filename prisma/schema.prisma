@@ -3,8 +3,9 @@
 
 generator client {
   provider = "dart run orm"
-  output = "../lib/src/generated/prisma_client"
-  binaryTargets = ["native", "windows", "linux-musl"]
+  output = "../lib/prisma/generated_dart_client"
+  binaryTargets = ["native"]
+  
 }
 
 datasource db {
