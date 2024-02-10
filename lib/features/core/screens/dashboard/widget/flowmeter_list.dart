@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/controllers/flowmeter_controller.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../controllers/flowmeter_controller.dart';
 import '../../../models/dashboard/flowmeter_model.dart';
 
 class FlowMeterDashboardData extends StatefulWidget {
@@ -184,112 +184,6 @@ class _FlowMeterDashboardDataState extends State<FlowMeterDashboardData> {
           const SizedBox(
             height: 25,
           ),
-          // Container(
-          //   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(15),
-          //     color: chartContainerColor,
-          //     boxShadow: [
-          //       BoxShadow(
-          //         color: Colors.grey.withOpacity(0.5),
-          //         spreadRadius: 5,
-          //         blurRadius: 10,
-          //         offset: Offset(0, 3),
-          //       ),
-          //     ],
-          //   ),
-          //   // child: SingleChildScrollView(
-          //   //   scrollDirection: Axis.horizontal,
-          //   //   child: DataTable(
-          //   //     headingTextStyle: const TextStyle(
-          //   //       fontWeight: FontWeight.bold,
-          //   //     ),
-          //   //     dataTextStyle: TextStyle(
-          //   //       fontSize: 18,
-          //   //       color: Theme.of(context).brightness == Brightness.dark
-          //   //           ? Colors.white
-          //   //           : Colors.black,
-          //   //     ),
-          //   //     columnSpacing: 20,
-          //   //     decoration: BoxDecoration(
-          //   //       borderRadius: BorderRadius.circular(10),
-          //   //       color: isDarkMode ? Colors.black : Colors.white,
-          //   //       boxShadow: [
-          //   //         BoxShadow(
-          //   //           color: Colors.grey.withOpacity(0.5),
-          //   //           spreadRadius: 2,
-          //   //           blurRadius: 5,
-          //   //           offset: Offset(0, 3),
-          //   //         ),
-          //   //       ],
-          //   //     ),
-          //   //     columns: [
-          //   //       DataColumn(
-          //   //         label: Text(
-          //   //           'Timestamp',
-          //   //           style: TextStyle(color: textColor),
-          //   //         ),
-          //   //       ),
-          //   //       DataColumn(
-          //   //         label: Text(
-          //   //           'Flow Rate (GPM)',
-          //   //           style: TextStyle(color: textColor),
-          //   //         ),
-          //   //       ),
-          //   //       DataColumn(
-          //   //         label: Text(
-          //   //           'Total Flow (Gallon)',
-          //   //           style: TextStyle(color: textColor),
-          //   //         ),
-          //   //       ),
-          //   //       DataColumn(
-          //   //         label: Text(
-          //   //           'Temperature (°F)',
-          //   //           style: TextStyle(color: textColor),
-          //   //         ),
-          //   //       ),
-          //   //       DataColumn(
-          //   //         label: Text(
-          //   //           'Pressure (PSI)',
-          //   //           style: TextStyle(color: textColor),
-          //   //         ),
-          //   //       ),
-          //   //       DataColumn(
-          //   //         label: Text(
-          //   //           'Density (lb/Gal)',
-          //   //           style: TextStyle(color: textColor),
-          //   //         ),
-          //   //       ),
-          //   //       DataColumn(
-          //   //         label: Text(
-          //   //           'Viscosity (cP)',
-          //   //           style: TextStyle(color: textColor),
-          //   //         ),
-          //   //       ),
-          //   //       DataColumn(
-          //   //         label: Text(
-          //   //           'API Gravity',
-          //   //           style: TextStyle(color: textColor),
-          //   //         ),
-          //   //       ),
-          //   //     ],
-          //   //     rows: list.map((item) {
-          //   //       return DataRow(
-          //   //         cells: [
-          //   //           DataCell(Text(item.timestamp)),
-          //   //           DataCell(Text(item.flowRateGpm?.toString() ?? "")),
-          //   //           DataCell(Text(item.totalFlowGalon?.toString() ?? "")),
-          //   //           DataCell(Text(item.tempFahrenheit?.toString() ?? "")),
-          //   //           DataCell(Text(item.pressurePsi?.toString() ?? "")),
-          //   //           DataCell(Text(item.densitylbGal?.toString() ?? "")),
-          //   //           DataCell(Text(item.viscosityCp?.toString() ?? "")),
-          //   //           DataCell(Text(item.apiGravity?.toString() ?? "")),
-          //   //         ],
-          //   //       );
-          //   //     }).toList(),
-          //   //   ),
-          //   // ),
-          // ),
         ],
       ),
     );

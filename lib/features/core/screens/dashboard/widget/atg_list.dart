@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_controller.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+
+import '../../../controllers/atg_controller.dart';
 
 class ATGDashboardData extends StatefulWidget {
   final ATGBusinessLogic logic;
@@ -18,6 +19,7 @@ class ATGDashboardData extends StatefulWidget {
 
 class _ATGDashboardDataState extends State<ATGDashboardData> {
   late Timer timer;
+  DateTimeRange? _dateRange;
 
   final List<Gradient> gradients = [
     LinearGradient(
@@ -25,6 +27,19 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
       stops: [0.0, 1.0],
     ),
   ];
+
+  Future<void> _selectDateRange(BuildContext context) async {
+    final DateTimeRange? picked = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now().add(Duration(days: 365)),
+    );
+    if (picked != null && picked != _dateRange) {
+      setState(() {
+        _dateRange = picked;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -56,6 +71,13 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          ElevatedButton(
+            onPressed: () => _selectDateRange(context),
+            child: Text('Select Date Range'),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
           Container(
             width: MediaQuery.of(context).size.width * 0.8,
             height: 200,
@@ -97,6 +119,31 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
               ),
               enableAxisAnimation: true,
             ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(columns: const <DataColumn>[
+              DataColumn(
+                label: Text('Posisi Awal'),
+              ),
+              DataColumn(
+                label: Text('Posisi Akhir'),
+              ),
+              DataColumn(
+                label: Text('Berkurang'),
+              ),
+            ], rows: const <DataRow>[
+              DataRow(
+                cells: [
+                  DataCell(Text('1000')),
+                  DataCell(Text('930')),
+                  DataCell(Text('-70')),
+                ],
+              ),
+            ]),
           ),
           const SizedBox(
             height: 25,

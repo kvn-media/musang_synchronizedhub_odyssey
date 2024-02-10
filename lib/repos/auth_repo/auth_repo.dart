@@ -1,5 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart' as Auth;
-import 'package:postgres/postgres.dart' as pg;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -17,18 +16,18 @@ class AuthRepo extends GetxController {
   // variable
   late final ATGBusinessLogic atgLogic;
   late final FlowMeterBusinessLogic flowMeterLogic;
-  final auth = Auth.FirebaseAuth.instance;
-  late final Rx<Auth.User?> firebaseUser;
+  final auth = FirebaseAuth.instance;
+  late final Rx<User?> firebaseUser;
   var phoneVerificationId = ''.obs;
   late final GoogleSignInAccount googleUser;
 
   @override
   void onReady() {
-    super.onReady();
-
+    atgLogic = ATGBusinessLogic();
     flowMeterLogic = FlowMeterBusinessLogic();
+
     // Future.delayed(const Duration(seconds: 6));
-    firebaseUser = Rx<Auth.User?>(auth.currentUser);
+    firebaseUser = Rx<User?>(auth.currentUser);
     firebaseUser.bindStream(auth.userChanges());
     FlutterNativeSplash.remove();
     // ever(firebaseUser, setInitialScreen);
@@ -37,7 +36,7 @@ class AuthRepo extends GetxController {
   }
 
   // setting initial screen unload
-  setInitialScreen(Auth.User? user) {
+  setInitialScreen(User? user) {
     user == null
         ? Get.offAll(() => const WelcomeScreen())
         : user.emailVerified
@@ -76,7 +75,7 @@ class AuthRepo extends GetxController {
   // verify phone no by OTP
   Future<bool> verifyOTP(String otp) async {
     var credential = await auth.signInWithCredential(
-        Auth.PhoneAuthProvider.credential(
+        PhoneAuthProvider.credential(
             verificationId: phoneVerificationId.value, smsCode: otp));
 
     return credential.user != null ? true : false;
@@ -95,7 +94,7 @@ class AuthRepo extends GetxController {
                 flowmeterLogic: flowMeterLogic,
               ))
           : Get.to(() => const WelcomeScreen());
-    } on Auth.FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       final ex = TExceptions.fromCode(e.code);
       throw ex.message;
     } catch (_) {
@@ -115,7 +114,7 @@ class AuthRepo extends GetxController {
                 flowmeterLogic: flowMeterLogic,
               ))
           : Get.to(() => const WelcomeScreen());
-    } on Auth.FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       final ex = TExceptions.fromCode(e.code);
       throw ex.message;
     } catch (_) {
@@ -128,7 +127,7 @@ class AuthRepo extends GetxController {
   Future<void> sendEmailVerification() async {
     try {
       await auth.currentUser?.sendEmailVerification();
-    } on Auth.FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       final ex = TExceptions.fromCode(e.code);
       throw ex.message;
     } catch (_) {
@@ -138,18 +137,18 @@ class AuthRepo extends GetxController {
   }
 
   // google
-  Future<Auth.UserCredential> signInWithGoogle() async {
+  Future<UserCredential> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
 
-      final credential = Auth.GoogleAuthProvider.credential(
+      final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
 
-      return await Auth.FirebaseAuth.instance.signInWithCredential(credential);
-    } on Auth.FirebaseAuthException catch (e) {
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
       final ex = TExceptions.fromCode(e.code);
       throw ex.message;
     } catch (_) {
@@ -164,7 +163,7 @@ class AuthRepo extends GetxController {
       await auth.signOut();
       await GoogleSignIn().signOut();
       Get.offAll(() => const WelcomeScreen());
-    } on Auth.FirebaseException catch (e) {
+    } on FirebaseException catch (e) {
       throw e.message!;
     } on FormatException catch (e) {
       throw e.message;

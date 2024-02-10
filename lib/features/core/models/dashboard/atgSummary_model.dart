@@ -1,4 +1,3 @@
-// Access the ATGModel class.
 class ATGSummary {
   int id;
   DateTime? from_date;

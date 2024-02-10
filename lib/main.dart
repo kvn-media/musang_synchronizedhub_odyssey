@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musang_syncronizehub_odyssey/common_widgets/theme/theme.dart';
-import 'package:musang_syncronizehub_odyssey/dao/prisma.dart';
 import 'package:musang_syncronizehub_odyssey/repos/auth_repo/auth_repo.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -11,12 +11,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value) => Get.put(AuthRepo()));
-
-  var prismaService = PrismaService();
-
-  await prismaService.createUserMultipleRecords();
-  await prismaService.createAtgMultipleRecords();
-  await prismaService.createAtgSumMultipleRecords();
 
   runApp(const MyApp());
 }

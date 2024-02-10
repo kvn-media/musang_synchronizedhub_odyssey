@@ -13,7 +13,7 @@ class DashboardHeading extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Hello, Welcome to Dashboard ',
+          'Hey, Welcome to Dashboard ',
           style: txtTheme.bodyLarge,
         ),
         const Text(
