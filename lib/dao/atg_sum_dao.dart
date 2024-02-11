@@ -5,14 +5,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AtgSumDao {
   final PostgrestClient _client;
-  final supabase = Supabase.instance.client;
 
   AtgSumDao(PostgrestService service) : _client = service.client;
 
   // Get all data fetches
   Future<List<ATGSummary>> read() async {
     final List<Map<String, dynamic>> response =
-        await supabase.from('atg_summary').select();
+        await _client.from('atg_summary').select();
 
     if (response == null) {
       print('Error: Failed to fetch data');

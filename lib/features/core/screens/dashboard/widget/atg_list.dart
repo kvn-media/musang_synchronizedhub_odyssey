@@ -44,11 +44,10 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
   @override
   void initState() {
     super.initState();
-    widget.logic.initializeChartData();
 
     // Set up the timer
     timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
-      widget.logic.updateData();
+      widget.logic.fetchData();
     });
   }
 
@@ -78,47 +77,58 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
           const SizedBox(
             height: 25,
           ),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.8,
-            height: 200,
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: chartContainerColor,
-              boxShadow: [
-                BoxShadow(
-                  color: isDarkMode
-                      ? Colors.transparent
-                      : Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 10,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: SfCartesianChart(
-              series: [
-                // ...widget.logic.detailedChartData,
-                ...widget.logic.sumChartData,
-              ],
-              primaryXAxis: CategoryAxis(
-                labelStyle: TextStyle(
-                  color: textColor,
-                ),
-                majorGridLines: MajorGridLines(
-                  color: textColor, // Set color for light mode
-                ),
-              ),
-              primaryYAxis: NumericAxis(
-                labelStyle: TextStyle(
-                  color: textColor,
-                ),
-                majorGridLines: MajorGridLines(
-                  color: textColor, // Set color for light mode
-                ),
-              ),
-              enableAxisAnimation: true,
-            ),
+          FutureBuilder(
+            future: widget.logic.fetchData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                return Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: 200,
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: chartContainerColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: isDarkMode
+                            ? Colors.transparent
+                            : Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 10,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: SfCartesianChart(
+                    series: [
+                      // ...widget.logic.detailedChartData,
+                      ...widget.logic.sumChartData,
+                    ],
+                    primaryXAxis: CategoryAxis(
+                      labelStyle: TextStyle(
+                        color: textColor,
+                      ),
+                      majorGridLines: MajorGridLines(
+                        color: textColor, // Set color for light mode
+                      ),
+                    ),
+                    primaryYAxis: NumericAxis(
+                      labelStyle: TextStyle(
+                        color: textColor,
+                      ),
+                      majorGridLines: MajorGridLines(
+                        color: textColor, // Set color for light mode
+                      ),
+                    ),
+                    enableAxisAnimation: true,
+                  ),
+                );
+              }
+            },
           ),
           const SizedBox(
             height: 25,

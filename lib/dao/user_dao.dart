@@ -5,14 +5,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UsersDao {
   final PostgrestClient _client;
-  final supabase = Supabase.instance.client;
 
   UsersDao(PostgrestService service) : _client = service.client;
 
   // Get all data fetches
   Future<List<DUserModel>> read() async {
     final List<Map<String, dynamic>> response =
-        await supabase.from('users').select();
+        await _client.from('users').select();
 
     if (response == null) {
       print('Error: Failed to fetch data');

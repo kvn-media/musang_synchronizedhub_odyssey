@@ -25,11 +25,13 @@ class ATGBusinessLogic extends GetxController {
 
   Stream<double> get dataStream => _dataController.stream;
 
-  final AtgSumDao _sumDao = AtgSumDao(PostgrestService());
-  final AtgDao _AtgDao = AtgDao(PostgrestService());
+  final AtgSumDao _sumDao = AtgSumDao(Get.find<PostgrestService>());
+  final AtgDao _AtgDao = AtgDao(Get.find<PostgrestService>());
 
-  void initializeChartData() {
-    updateChartData();
+  @override
+  void onInit() {
+    super.onInit();
+    fetchData();
   }
 
   Future<void> fetchData() async {
@@ -37,10 +39,6 @@ class ATGBusinessLogic extends GetxController {
     detailsListData = await _AtgDao.read();
     updateChartData();
     updateSumChartData();
-  }
-
-  Future<void> updateData() async {
-    fetchData();
     if (detailsListData.isNotEmpty) {
       _dataController.add(detailsListData.first.levelBarrel ?? 0);
     }
@@ -48,6 +46,7 @@ class ATGBusinessLogic extends GetxController {
 
   void dispose() {
     _dataController.close();
+    super.dispose();
   }
 
   void updateChartData() {
