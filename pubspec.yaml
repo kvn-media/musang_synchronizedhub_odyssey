@@ -52,12 +52,12 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
   line_awesome_flutter: ^2.0.0
+  postgrest: ^2.1.0
+  flutter_dotenv: ^5.1.0
   intl: ^0.19.0
   cloud_firestore: ^4.13.6
   google_sign_in: ^6.2.1
   share: ^2.0.4
-  orm: ^4.0.0-beta
-  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

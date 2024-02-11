@@ -265,14 +265,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.4"
-  decimal:
-    dependency: transitive
-    description:
-      name: decimal
-      sha256: "24a261d5d5c87e86c7651c417a5dbdf8bcd7080dd592533910e8d0505a279f21"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.3"
   fake_async:
     dependency: transitive
     description:
@@ -568,14 +560,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.1"
-  json_rpc_2:
-    dependency: transitive
-    description:
-      name: json_rpc_2
-      sha256: "5e469bffa23899edacb7b22787780068d650b106a21c76db3c49218ab7ca447e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.2"
   line_awesome_flutter:
     dependency: "direct main"
     description:
@@ -640,14 +624,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  orm:
-    dependency: "direct main"
-    description:
-      name: orm
-      sha256: "2e84e9b7a51734a41ffc1950e20552f7651c872afd0171dbc2115831fceb201c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.0-beta.3"
   package_config:
     dependency: transitive
     description:
@@ -776,6 +752,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.8"
+  postgrest:
+    dependency: "direct main"
+    description:
+      name: postgrest
+      sha256: "748ebffffb60b4eaa270955dcf3742a19a2b315344c41ff1b4a0ebcd322b5181"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   provider:
     dependency: transitive
     description:
@@ -800,30 +784,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
-  rational:
-    dependency: transitive
-    description:
-      name: rational
-      sha256: ba58e9e18df9abde280e8b10051e4bce85091e41e8e7e411b6cde2e738d357cf
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.2"
-  recase:
-    dependency: transitive
-    description:
-      name: recase
-      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.0"
-  retry:
-    dependency: transitive
-    description:
-      name: retry
-      sha256: "822e118d5b3aafed083109c72d5f484c6dc66707885e07c0fbcb8b986bba7efc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.2"
   sasl_scram:
     dependency: transitive
     description:
@@ -1053,14 +1013,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
-  webfetch:
-    dependency: transitive
-    description:
-      name: webfetch
-      sha256: "08cb156e0b476447da5c9d2cd30a4ca7d63270310153fc351aa536217d73d859"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.15"
   win32:
     dependency: transitive
     description:
@@ -1093,6 +1045,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
+  yet_another_json_isolate:
+    dependency: transitive
+    description:
+      name: yet_another_json_isolate
+      sha256: e727502a2640d65b4b8a8a6cb48af9dd0cbe644ba4b3ee667c7f4afa0c1d6069
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
 sdks:
   dart: ">=3.2.5 <4.0.0"
   flutter: ">=3.16.0"
