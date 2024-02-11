@@ -8,7 +8,7 @@ class ATGModel {
   final double avgTempCelcius;
   final double waterLevelMeter;
   final double productTempCelcius;
-  final String alarm, category;
+  final String alarm;
   final int siteId;
 
   ATGModel({
@@ -19,10 +19,30 @@ class ATGModel {
     required this.waterLevelMeter,
     required this.productTempCelcius,
     required this.alarm,
-    required this.category,
     required this.siteId,
     this.onPress,
   });
 
-  static List<ATGModel> list = [];
+  factory ATGModel.fromJson(Map<String, dynamic> json) {
+    return ATGModel(
+      timestamp: DateTime.parse(json['timestamp']),
+      levelBarrel: json['levelBarrel'] != null
+          ? double.parse(json['levelBarrel'].toString())
+          : 0.0,
+      volumeChangeBarrel: json['volumeChangeBarrel'] != null
+          ? double.parse(json['volumeChangeBarrel'].toString())
+          : 0.0,
+      avgTempCelcius: json['avgTempCelcius'] != null
+          ? double.parse(json['avgTempCelcius'].toString())
+          : 0.0,
+      waterLevelMeter: json['waterLevelMeter'] != null
+          ? double.parse(json['waterLevelMeter'].toString())
+          : 0.0,
+      productTempCelcius: json['productTempCelcius'] != null
+          ? double.parse(json['productTempCelcius'].toString())
+          : 0.0,
+      alarm: json['alarm'] != null ? json['alarm'].toString() : '',
+      siteId: json['siteId'] != null ? int.parse(json['siteId'].toString()) : 0,
+    );
+  }
 }

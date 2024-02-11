@@ -67,11 +67,11 @@ class ATGDetailsPage extends StatelessWidget {
                 DataColumn(label: Text('Water Level Meter')),
                 DataColumn(label: Text('Product Temp Celcius')),
               ],
-              rows: ATGModel.list.map((item) {
+              rows: atgLogic.detailsListData.map((item) {
                 return DataRow(
                   cells: [
-                    DataCell(
-                        Text(DateFormat('yyyy-MM-dd').format(item.timestamp))),
+                    DataCell(Text(DateFormat('yyyy-MM-dd hh:mm:ss')
+                        .format(item.timestamp))),
                     DataCell(Text(item.alarm)),
                     DataCell(Text(item.levelBarrel?.toString() ?? '')),
                     DataCell(Text(item.volumeChangeBarrel?.toString() ?? '')),

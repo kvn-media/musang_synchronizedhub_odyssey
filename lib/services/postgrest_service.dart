@@ -2,16 +2,23 @@ import 'package:postgrest/postgrest.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PostgrestService {
-  late final PostgrestClient _client;
+  PostgrestClient? _client;
 
   PostgrestService() {
-    final String url = 'http://localhost:5432/musangten';
-    final String username = dotenv.get('DB_USERNAME');
-    final String password = dotenv.get('DB_PASSWORD');
-
-    _client = PostgrestClient(
-      Uri.parse('$url?user=$username&password=$password') as String,
-    );
+    initialize();
   }
 
+  Future<void> initialize() async {
+    await dotenv.load();
+    _client = PostgrestClient(dotenv.env['SUPABASE_URL']!);
+  }
+
+  PostgrestClient get client {
+    if (_client == null) {
+      throw Exception('Client not initialized');
+    }
+    return _client!;
+  }
+
+  // You can add methods here to interact with your Supabase database via PostgREST
 }

@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:musang_syncronizehub_odyssey/common_widgets/theme/theme.dart';
 import 'package:musang_syncronizehub_odyssey/repos/auth_repo/auth_repo.dart';
 import 'package:musang_syncronizehub_odyssey/services/postgrest_service.dart';
@@ -14,7 +15,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value) => Get.put(AuthRepo()));
 
-  PostgrestService();
+  await dotenv.load();
+
+  Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+  );
 
   runApp(const MyApp());
 }
