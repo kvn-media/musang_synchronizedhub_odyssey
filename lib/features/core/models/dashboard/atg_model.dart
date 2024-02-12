@@ -8,8 +8,8 @@ class ATGModel {
   final double avgTempCelcius;
   final double waterLevelMeter;
   final double productTempCelcius;
-  final String alarm;
-  final int siteId;
+  final String? alarm;
+  final int? siteId;
 
   ATGModel({
     required this.timestamp,
@@ -25,7 +25,9 @@ class ATGModel {
 
   factory ATGModel.fromJson(Map<String, dynamic> json) {
     return ATGModel(
-      timestamp: DateTime.parse(json['timestamp']),
+      timestamp: json['timestamp'] != null
+          ? DateTime.parse(json['timestamp'])
+          : DateTime.now(),
       levelBarrel: json['levelBarrel'] != null
           ? double.parse(json['levelBarrel'].toString())
           : 0.0,

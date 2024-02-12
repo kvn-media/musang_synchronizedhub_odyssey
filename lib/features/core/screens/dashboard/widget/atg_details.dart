@@ -16,84 +16,124 @@ class ATGDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    Color textColor = isDarkMode ? Colors.white : Colors.black;
+    Color chartContainerColor =
+        (isDarkMode ? Colors.grey[800] : Colors.white) as Color;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('ATG Details'),
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 20.0,
-          ),
-          GetBuilder<ATGBusinessLogic>(
-            builder: (controller) {
-              double? data = controller.data;
-              if (data != null) {
-                return DataAnimateWidget(level: data);
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
-          ),
-          const SizedBox(
-            height: 25.0,
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: DataTable(
-              columnSpacing: 20.0,
-              headingRowHeight: 60.0,
-              dataRowHeight: 50.0,
-              headingTextStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
-              ),
-              dataTextStyle: TextStyle(
-                fontSize: 14.0,
-              ),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade800,
-                  width: 1.0,
-                ),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              columns: const [
-                DataColumn(label: Text('Timestamp')),
-                DataColumn(label: Text('Alarm')),
-                DataColumn(label: Text('Level Barrel')),
-                DataColumn(label: Text('Volume Change Barrel')),
-                DataColumn(label: Text('Avg Temp Celcius')),
-                DataColumn(label: Text('Water Level Meter')),
-                DataColumn(label: Text('Product Temp Celcius')),
-              ],
-              rows: atgLogic.detailsListData.map((item) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(DateFormat('yyyy-MM-dd hh:mm:ss')
-                        .format(item.timestamp))),
-                    DataCell(Text(item.alarm)),
-                    DataCell(Text(item.levelBarrel?.toString() ?? '')),
-                    DataCell(Text(item.volumeChangeBarrel?.toString() ?? '')),
-                    DataCell(Text(item.avgTempCelcius?.toString() ?? '')),
-                    DataCell(Text(item.waterLevelMeter?.toString() ?? '')),
-                    DataCell(Text(item.productTempCelcius?.toString() ?? '')),
-                  ],
-                );
-              }).toList(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20.0,
             ),
-          ),
-        ],
+            GetBuilder<ATGBusinessLogic>(
+              builder: (controller) {
+                double? data = controller.data;
+                if (data != null) {
+                  return DataAnimateWidget(level: data);
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
+            const SizedBox(
+              height: 25.0,
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                columnSpacing: 20.0,
+                headingRowHeight: 60.0,
+                dataRowHeight: 50.0,
+                headingTextStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+                dataTextStyle: TextStyle(
+                  fontSize: 14.0,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey.shade800,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                columns: const [
+                  DataColumn(label: Text('Timestamp')),
+                  DataColumn(label: Text('Alarm')),
+                  DataColumn(label: Text('Level Barrel')),
+                  DataColumn(label: Text('Volume Change Barrel')),
+                  DataColumn(label: Text('Avg Temp Celcius')),
+                  DataColumn(label: Text('Water Level Meter')),
+                  DataColumn(label: Text('Product Temp Celcius')),
+                ],
+                rows: atgLogic.detailsListData.map((item) {
+                  return DataRow(
+                    cells: [
+                      DataCell(Text(DateFormat('yyyy-MM-dd hh:mm:ss')
+                          .format(item.timestamp))),
+                      DataCell(Text(item.alarm?.toString() ?? '')),
+                      DataCell(Text(item.levelBarrel?.toString() ?? '')),
+                      DataCell(
+                          Text(item.volumeChangeBarrel?.toString() ?? '')),
+                      DataCell(Text(item.avgTempCelcius?.toString() ?? '')),
+                      DataCell(Text(item.waterLevelMeter?.toString() ?? '')),
+                      DataCell(
+                          Text(item.productTempCelcius?.toString() ?? '')),
+                    ],
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _downloadCSV,
-      //   child: Icon(Icons.download),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          List<List<dynamic>> rows = <List<dynamic>>[];
+          rows.add([
+            'Timestamp',
+            'Alarm',
+            'Level Barrel',
+            'Volume Change Barrel',
+            'Avg Temp Celcius',
+            'Water Level Meter',
+            'Product Temp Celcius'
+          ]);
+
+          for (var item in atgLogic.detailsListData) {
+            List<dynamic> row = [];
+            row.add(item.timestamp);
+            row.add(item.levelBarrel);
+            row.add(item.volumeChangeBarrel);
+            row.add(item.avgTempCelcius);
+            row.add(item.waterLevelMeter);
+            row.add(item.productTempCelcius);
+            row.add(item.alarm);
+            row.add(item.siteId);
+          }
+
+          String csv = const ListToCsvConverter().convert(rows);
+          final directory = await getApplicationDocumentsDirectory();
+          final pathOfTheFileToWrite = directory.path + "/testCSV.csv";
+          File file = File(pathOfTheFileToWrite);
+          await file.writeAsString(csv);
+        },
+        child: Icon(Icons.download),
+      ),
     );
   }
 
   // void _downloadCSV() async {
-  //   List<ATG> atgs = await atgLogic.getAllATGs();
+  //   List<ATG> atgs = await atgLogic.;
   //   List<ATGModel> listData = atgs.map((atg) => ATGModel.fromATG(atg)).toList();
 
   //   List<List<dynamic>> rows = listData.map((item) {

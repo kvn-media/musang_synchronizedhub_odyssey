@@ -11,7 +11,7 @@ class AtgDao {
   // Get all data fetches
   Future<List<ATGModel>> read() async {
     final List<Map<String, dynamic>> response =
-        await _client.from('atg').select();
+        await _client.from('atg').select('*');
 
     if (response == null) {
       print('Error: Failed to fetch data');

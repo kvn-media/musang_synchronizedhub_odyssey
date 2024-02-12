@@ -125,6 +125,7 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                       ),
                     ),
                     enableAxisAnimation: true,
+                    legend: Legend(isVisible: true),
                   ),
                 );
               }

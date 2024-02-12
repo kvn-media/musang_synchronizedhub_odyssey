@@ -11,7 +11,7 @@ class UsersDao {
   // Get all data fetches
   Future<List<DUserModel>> read() async {
     final List<Map<String, dynamic>> response =
-        await _client.from('users').select();
+        await _client.from('users').select('*');
 
     if (response == null) {
       print('Error: Failed to fetch data');

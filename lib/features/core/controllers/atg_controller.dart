@@ -19,7 +19,7 @@ class ATGBusinessLogic extends GetxController {
   List<ATGSummary> sumListData = [];
 
   late List<StackedBarSeries<ATGModel, String>> detailedChartData;
-  late List<StackedBarSeries<ATGSummary, String>> sumChartData;
+  late List<ColumnSeries<ATGSummary, String>> sumChartData;
 
   final _dataController = StreamController<double>.broadcast();
 
@@ -96,26 +96,26 @@ class ATGBusinessLogic extends GetxController {
 
   void updateSumChartData() {
     sumChartData = [
-      StackedBarSeries<ATGSummary, String>(
-        dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) =>
-            DateFormat('yyyy-MM-dd').format(data.from_date ?? DateTime.now()),
-        yValueMapper: (ATGSummary data, _) => data.from_tank_position ?? 0.0,
-        name: "Change",
-      ),
-      StackedBarSeries<ATGSummary, String>(
-        dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) =>
-            DateFormat('yyyy-MM-dd').format(data.to_date ?? DateTime.now()),
-        yValueMapper: (ATGSummary data, _) => data.last_tank_position ?? 0.0,
-        name: "Change",
-      ),
-      StackedBarSeries<ATGSummary, String>(
+      ColumnSeries<ATGSummary, String>(
         dataSource: sumListData,
         xValueMapper: (ATGSummary data, _) =>
             DateFormat('yyyy-MM-dd').format(data.from_date ?? DateTime.now()),
         yValueMapper: (ATGSummary data, _) => data.change ?? 0.0,
-        name: "Change",
+        name: "Berkurang",
+      ),
+      ColumnSeries<ATGSummary, String>(
+        dataSource: sumListData,
+        xValueMapper: (ATGSummary data, _) =>
+            DateFormat('yyyy-MM-dd').format(data.to_date ?? DateTime.now()),
+        yValueMapper: (ATGSummary data, _) => data.last_tank_position ?? 0.0,
+        name: "Posisi akhir",
+      ),
+      ColumnSeries<ATGSummary, String>(
+        dataSource: sumListData,
+        xValueMapper: (ATGSummary data, _) =>
+            DateFormat('yyyy-MM-dd').format(data.from_date ?? DateTime.now()),
+        yValueMapper: (ATGSummary data, _) => data.from_tank_position ?? 0.0,
+        name: "Posisi awal",
       ),
     ];
   }
