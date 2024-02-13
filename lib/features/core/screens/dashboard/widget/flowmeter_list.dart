@@ -179,6 +179,7 @@ class _FlowMeterDashboardDataState extends State<FlowMeterDashboardData> {
                 ),
               ),
               enableAxisAnimation: true,
+              legend: Legend(isVisible: true),
             ),
           ),
           const SizedBox(

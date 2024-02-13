@@ -41,11 +41,32 @@ class ATGBusinessLogic extends GetxController {
     updateChartData();
     updateSumChartData();
     if (detailsListData.isNotEmpty) {
-      _dataController.add(detailsListData.first.levelBarrel ?? 1);
-      _dataController.add(detailsListData.first.volumeChangeBarrel ?? 1);
-      _dataController.add(detailsListData.first.avgTempCelcius ?? 1);
-      _dataController.add(detailsListData.first.waterLevelMeter ?? 0.1);
-      _dataController.add(detailsListData.first.productTempCelcius ?? 0);
+      var firstItem = detailsListData.first;
+      if (firstItem.levelBarrel != null) {
+        _dataController.add(firstItem.levelBarrel);
+      } else {
+        print('levelBarrel is null');
+      }
+      if (firstItem.volumeChangeBarrel != null) {
+        _dataController.add(firstItem.volumeChangeBarrel);
+      } else {
+        print('volumeChangeBarrel is null');
+      }
+      if (firstItem.avgTempCelcius != null) {
+        _dataController.add(firstItem.avgTempCelcius);
+      } else {
+        print('avgTempCelcius is null');
+      }
+      if (firstItem.waterLevelMeter != null) {
+        _dataController.add(firstItem.waterLevelMeter);
+      } else {
+        print('waterLevelMeter is null');
+      }
+      if (firstItem.productTempCelcius != null) {
+        _dataController.add(firstItem.productTempCelcius);
+      } else {
+        print('productTempCelcius is null');
+      }
     }
   }
 
@@ -103,22 +124,22 @@ class ATGBusinessLogic extends GetxController {
     sumChartData = [
       ColumnSeries<ATGSummary, String>(
         dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.from_date ?? DateTime.now()),
+        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
+            .format(data.from_date ?? DateTime.now()),
         yValueMapper: (ATGSummary data, _) => data.change ?? 0.0,
         name: "Berkurang",
       ),
       ColumnSeries<ATGSummary, String>(
         dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.to_date ?? DateTime.now()),
+        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
+            .format(data.to_date ?? DateTime.now()),
         yValueMapper: (ATGSummary data, _) => data.last_tank_position ?? 0.0,
         name: "Posisi akhir",
       ),
       ColumnSeries<ATGSummary, String>(
         dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.from_date ?? DateTime.now()),
+        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
+            .format(data.from_date ?? DateTime.now()),
         yValueMapper: (ATGSummary data, _) => data.from_tank_position ?? 0.0,
         name: "Posisi awal",
       ),

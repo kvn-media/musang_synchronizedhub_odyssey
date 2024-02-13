@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musang_syncronizehub_odyssey/helpers/parser.dart';
 
 class ATGModel {
   final DateTime timestamp;
@@ -25,26 +26,16 @@ class ATGModel {
 
   factory ATGModel.fromJson(Map<String, dynamic> json) {
     return ATGModel(
-      timestamp: json['timestamp'] != null
-          ? DateTime.parse(json['timestamp'])
-          : DateTime.now(),
-      levelBarrel: json['levelBarrel'] != null
-          ? double.parse(json['levelBarrel'].toString())
-          : 0.0,
-      volumeChangeBarrel: json['volumeChangeBarrel'] != null
-          ? double.parse(json['volumeChangeBarrel'].toString())
-          : 0.0,
-      avgTempCelcius: json['avgTempCelcius'] != null
-          ? double.parse(json['avgTempCelcius'].toString())
-          : 0.0,
-      waterLevelMeter: json['waterLevelMeter'] != null
-          ? double.parse(json['waterLevelMeter'].toString())
-          : 0.0,
-      productTempCelcius: json['productTempCelcius'] != null
-          ? double.parse(json['productTempCelcius'].toString())
-          : 0.0,
-      alarm: json['alarm'] != null ? json['alarm'].toString() : '',
-      siteId: json['siteId'] != null ? int.parse(json['siteId'].toString()) : 0,
+      timestamp: DataParser.parseTimestamp(json['timestamp']),
+      levelBarrel: DataParser.parseDouble(json['levelBarrel']) ?? 0.0,
+      volumeChangeBarrel:
+          DataParser.parseDouble(json['volumeChangeBarrel']) ?? 0.0,
+      avgTempCelcius: DataParser.parseDouble(json['avgTempCelcius']) ?? 0.0,
+      waterLevelMeter: DataParser.parseDouble(json['waterLevelMeter']) ?? 0.0,
+      productTempCelcius:
+          DataParser.parseDouble(json['productTempCelcius']) ?? 0.0,
+      alarm: DataParser.parseString(json['alarm']),
+      siteId: DataParser.parseInt(json['siteId']),
     );
   }
 }
