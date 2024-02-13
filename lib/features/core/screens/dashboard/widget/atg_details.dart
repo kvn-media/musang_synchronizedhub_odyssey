@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/models/dashboard/atg_model.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/oilTank.dart';
+import 'package:musang_syncronizehub_odyssey/services/csv_download.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 
@@ -19,7 +20,7 @@ class ATGDetailsPage extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     Color textColor = isDarkMode ? Colors.white : Colors.black;
-    Color chartContainerColor =
+    Color containerColor =
         (isDarkMode ? Colors.grey[800] : Colors.white) as Color;
 
     return Scaffold(
@@ -49,15 +50,15 @@ class ATGDetailsPage extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
-                columnSpacing: 20.0,
+                columnSpacing: 30.0,
                 headingRowHeight: 60.0,
-                dataRowHeight: 50.0,
+                dataRowHeight: 60.0,
                 headingTextStyle: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
                 ),
                 dataTextStyle: TextStyle(
-                  fontSize: 14.0,
+                  fontSize: 12.0,
                 ),
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -82,12 +83,10 @@ class ATGDetailsPage extends StatelessWidget {
                           .format(item.timestamp))),
                       DataCell(Text(item.alarm?.toString() ?? '')),
                       DataCell(Text(item.levelBarrel?.toString() ?? '')),
-                      DataCell(
-                          Text(item.volumeChangeBarrel?.toString() ?? '')),
+                      DataCell(Text(item.volumeChangeBarrel?.toString() ?? '')),
                       DataCell(Text(item.avgTempCelcius?.toString() ?? '')),
                       DataCell(Text(item.waterLevelMeter?.toString() ?? '')),
-                      DataCell(
-                          Text(item.productTempCelcius?.toString() ?? '')),
+                      DataCell(Text(item.productTempCelcius?.toString() ?? '')),
                     ],
                   );
                 }).toList(),
@@ -97,65 +96,9 @@ class ATGDetailsPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          List<List<dynamic>> rows = <List<dynamic>>[];
-          rows.add([
-            'Timestamp',
-            'Alarm',
-            'Level Barrel',
-            'Volume Change Barrel',
-            'Avg Temp Celcius',
-            'Water Level Meter',
-            'Product Temp Celcius'
-          ]);
-
-          for (var item in atgLogic.detailsListData) {
-            List<dynamic> row = [];
-            row.add(item.timestamp);
-            row.add(item.levelBarrel);
-            row.add(item.volumeChangeBarrel);
-            row.add(item.avgTempCelcius);
-            row.add(item.waterLevelMeter);
-            row.add(item.productTempCelcius);
-            row.add(item.alarm);
-            row.add(item.siteId);
-          }
-
-          String csv = const ListToCsvConverter().convert(rows);
-          final directory = await getApplicationDocumentsDirectory();
-          final pathOfTheFileToWrite = directory.path + "/testCSV.csv";
-          File file = File(pathOfTheFileToWrite);
-          await file.writeAsString(csv);
-        },
+        onPressed: downloadCSV,
         child: Icon(Icons.download),
       ),
     );
   }
-
-  // void _downloadCSV() async {
-  //   List<ATG> atgs = await atgLogic.;
-  //   List<ATGModel> listData = atgs.map((atg) => ATGModel.fromATG(atg)).toList();
-
-  //   List<List<dynamic>> rows = listData.map((item) {
-  //     return [
-  //       DateFormat('yyyy-MM-dd').format(item.timestamp),
-  //       item.alarm,
-  //       item.levelBarrel?.toString() ?? '',
-  //       item.volumeChangeBarrel?.toString() ?? '',
-  //       item.avgTempCelcius?.toString() ?? '',
-  //       item.waterLevelMeter?.toString() ?? '',
-  //       item.productTempCelcius?.toString() ?? '',
-  //     ];
-  //   }).toList();
-
-  //   String csv = const ListToCsvConverter().convert(rows);
-
-  //   final directory = await getApplicationDocumentsDirectory();
-  //   final path = directory.path;
-  //   final file = File('$path/export.csv');
-
-  //   await file.writeAsString(csv);
-
-  //   Share.shareFiles([file.path], text: 'Your CSV file');
-  // }
 }
