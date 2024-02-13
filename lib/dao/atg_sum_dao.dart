@@ -13,12 +13,7 @@ class AtgSumDao {
     final List<Map<String, dynamic>> response =
         await _client.from('atg_summary').select('*');
 
-    if (response == null) {
-      print('Error: Failed to fetch data');
-      return [];
-    } else {
-      print('Data: ${response}');
-      return response.map((item) => ATGSummary.fromJson(item)).toList();
+    print('Data: ${response}');
+    return response.map((item) => ATGSummary.fromJson(item)).toList();
     }
-  }
 }

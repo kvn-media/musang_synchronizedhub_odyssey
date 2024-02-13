@@ -1,14 +1,9 @@
-import 'dart:io';
 
-import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/models/dashboard/atg_model.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/oilTank.dart';
 import 'package:musang_syncronizehub_odyssey/services/csv_download.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share/share.dart';
 
 import '../../../controllers/atg_controller.dart';
 
@@ -37,15 +32,11 @@ class ATGDetailsPage extends StatelessWidget {
             GetBuilder<ATGBusinessLogic>(
               builder: (controller) {
                 double? data = controller.data;
-                if (data != null) {
-                  return DataAnimateWidget(level: data);
-                } else {
-                  return CircularProgressIndicator();
-                }
-              },
+                return DataAnimateWidget(level: data);
+                            },
             ),
             const SizedBox(
-              height: 25.0,
+              height: 30.0,
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -82,15 +73,18 @@ class ATGDetailsPage extends StatelessWidget {
                       DataCell(Text(DateFormat('yyyy-MM-dd hh:mm:ss')
                           .format(item.timestamp))),
                       DataCell(Text(item.alarm?.toString() ?? '')),
-                      DataCell(Text(item.levelBarrel?.toString() ?? '')),
-                      DataCell(Text(item.volumeChangeBarrel?.toString() ?? '')),
-                      DataCell(Text(item.avgTempCelcius?.toString() ?? '')),
-                      DataCell(Text(item.waterLevelMeter?.toString() ?? '')),
-                      DataCell(Text(item.productTempCelcius?.toString() ?? '')),
+                      DataCell(Text(item.levelBarrel.toString() ?? '')),
+                      DataCell(Text(item.volumeChangeBarrel.toString() ?? '')),
+                      DataCell(Text(item.avgTempCelcius.toString() ?? '')),
+                      DataCell(Text(item.waterLevelMeter.toString() ?? '')),
+                      DataCell(Text(item.productTempCelcius.toString() ?? '')),
                     ],
                   );
                 }).toList(),
               ),
+            ),
+            const SizedBox(
+              height: 30.0,
             ),
           ],
         ),

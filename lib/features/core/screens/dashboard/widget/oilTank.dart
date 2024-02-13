@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+
+import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_controller.dart';
 
 class DataAnimateWidget extends StatefulWidget {
   final double level;
@@ -12,17 +15,26 @@ class DataAnimateWidget extends StatefulWidget {
 class _DataAnimateWidgetState extends State<DataAnimateWidget> {
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: OilTankPainter(widget.level),
-      child: Container(),
+    return StreamBuilder<double>(
+      stream: ATGBusinessLogic().dataStream,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return CustomPaint(
+            painter: TankPainter(widget.level),
+            child: Container(),
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 }
 
-class OilTankPainter extends CustomPainter {
+class TankPainter extends CustomPainter {
   final double level;
 
-  OilTankPainter(this.level);
+  TankPainter(this.level);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -35,12 +47,27 @@ class OilTankPainter extends CustomPainter {
       ..color = Colors.black
       ..style = PaintingStyle.fill;
 
-    final tankRect = Rect.fromLTWH(0, 0, size.width, size.height);
-    final oilRect = Rect.fromLTWH(
-        0, size.height * (1 - level), size.width, size.height * level);
+    // Gambar bentuk truk tangki menggunakan Path
+    final truckPath = Path()
+      ..moveTo(size.width * 0.2, size.height * 0.5) // Mulai dari titik ini
+      ..lineTo(size.width * 0.8, size.height * 0.5) // Garis ke titik ini
+      ..arcTo(
+          Rect.fromCenter(
+              center: Offset(size.width * 0.8, size.height * 0.5),
+              width: size.width * 0.2,
+              height: size.height * 0.5),
+          -pi / 2,
+          pi,
+          false) // Gambar arc untuk bentuk tangki
+      ..lineTo(size.width * 0.2, size.height * 0.5); // Kembali ke titik awal
 
-    canvas.drawRect(tankRect, paint);
-    canvas.drawRect(oilRect, paint);
+    // Gambar bentuk minyak di dalam tangki
+    final oilPath = Path()
+      ..addRect(Rect.fromLTWH(size.width * 0.2, size.height * (1 - level),
+          size.width * 0.6, size.height * level)); // Rect untuk minyak
+
+    canvas.drawPath(truckPath, paint);
+    canvas.drawPath(oilPath, oilPaint);
   }
 
   @override

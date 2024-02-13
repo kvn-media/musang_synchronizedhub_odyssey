@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.leftToRightWithFade,
-      transitionDuration: const Duration(milliseconds: 2000),
+      transitionDuration: const Duration(milliseconds: 1000),
       home: const CircularProgressIndicator(),
     );
   }
