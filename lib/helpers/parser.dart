@@ -12,8 +12,10 @@ class DataParser {
   }
 
   static double parseDouble(dynamic value) {
-    if (value is num) {
-      return value.toDouble();
+    if (value is double) {
+      return value;
+    } else if (value is String) {
+      return double.tryParse(value) ?? 0.0;
     }
     print('Invalid number: $value. Defaulting to 0.0.');
     return 0.0;

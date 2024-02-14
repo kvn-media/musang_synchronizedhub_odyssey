@@ -35,37 +35,42 @@ class ATGBusinessLogic extends GetxController {
   }
 
   Future<void> fetchData() async {
-    sumListData = await _sumDao.read();
-    detailsListData = await _AtgDao.read(1, 20);
-    print('Fetch Data: $detailsListData');
-    updateChartData();
-    updateSumChartData();
-    if (detailsListData.isNotEmpty) {
-      var firstItem = detailsListData.first;
-      if (firstItem.levelBarrel != null) {
-        _dataController.add(firstItem.levelBarrel);
-      } else {
-        print('levelBarrel is null');
-      }
-      if (firstItem.volumeChangeBarrel != null) {
-        _dataController.add(firstItem.volumeChangeBarrel);
-      } else {
-        print('volumeChangeBarrel is null');
-      }
-      if (firstItem.avgTempCelcius != null) {
-        _dataController.add(firstItem.avgTempCelcius);
-      } else {
-        print('avgTempCelcius is null');
-      }
-      if (firstItem.waterLevelMeter != null) {
-        _dataController.add(firstItem.waterLevelMeter);
-      } else {
-        print('waterLevelMeter is null');
-      }
-      if (firstItem.productTempCelcius != null) {
-        _dataController.add(firstItem.productTempCelcius);
-      } else {
-        print('productTempCelcius is null');
+    await _sumDao.read().then((data) {
+      sumListData = data;
+      updateSumChartData();
+    });
+
+    await for (var data in _AtgDao.read(1, 20)) {
+      detailsListData = data;
+      print('Fetch Data: $detailsListData');
+      updateChartData();
+      if (detailsListData.isNotEmpty) {
+        var firstItem = detailsListData.first;
+        if (firstItem.levelBarrel != null) {
+          _dataController.add(firstItem.levelBarrel!.toDouble());
+        } else {
+          print('levelBarrel is null');
+        }
+        if (firstItem.volumeChangeBarrel != null) {
+          _dataController.add(firstItem.volumeChangeBarrel!.toDouble());
+        } else {
+          print('volumeChangeBarrel is null');
+        }
+        if (firstItem.avgTempCelcius != null) {
+          _dataController.add(firstItem.avgTempCelcius!.toDouble());
+        } else {
+          print('avgTempCelcius is null');
+        }
+        if (firstItem.waterLevelMeter != null) {
+          _dataController.add(firstItem.waterLevelMeter!.toDouble());
+        } else {
+          print('waterLevelMeter is null');
+        }
+        if (firstItem.productTempCelcius != null) {
+          _dataController.add(firstItem.productTempCelcius!.toDouble());
+        } else {
+          print('productTempCelcius is null');
+        }
       }
     }
   }
