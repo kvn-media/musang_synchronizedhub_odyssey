@@ -93,7 +93,9 @@ class ATGDetailsPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: downloadCSV,
+        onPressed: () async {
+          await downloadCSV(atgLogic.detailsListData, 'atg_details_report');
+        },
         child: Icon(Icons.download),
       ),
     );

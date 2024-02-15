@@ -77,7 +77,7 @@ class FlowmeterDetailsPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: downloadCSV,
+        onPressed: () {},
         child: Icon(Icons.download),
       ),
     );
