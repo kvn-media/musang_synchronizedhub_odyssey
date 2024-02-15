@@ -20,14 +20,14 @@ Future<void> downloadCSV() async {
 
   for (var item in atgLogic.detailsListData) {
     List<dynamic> row = [];
-    row.add(item.timestamp);
-    row.add(item.levelBarrel);
-    row.add(item.volumeChangeBarrel);
-    row.add(item.avgTempCelcius);
-    row.add(item.waterLevelMeter);
-    row.add(item.productTempCelcius);
+    row.add(item.atg_timestamp);
+    row.add(item.level_barrel);
+    row.add(item.volume_change_barrel);
+    row.add(item.avg_temp_celcius);
+    row.add(item.water_level_meter);
+    row.add(item.product_temp_celcius);
     row.add(item.alarm);
-    row.add(item.siteId);
+    row.add(item.site_id);
     rows.add(row);
   }
 

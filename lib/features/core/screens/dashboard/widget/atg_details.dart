@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -33,7 +32,7 @@ class ATGDetailsPage extends StatelessWidget {
               builder: (controller) {
                 double? data = controller.data;
                 return DataAnimateWidget(level: data);
-                            },
+              },
             ),
             const SizedBox(
               height: 30.0,
@@ -66,18 +65,22 @@ class ATGDetailsPage extends StatelessWidget {
                   DataColumn(label: Text('Avg Temp Celcius')),
                   DataColumn(label: Text('Water Level Meter')),
                   DataColumn(label: Text('Product Temp Celcius')),
+                  DataColumn(label: Text('Site ID')),
                 ],
                 rows: atgLogic.detailsListData.map((item) {
                   return DataRow(
                     cells: [
                       DataCell(Text(DateFormat('yyyy-MM-dd hh:mm:ss')
-                          .format(item.timestamp))),
+                          .format(item.atg_timestamp))),
                       DataCell(Text(item.alarm?.toString() ?? '')),
-                      DataCell(Text(item.levelBarrel.toString() ?? '')),
-                      DataCell(Text(item.volumeChangeBarrel.toString() ?? '')),
-                      DataCell(Text(item.avgTempCelcius.toString() ?? '')),
-                      DataCell(Text(item.waterLevelMeter.toString() ?? '')),
-                      DataCell(Text(item.productTempCelcius.toString() ?? '')),
+                      DataCell(Text(item.level_barrel.toString() ?? '')),
+                      DataCell(
+                          Text(item.volume_change_barrel.toString() ?? '')),
+                      DataCell(Text(item.avg_temp_celcius.toString() ?? '')),
+                      DataCell(Text(item.water_level_meter.toString() ?? '')),
+                      DataCell(
+                          Text(item.product_temp_celcius.toString() ?? '')),
+                      DataCell(Text(item.site_id.toString() ?? '')),
                     ],
                   );
                 }).toList(),

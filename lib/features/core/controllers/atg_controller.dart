@@ -42,35 +42,35 @@ class ATGBusinessLogic extends GetxController {
     updateSumChartData();
     if (detailsListData.isNotEmpty) {
       var firstItem = detailsListData.first;
-      if (firstItem.levelBarrel != null) {
-        _data = firstItem.levelBarrel!.toDouble();
+      if (firstItem.level_barrel != null) {
+        _data = firstItem.level_barrel!.toDouble();
         _dataController.add(_data);
       } else {
-        print('${firstItem.levelBarrel} is null');
+        print('${firstItem.level_barrel} is null');
       }
-      if (firstItem.volumeChangeBarrel != null) {
-        _data = firstItem.volumeChangeBarrel!.toDouble();
+      if (firstItem.volume_change_barrel != null) {
+        _data = firstItem.volume_change_barrel!.toDouble();
         _dataController.add(_data);
       } else {
-        print('${firstItem.volumeChangeBarrel} is null');
+        print('${firstItem.volume_change_barrel} is null');
       }
-      if (firstItem.avgTempCelcius != null) {
-        _data = firstItem.avgTempCelcius!.toDouble();
+      if (firstItem.avg_temp_celcius != null) {
+        _data = firstItem.avg_temp_celcius!.toDouble();
         _dataController.add(_data);
       } else {
-        print('${firstItem.avgTempCelcius} is null');
+        print('${firstItem.avg_temp_celcius} is null');
       }
-      if (firstItem.waterLevelMeter != null) {
-        _data = firstItem.waterLevelMeter!;
+      if (firstItem.water_level_meter != null) {
+        _data = firstItem.water_level_meter!;
         _dataController.add(_data);
       } else {
-        print('${firstItem.waterLevelMeter} is null');
+        print('${firstItem.water_level_meter} is null');
       }
-      if (firstItem.productTempCelcius != null) {
-        _data = firstItem.productTempCelcius!.toDouble();
+      if (firstItem.product_temp_celcius != null) {
+        _data = firstItem.product_temp_celcius!.toDouble();
         _dataController.add(_data);
       } else {
-        print('${firstItem.productTempCelcius} is null');
+        print('${firstItem.product_temp_celcius} is null');
       }
     }
   }
@@ -78,6 +78,32 @@ class ATGBusinessLogic extends GetxController {
   void dispose() {
     _dataController.close();
     super.dispose();
+  }
+
+  void updateSumChartData() {
+    sumChartData = [
+      ColumnSeries<ATGSummary, String>(
+        dataSource: sumListData,
+        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
+            .format(data.from_date ?? DateTime.now()),
+        yValueMapper: (ATGSummary data, _) => data.change ?? 0.0,
+        name: "Berkurang",
+      ),
+      ColumnSeries<ATGSummary, String>(
+        dataSource: sumListData,
+        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
+            .format(data.to_date ?? DateTime.now()),
+        yValueMapper: (ATGSummary data, _) => data.last_tank_position ?? 0.0,
+        name: "Posisi akhir",
+      ),
+      ColumnSeries<ATGSummary, String>(
+        dataSource: sumListData,
+        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
+            .format(data.from_date ?? DateTime.now()),
+        yValueMapper: (ATGSummary data, _) => data.from_tank_position ?? 0.0,
+        name: "Posisi awal",
+      ),
+    ];
   }
 
   // void updateChartData() {
@@ -124,30 +150,4 @@ class ATGBusinessLogic extends GetxController {
   //     ),
   //   ];
   // }
-
-  void updateSumChartData() {
-    sumChartData = [
-      ColumnSeries<ATGSummary, String>(
-        dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
-            .format(data.from_date ?? DateTime.now()),
-        yValueMapper: (ATGSummary data, _) => data.change ?? 0.0,
-        name: "Berkurang",
-      ),
-      ColumnSeries<ATGSummary, String>(
-        dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
-            .format(data.to_date ?? DateTime.now()),
-        yValueMapper: (ATGSummary data, _) => data.last_tank_position ?? 0.0,
-        name: "Posisi akhir",
-      ),
-      ColumnSeries<ATGSummary, String>(
-        dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
-            .format(data.from_date ?? DateTime.now()),
-        yValueMapper: (ATGSummary data, _) => data.from_tank_position ?? 0.0,
-        name: "Posisi awal",
-      ),
-    ];
-  }
 }
