@@ -35,42 +35,42 @@ class ATGBusinessLogic extends GetxController {
   }
 
   Future<void> fetchData() async {
-    await _sumDao.read().then((data) {
-      sumListData = data;
-      updateSumChartData();
-    });
-
-    await for (var data in _AtgDao.read(1, 20)) {
-      detailsListData = data;
-      print('Fetch Data: $detailsListData');
-      updateChartData();
-      if (detailsListData.isNotEmpty) {
-        var firstItem = detailsListData.first;
-        if (firstItem.levelBarrel != null) {
-          _dataController.add(firstItem.levelBarrel!.toDouble());
-        } else {
-          print('levelBarrel is null');
-        }
-        if (firstItem.volumeChangeBarrel != null) {
-          _dataController.add(firstItem.volumeChangeBarrel!.toDouble());
-        } else {
-          print('volumeChangeBarrel is null');
-        }
-        if (firstItem.avgTempCelcius != null) {
-          _dataController.add(firstItem.avgTempCelcius!.toDouble());
-        } else {
-          print('avgTempCelcius is null');
-        }
-        if (firstItem.waterLevelMeter != null) {
-          _dataController.add(firstItem.waterLevelMeter!.toDouble());
-        } else {
-          print('waterLevelMeter is null');
-        }
-        if (firstItem.productTempCelcius != null) {
-          _dataController.add(firstItem.productTempCelcius!.toDouble());
-        } else {
-          print('productTempCelcius is null');
-        }
+    sumListData = await _sumDao.read();
+    detailsListData = await _AtgDao.read(1, 20);
+    print('Fetch Data: $detailsListData');
+    // updateChartData();
+    updateSumChartData();
+    if (detailsListData.isNotEmpty) {
+      var firstItem = detailsListData.first;
+      if (firstItem.levelBarrel != null) {
+        _data = firstItem.levelBarrel!.toDouble();
+        _dataController.add(_data);
+      } else {
+        print('${firstItem.levelBarrel} is null');
+      }
+      if (firstItem.volumeChangeBarrel != null) {
+        _data = firstItem.volumeChangeBarrel!.toDouble();
+        _dataController.add(_data);
+      } else {
+        print('${firstItem.volumeChangeBarrel} is null');
+      }
+      if (firstItem.avgTempCelcius != null) {
+        _data = firstItem.avgTempCelcius!.toDouble();
+        _dataController.add(_data);
+      } else {
+        print('${firstItem.avgTempCelcius} is null');
+      }
+      if (firstItem.waterLevelMeter != null) {
+        _data = firstItem.waterLevelMeter!;
+        _dataController.add(_data);
+      } else {
+        print('${firstItem.waterLevelMeter} is null');
+      }
+      if (firstItem.productTempCelcius != null) {
+        _data = firstItem.productTempCelcius!.toDouble();
+        _dataController.add(_data);
+      } else {
+        print('${firstItem.productTempCelcius} is null');
       }
     }
   }
@@ -80,50 +80,50 @@ class ATGBusinessLogic extends GetxController {
     super.dispose();
   }
 
-  void updateChartData() {
-    detailedChartData = [
-      StackedBarSeries<ATGModel, String>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
-        yValueMapper: (ATGModel data, _) =>
-            data.levelBarrel != null ? data.levelBarrel : 0,
-        name: "Level Barrel",
-      ),
-      StackedBarSeries<ATGModel, String>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
-        yValueMapper: (ATGModel data, _) =>
-            data.volumeChangeBarrel != null ? data.volumeChangeBarrel : 0,
-        name: "Volume Change Barrel",
-      ),
-      StackedBarSeries<ATGModel, String>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
-        yValueMapper: (ATGModel data, _) =>
-            data.avgTempCelcius != null ? data.avgTempCelcius : 0,
-        name: "Average Temperature",
-      ),
-      StackedBarSeries<ATGModel, String>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
-        yValueMapper: (ATGModel data, _) =>
-            data.waterLevelMeter != null ? data.waterLevelMeter : 0,
-        name: "Water Level Meter",
-      ),
-      StackedBarSeries<ATGModel, String>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
-        yValueMapper: (ATGModel data, _) =>
-            data.productTempCelcius != null ? data.productTempCelcius : 0,
-        name: "Product Temperature",
-      ),
-    ];
-  }
+  // void updateChartData() {
+  //   detailedChartData = [
+  //     StackedBarSeries<ATGModel, String>(
+  //       dataSource: detailsListData,
+  //       xValueMapper: (ATGModel data, _) =>
+  //           DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
+  //       yValueMapper: (ATGModel data, _) =>
+  //           data.levelBarrel != null ? data.levelBarrel : 0,
+  //       name: "Level Barrel",
+  //     ),
+  //     StackedBarSeries<ATGModel, String>(
+  //       dataSource: detailsListData,
+  //       xValueMapper: (ATGModel data, _) =>
+  //           DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
+  //       yValueMapper: (ATGModel data, _) =>
+  //           data.volumeChangeBarrel != null ? data.volumeChangeBarrel : 0,
+  //       name: "Volume Change Barrel",
+  //     ),
+  //     StackedBarSeries<ATGModel, String>(
+  //       dataSource: detailsListData,
+  //       xValueMapper: (ATGModel data, _) =>
+  //           DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
+  //       yValueMapper: (ATGModel data, _) =>
+  //           data.avgTempCelcius != null ? data.avgTempCelcius : 0,
+  //       name: "Average Temperature",
+  //     ),
+  //     StackedBarSeries<ATGModel, String>(
+  //       dataSource: detailsListData,
+  //       xValueMapper: (ATGModel data, _) =>
+  //           DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
+  //       yValueMapper: (ATGModel data, _) =>
+  //           data.waterLevelMeter != null ? data.waterLevelMeter : 0,
+  //       name: "Water Level Meter",
+  //     ),
+  //     StackedBarSeries<ATGModel, String>(
+  //       dataSource: detailsListData,
+  //       xValueMapper: (ATGModel data, _) =>
+  //           DateFormat('yyyy-MM-dd hh:mm:ss').format(data.timestamp),
+  //       yValueMapper: (ATGModel data, _) =>
+  //           data.productTempCelcius != null ? data.productTempCelcius : 0,
+  //       name: "Product Temperature",
+  //     ),
+  //   ];
+  // }
 
   void updateSumChartData() {
     sumChartData = [
