@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.5 <4.0.0'
+  sdk: '>=2.19.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -50,8 +50,9 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   flutter_otp_text_field: ^1.1.1
   firebase_core: ^2.24.2
-  firebase_auth: ^4.15.3
+  firebase_auth: ^4.14.0
   line_awesome_flutter: ^2.0.0
+  sizer: ^2.0.15
   postgrest: ^2.1.0
   built_value: ^8.9.0
   built_value_generator: ^8.9.0
