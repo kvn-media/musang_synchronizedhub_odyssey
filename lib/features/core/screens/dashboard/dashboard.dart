@@ -5,6 +5,7 @@ import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/wid
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/flowmeter_list.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/heading.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_list.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../controllers/atg_controller.dart';
 import '../../controllers/flowmeter_controller.dart';
@@ -24,14 +25,14 @@ class DashBoard extends StatelessWidget {
       appBar: const DashboardAppBar(),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(2.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Heading
               DashboardHeading(txtTheme: txtTheme),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 4.h,
               ),
 
               // //Search
@@ -44,8 +45,8 @@ class DashBoard extends StatelessWidget {
               DashboardCategories(
                 atgLogic: atgLogic,
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 4.h,
               ),
 
               // //Banner
@@ -55,35 +56,35 @@ class DashBoard extends StatelessWidget {
               // ),
 
               // ATG data
-              const Text(
+              Text(
                 'ATG data',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.w800,
                 ),
               ),
 
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 2.h,
               ),
 
               ATGDashboardData(logic: atgLogic),
 
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 2.h,
               ),
 
               // Flow Meter data
-              const Text(
+              Text(
                 'Flow Meter data',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.w800,
                 ),
               ),
 
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 2.h,
               ),
 
               FlowMeterDashboardData(logic: flowmeterLogic),

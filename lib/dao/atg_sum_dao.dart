@@ -10,10 +10,12 @@ class AtgSumDao {
 
   // Get all data fetches
   Future<List<ATGSummary>> read() async {
-    final List<Map<String, dynamic>> response =
-        await _client.from('atg_summary').select('*');
+    final List<
+        Map<String,
+            dynamic>> response = await _client.from('atg_summary').select(
+        'id, from_date, end_date, from_tank_position, last_tank_position, change');
 
     print('Data: ${response}');
     return response.map((item) => ATGSummary.fromJson(item)).toList();
-    }
+  }
 }

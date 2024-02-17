@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/dao/data_processing/process_data.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/models/dashboard/atg_model.dart';
 import 'package:musang_syncronizehub_odyssey/helpers/serializers.dart';
@@ -10,19 +11,31 @@ class AtgDao {
 
   AtgDao(PostgrestService service) : _client = service.client;
 
-  // Get all data fetches
-  Future<List<ATGModel>> read(int page, int limit) async {
+  Future<List<ATGModel>> read(int page, int limit,
+      {DateTimeRange? dateRange}) async {
     try {
       final int offset = (page - 1) * limit;
-      final response = await _client
+      var query = _client
           .from('atg')
           .select(
-              'atg_timestamp, level_barrel, volume_change_barrel, avg_temp_celcius, water_level_meter, product_temp_celcius, alarm, site_id')
+              'atg_timestamp, tank_barrel, volume_change_barrel, avg_temp_celcius, water_level_meter, product_temp_celcius, alarm, site_id')
           .order('atg_timestamp', ascending: false)
           .range(offset, offset + limit - 1);
 
-      print('Fetched Data: $response');
-      List<ATGModel> atgModels = response
+      final response = await query;
+
+      List<Map<String, dynamic>> data = response as List<Map<String, dynamic>>;
+
+      if (dateRange != null) {
+        data = data.where((item) {
+          final timestamp = DateTime.parse(item['atg_timestamp']);
+          return timestamp.isAfter(dateRange.start) &&
+              timestamp.isBefore(dateRange.end);
+        }).toList();
+      }
+
+      print('Fetched Data: $data');
+      List<ATGModel> atgModels = data
           .map((item) {
             return serializers.deserializeWith(ATGModel.serializer, item);
           })

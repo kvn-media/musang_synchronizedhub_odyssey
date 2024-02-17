@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../controllers/atg_controller.dart';
@@ -19,7 +20,6 @@ class ATGDashboardData extends StatefulWidget {
 
 class _ATGDashboardDataState extends State<ATGDashboardData> {
   late Timer timer;
-  DateTimeRange? _dateRange;
 
   final List<Gradient> gradients = [
     LinearGradient(
@@ -27,19 +27,6 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
       stops: [0.0, 1.0],
     ),
   ];
-
-  Future<void> _selectDateRange(BuildContext context) async {
-    final DateTimeRange? picked = await showDateRangePicker(
-      context: context,
-      firstDate: DateTime(2000),
-      lastDate: DateTime.now().add(Duration(days: 365)),
-    );
-    if (picked != null && picked != _dateRange) {
-      setState(() {
-        _dateRange = picked;
-      });
-    }
-  }
 
   @override
   void initState() {
@@ -71,11 +58,20 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ElevatedButton(
-            onPressed: () => _selectDateRange(context),
-            child: Text('Select Date Range'),
+            onPressed: () => widget.logic.selectDateRange(context),
+            child: Text(
+              'Select Date Range',
+              style: TextStyle(fontSize: 2.h),
+            ),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 1.h),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ),
           ),
-          const SizedBox(
-            height: 25,
+          SizedBox(
+            height: 4.h,
           ),
           FutureBuilder(
             future: widget.logic.fetchData(),
@@ -86,9 +82,9 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 return Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: 200,
-                  padding: const EdgeInsets.all(16.0),
+                  width: 80.w,
+                  height: 25.h,
+                  padding: EdgeInsets.all(2.w),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: chartContainerColor,
@@ -105,7 +101,7 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                   ),
                   child: SfCartesianChart(
                     series: [
-                      ...widget.logic.sumChartData,
+                      ...widget.logic.detailedChartData,
                     ],
                     primaryXAxis: CategoryAxis(
                       labelStyle: TextStyle(
@@ -130,33 +126,33 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
               }
             },
           ),
-          const SizedBox(
-            height: 25,
+          SizedBox(
+            height: 4.h,
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: DataTable(columns: const <DataColumn>[
+            child: DataTable(columns: <DataColumn>[
               DataColumn(
-                label: Text('Posisi Awal'),
+                label: Text('Posisi Awal', style: TextStyle(fontSize: 2.h)),
               ),
               DataColumn(
-                label: Text('Posisi Akhir'),
+                label: Text('Posisi Akhir', style: TextStyle(fontSize: 2.h)),
               ),
               DataColumn(
-                label: Text('Berkurang'),
+                label: Text('Berkurang', style: TextStyle(fontSize: 2.h)),
               ),
-            ], rows: const <DataRow>[
+            ], rows: <DataRow>[
               DataRow(
                 cells: [
-                  DataCell(Text('1000')),
-                  DataCell(Text('930')),
-                  DataCell(Text('-70')),
+                  DataCell(Text('1000', style: TextStyle(fontSize: 2.h))),
+                  DataCell(Text('930', style: TextStyle(fontSize: 2.h))),
+                  DataCell(Text('-70', style: TextStyle(fontSize: 2.h))),
                 ],
               ),
             ]),
           ),
-          const SizedBox(
-            height: 25,
+          SizedBox(
+            height: 4.h,
           ),
         ],
       ),
