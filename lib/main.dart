@@ -1,6 +1,6 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:musang_syncronizehub_odyssey/services/platform_service.dart';
@@ -9,9 +9,6 @@ import 'package:musang_syncronizehub_odyssey/common_widgets/theme/theme.dart';
 import 'package:musang_syncronizehub_odyssey/repos/auth_repo/auth_repo.dart';
 
 import 'firebase_options.dart';
-
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,12 +21,21 @@ void main() async {
   await postgrestService.initialize();
   Get.put(postgrestService);
 
-  const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-  final InitializationSettings initializationSettings = InitializationSettings(
-    android: initializationSettingsAndroid,
+  // Initialize AwesomeNotifications
+  AwesomeNotifications().initialize(
+    null, // default icon for your app notifications
+    [
+      NotificationChannel(
+        channelKey: 'download_channel_id',
+        channelName: 'Download Notifications',
+        channelDescription: 'Notifications about file downloads',
+        defaultColor: Color(0xFF9D50DD),
+        ledColor: Colors.white,
+        playSound: true,
+        enableVibration: true,
+      ),
+    ],
   );
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   runApp(MyApp());
 }

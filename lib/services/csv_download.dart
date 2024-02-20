@@ -1,54 +1,58 @@
-import 'dart:io';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_controller.dart';
-import 'package:musang_syncronizehub_odyssey/main.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:csv/csv.dart';
+import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-Future<void> downloadCSV(List<dynamic> dataList, String fileName) async {
-  List<List<dynamic>> rows = <List<dynamic>>[
-    [
-      'Timestamp',
-      'Alarm',
-      'Level Barrel',
-      'Volume Change Barrel',
-      'Avg Temp Celcius',
-      'Water Level Meter',
-      'Product Temp Celcius',
-      'Site ID'
-    ],
-  ];
+Future<void> downloadCSV({
+  required List<dynamic> dataList,
+  required String fileName,
+  required List<String> headers,
+  required List<dynamic> Function(dynamic) mapDataToRow,
+}) async {
+  try {
+    // Request storage permission
+    PermissionStatus status = await Permission.storage.request();
+    if (!status.isGranted) {
+      throw Exception('Storage permission not granted');
+    }
 
-  for (var item in dataList) {
-    List<dynamic> row = [];
-    row.add(item.atg_timestamp);
-    row.add(item.level_barrel);
-    row.add(item.volume_change_barrel);
-    row.add(item.avg_temp_celcius);
-    row.add(item.water_level_meter);
-    row.add(item.product_temp_celcius);
-    row.add(item.alarm);
-    row.add(item.site_id);
-    rows.add(row);
+    List<List<dynamic>> rows = [headers];
+
+    for (var item in dataList) {
+      rows.add(mapDataToRow(item));
+    }
+
+    String csv = const ListToCsvConverter().convert(rows);
+
+    // Save the CSV string
+    await FileSaver.instance.saveFile(
+      name: fileName,
+      bytes: Uint8List.fromList(csv.codeUnits),
+      ext: 'csv',
+      customMimeType: 'text/csv',
+    );
+
+    // Show a notification
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 10,
+        channelKey: 'download_channel_id',
+        title: 'Download Complete',
+        body: '$fileName.csv has been downloaded.',
+        notificationLayout: NotificationLayout.BigText,
+      ),
+    );
+  } catch (e) {
+    print('An error occurred while downloading the CSV: $e');
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 11,
+        channelKey: 'download_channel_id',
+        title: 'Download Failed',
+        body: 'An error occurred while downloading $fileName.csv.',
+        notificationLayout: NotificationLayout.BigText,
+      ),
+    );
   }
-
-  String csv = const ListToCsvConverter().convert(rows);
-  final directory = await getApplicationDocumentsDirectory();
-  final path = directory.path;
-  final file = File('$path/$fileName.csv');
-  await file.writeAsString(csv);
-
-  // Show a notification
-  const AndroidNotificationDetails androidPlatformChannelSpecifics =
-      AndroidNotificationDetails(
-          'download_channel_id', 
-          'Download Notifications', 
-          importance: Importance.max, 
-          priority: Priority.high, 
-          showWhen: false);
-  const NotificationDetails platformChannelSpecifics =
-      NotificationDetails(android: androidPlatformChannelSpecifics);
-  await flutterLocalNotificationsPlugin.show(
-      0, 'Download Complete', '$fileName.csv has been downloaded.', platformChannelSpecifics);
 }

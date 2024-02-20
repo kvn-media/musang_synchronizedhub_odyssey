@@ -21,11 +21,11 @@ class _$ATGModelSerializer implements StructuredSerializer<ATGModel> {
       'atg_timestamp',
       serializers.serialize(object.atg_timestamp,
           specifiedType: const FullType(DateTime)),
-      'level_barrel',
-      serializers.serialize(object.level_barrel,
+      'tank_level',
+      serializers.serialize(object.tank_level,
           specifiedType: const FullType(int)),
-      'volume_change_barrel',
-      serializers.serialize(object.volume_change_barrel,
+      'volume_change',
+      serializers.serialize(object.volume_change,
           specifiedType: const FullType(int)),
       'avg_temp_celcius',
       serializers.serialize(object.avg_temp_celcius,
@@ -61,12 +61,12 @@ class _$ATGModelSerializer implements StructuredSerializer<ATGModel> {
           result.atg_timestamp = serializers.deserialize(value,
               specifiedType: const FullType(DateTime))! as DateTime;
           break;
-        case 'level_barrel':
-          result.level_barrel = serializers.deserialize(value,
+        case 'tank_level':
+          result.tank_level = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
-        case 'volume_change_barrel':
-          result.volume_change_barrel = serializers.deserialize(value,
+        case 'volume_change':
+          result.volume_change = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
         case 'avg_temp_celcius':
@@ -100,9 +100,9 @@ class _$ATGModel extends ATGModel {
   @override
   final DateTime atg_timestamp;
   @override
-  final int level_barrel;
+  final int tank_level;
   @override
-  final int volume_change_barrel;
+  final int volume_change;
   @override
   final int avg_temp_celcius;
   @override
@@ -119,8 +119,8 @@ class _$ATGModel extends ATGModel {
 
   _$ATGModel._(
       {required this.atg_timestamp,
-      required this.level_barrel,
-      required this.volume_change_barrel,
+      required this.tank_level,
+      required this.volume_change,
       required this.avg_temp_celcius,
       required this.water_level_meter,
       required this.product_temp_celcius,
@@ -130,9 +130,9 @@ class _$ATGModel extends ATGModel {
     BuiltValueNullFieldError.checkNotNull(
         atg_timestamp, r'ATGModel', 'atg_timestamp');
     BuiltValueNullFieldError.checkNotNull(
-        level_barrel, r'ATGModel', 'level_barrel');
+        tank_level, r'ATGModel', 'tank_level');
     BuiltValueNullFieldError.checkNotNull(
-        volume_change_barrel, r'ATGModel', 'volume_change_barrel');
+        volume_change, r'ATGModel', 'volume_change');
     BuiltValueNullFieldError.checkNotNull(
         avg_temp_celcius, r'ATGModel', 'avg_temp_celcius');
     BuiltValueNullFieldError.checkNotNull(
@@ -155,8 +155,8 @@ class _$ATGModel extends ATGModel {
     if (identical(other, this)) return true;
     return other is ATGModel &&
         atg_timestamp == other.atg_timestamp &&
-        level_barrel == other.level_barrel &&
-        volume_change_barrel == other.volume_change_barrel &&
+        tank_level == other.tank_level &&
+        volume_change == other.volume_change &&
         avg_temp_celcius == other.avg_temp_celcius &&
         water_level_meter == other.water_level_meter &&
         product_temp_celcius == other.product_temp_celcius &&
@@ -168,8 +168,8 @@ class _$ATGModel extends ATGModel {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, atg_timestamp.hashCode);
-    _$hash = $jc(_$hash, level_barrel.hashCode);
-    _$hash = $jc(_$hash, volume_change_barrel.hashCode);
+    _$hash = $jc(_$hash, tank_level.hashCode);
+    _$hash = $jc(_$hash, volume_change.hashCode);
     _$hash = $jc(_$hash, avg_temp_celcius.hashCode);
     _$hash = $jc(_$hash, water_level_meter.hashCode);
     _$hash = $jc(_$hash, product_temp_celcius.hashCode);
@@ -183,8 +183,8 @@ class _$ATGModel extends ATGModel {
   String toString() {
     return (newBuiltValueToStringHelper(r'ATGModel')
           ..add('atg_timestamp', atg_timestamp)
-          ..add('level_barrel', level_barrel)
-          ..add('volume_change_barrel', volume_change_barrel)
+          ..add('tank_level', tank_level)
+          ..add('volume_change', volume_change)
           ..add('avg_temp_celcius', avg_temp_celcius)
           ..add('water_level_meter', water_level_meter)
           ..add('product_temp_celcius', product_temp_celcius)
@@ -202,14 +202,14 @@ class ATGModelBuilder implements Builder<ATGModel, ATGModelBuilder> {
   set atg_timestamp(DateTime? atg_timestamp) =>
       _$this._atg_timestamp = atg_timestamp;
 
-  int? _level_barrel;
-  int? get level_barrel => _$this._level_barrel;
-  set level_barrel(int? level_barrel) => _$this._level_barrel = level_barrel;
+  int? _tank_level;
+  int? get tank_level => _$this._tank_level;
+  set tank_level(int? tank_level) => _$this._tank_level = tank_level;
 
-  int? _volume_change_barrel;
-  int? get volume_change_barrel => _$this._volume_change_barrel;
-  set volume_change_barrel(int? volume_change_barrel) =>
-      _$this._volume_change_barrel = volume_change_barrel;
+  int? _volume_change;
+  int? get volume_change => _$this._volume_change;
+  set volume_change(int? volume_change) =>
+      _$this._volume_change = volume_change;
 
   int? _avg_temp_celcius;
   int? get avg_temp_celcius => _$this._avg_temp_celcius;
@@ -240,8 +240,8 @@ class ATGModelBuilder implements Builder<ATGModel, ATGModelBuilder> {
     final $v = _$v;
     if ($v != null) {
       _atg_timestamp = $v.atg_timestamp;
-      _level_barrel = $v.level_barrel;
-      _volume_change_barrel = $v.volume_change_barrel;
+      _tank_level = $v.tank_level;
+      _volume_change = $v.volume_change;
       _avg_temp_celcius = $v.avg_temp_celcius;
       _water_level_meter = $v.water_level_meter;
       _product_temp_celcius = $v.product_temp_celcius;
@@ -271,10 +271,10 @@ class ATGModelBuilder implements Builder<ATGModel, ATGModelBuilder> {
         new _$ATGModel._(
             atg_timestamp: BuiltValueNullFieldError.checkNotNull(
                 atg_timestamp, r'ATGModel', 'atg_timestamp'),
-            level_barrel: BuiltValueNullFieldError.checkNotNull(
-                level_barrel, r'ATGModel', 'level_barrel'),
-            volume_change_barrel: BuiltValueNullFieldError.checkNotNull(
-                volume_change_barrel, r'ATGModel', 'volume_change_barrel'),
+            tank_level: BuiltValueNullFieldError.checkNotNull(
+                tank_level, r'ATGModel', 'tank_level'),
+            volume_change: BuiltValueNullFieldError.checkNotNull(
+                volume_change, r'ATGModel', 'volume_change'),
             avg_temp_celcius: BuiltValueNullFieldError.checkNotNull(
                 avg_temp_celcius, r'ATGModel', 'avg_temp_celcius'),
             water_level_meter: BuiltValueNullFieldError.checkNotNull(

@@ -13,7 +13,7 @@ import '../models/dashboard/atg_model.dart';
 
 class ATGBusinessLogic extends GetxController {
   List<ATGModel> detailsListData = [];
-  List<ATGSummary> sumListData = [];
+  List<ATGSummaryModel> sumListData = [];
 
   double _data = 0.0;
 
@@ -23,7 +23,7 @@ class ATGBusinessLogic extends GetxController {
   DateTimeRange? get dateRange => _dateRange;
 
   late List<ColumnSeries<ATGModel, String>> detailedChartData;
-  late List<ColumnSeries<ATGSummary, String>> sumChartData;
+  late List<ColumnSeries<ATGSummaryModel, String>> sumChartData;
 
   final _dataController = StreamController<double>.broadcast();
 
@@ -38,31 +38,33 @@ class ATGBusinessLogic extends GetxController {
     fetchData();
   }
 
-  Future<void> fetchData({DateTimeRange? dateRange}) async {
+  Future<void> fetchData(
+      {DateTimeRange? dateRange, int page = 1, int recordsPerPage = 20}) async {
     if (dateRange != null) {
-      sumListData = await _sumDao.read();
-      detailsListData = await _AtgDao.read(1, 20, dateRange: dateRange);
+      sumListData = await _sumDao.read(page, recordsPerPage, dateRange: dateRange);
+      detailsListData =
+          await _AtgDao.read(page, recordsPerPage, dateRange: dateRange);
     } else {
       // Jika dateRange null, ambil semua data
-      sumListData = await _sumDao.read();
-      detailsListData = await _AtgDao.read(1, 20);
+      sumListData = await _sumDao.read(page, recordsPerPage);
+      detailsListData = await _AtgDao.read(page, recordsPerPage);
     }
-    print('Fetch Data: $detailsListData');
+    // print('Fetch Data: $detailsListData');
     updateChartData();
     updateSumChartData();
     if (detailsListData.isNotEmpty) {
       var firstItem = detailsListData.first;
-      if (firstItem.level_barrel != null) {
-        _data = firstItem.level_barrel!.toDouble();
+      if (firstItem.tank_level != null) {
+        _data = firstItem.tank_level!.toDouble();
         _dataController.add(_data);
       } else {
-        print('${firstItem.level_barrel} is null');
+        print('${firstItem.tank_level} is null');
       }
-      if (firstItem.volume_change_barrel != null) {
-        _data = firstItem.volume_change_barrel!.toDouble();
+      if (firstItem.volume_change != null) {
+        _data = firstItem.volume_change!.toDouble();
         _dataController.add(_data);
       } else {
-        print('${firstItem.volume_change_barrel} is null');
+        print('${firstItem.volume_change} is null');
       }
       if (firstItem.avg_temp_celcius != null) {
         _data = firstItem.avg_temp_celcius!.toDouble();
@@ -112,25 +114,25 @@ class ATGBusinessLogic extends GetxController {
 
   void updateSumChartData() {
     sumChartData = [
-      ColumnSeries<ATGSummary, String>(
+      ColumnSeries<ATGSummaryModel, String>(
         dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
+        xValueMapper: (ATGSummaryModel data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
             .format(data.from_date ?? DateTime.now()),
-        yValueMapper: (ATGSummary data, _) => data.change ?? 0.0,
+        yValueMapper: (ATGSummaryModel data, _) => data.change ?? 0.0,
         name: "Berkurang",
       ),
-      ColumnSeries<ATGSummary, String>(
+      ColumnSeries<ATGSummaryModel, String>(
         dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
-            .format(data.to_date ?? DateTime.now()),
-        yValueMapper: (ATGSummary data, _) => data.last_tank_position ?? 0.0,
+        xValueMapper: (ATGSummaryModel data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
+            .format(data.end_date ?? DateTime.now()),
+        yValueMapper: (ATGSummaryModel data, _) => data.last_tank_position ?? 0.0,
         name: "Posisi akhir",
       ),
-      ColumnSeries<ATGSummary, String>(
+      ColumnSeries<ATGSummaryModel, String>(
         dataSource: sumListData,
-        xValueMapper: (ATGSummary data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
+        xValueMapper: (ATGSummaryModel data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
             .format(data.from_date ?? DateTime.now()),
-        yValueMapper: (ATGSummary data, _) => data.from_tank_position ?? 0.0,
+        yValueMapper: (ATGSummaryModel data, _) => data.from_tank_position ?? 0.0,
         name: "Posisi awal",
       ),
     ];
@@ -149,7 +151,7 @@ class ATGBusinessLogic extends GetxController {
         xValueMapper: (ATGModel data, _) =>
             DateFormat('yyyy-MM-dd hh:mm:ss').format(data.atg_timestamp),
         yValueMapper: (ATGModel data, _) =>
-            data.level_barrel != null ? data.level_barrel : 0,
+            data.tank_level != null ? data.tank_level : 0,
         name: "Level Barrel",
       ),
       ColumnSeries<ATGModel, String>(
@@ -157,7 +159,7 @@ class ATGBusinessLogic extends GetxController {
         xValueMapper: (ATGModel data, _) =>
             DateFormat('yyyy-MM-dd hh:mm:ss').format(data.atg_timestamp),
         yValueMapper: (ATGModel data, _) =>
-            data.volume_change_barrel != null ? data.volume_change_barrel : 0,
+            data.volume_change != null ? data.volume_change : 0,
         name: "Volume Change Barrel",
       ),
       ColumnSeries<ATGModel, String>(

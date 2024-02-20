@@ -101,9 +101,11 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                   ),
                   child: SfCartesianChart(
                     series: [
-                      ...widget.logic.detailedChartData,
+                      ...widget.logic.sumChartData,
                     ],
                     primaryXAxis: CategoryAxis(
+                      initialVisibleMinimum: 0,
+                      initialVisibleMaximum: 10,
                       labelStyle: TextStyle(
                         color: textColor,
                       ),
