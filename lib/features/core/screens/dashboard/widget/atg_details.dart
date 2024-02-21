@@ -9,7 +9,12 @@ import 'package:musang_syncronizehub_odyssey/services/csv_download.dart';
 import '../../../controllers/atg_controller.dart';
 import '../../../models/dashboard/atg_model.dart';
 
-class ATGDetailsPage extends StatelessWidget {
+class ATGDetailsPage extends StatefulWidget {
+  @override
+  State<ATGDetailsPage> createState() => _ATGDetailsPageState();
+}
+
+class _ATGDetailsPageState extends State<ATGDetailsPage> {
   final ATGBusinessLogic atgLogic = Get.put(ATGBusinessLogic());
 
   @override
@@ -108,16 +113,6 @@ class ATGDetailsPage extends StatelessWidget {
           await downloadCSV(
             dataList: filteredData,
             fileName: 'atg_report',
-            headers: [
-              'Timestamp',
-              'Tank Level',
-              'Volume Change Barrel',
-              'Avg Temp Celcius',
-              'Water Level Meter',
-              'Product Temp Celcius',
-              'Alarm',
-              'Site ID'
-            ],
             mapDataToRow: (item) => [
               DateFormat('yyyy-MM-dd hh:mm:ss').format(item.atg_timestamp),
               item.tank_level.toString(),
@@ -125,7 +120,7 @@ class ATGDetailsPage extends StatelessWidget {
               item.avg_temp_celcius.toString(),
               item.water_level_meter.toString(),
               item.product_temp_celcius.toString(),
-              item.alarm?.toString(),
+              item.alarm?.toString() ?? '',
               item.site_id.toString(),
             ],
           );

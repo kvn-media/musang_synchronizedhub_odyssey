@@ -40,14 +40,15 @@ dependencies:
   build_runner: ^2.4.8
   path_provider: ^2.1.2
   path: ^1.8.3
-  to_csv: ^2.2.1
+  universal_platform: ^1.0.0+1
+  universal_html: ^2.2.4
   csv: ^5.1.1
   syncfusion_flutter_charts: ^24.2.4
+  shared_preferences: ^2.2.2
   permission_handler: ^11.3.0
   awesome_notifications: ^0.8.2
   flutter_native_splash: ^2.2.16
   syncfusion_flutter_datagrid: ^24.2.7
-  file_saver: ^0.2.10
   get: ^4.6.6
   postgres: ^3.0.8
   uuid: ^4.3.3

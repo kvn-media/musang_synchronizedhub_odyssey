@@ -1,37 +1,64 @@
+import 'dart:io';
+import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:file_saver/file_saver.dart';
 import 'package:csv/csv.dart';
-import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:universal_html/html.dart' as html;
 
-Future<void> downloadCSV({
-  required List<dynamic> dataList,
+Future<void> downloadCSV<T>({
+  required List<T> dataList,
   required String fileName,
-  required List<String> headers,
-  required List<dynamic> Function(dynamic) mapDataToRow,
+  required List<String> Function(T) mapDataToRow,
 }) async {
   try {
     // Request storage permission
-    PermissionStatus status = await Permission.storage.request();
-    if (!status.isGranted) {
-      throw Exception('Storage permission not granted');
+    if (UniversalPlatform.isAndroid) {
+      PermissionStatus status = await Permission.storage.request();
+      if (!status.isGranted) {
+        throw Exception('Storage permission not granted');
+      }
     }
 
-    List<List<dynamic>> rows = [headers];
-
-    for (var item in dataList) {
-      rows.add(mapDataToRow(item));
-    }
+    List<List<String>> rows = dataList.map(mapDataToRow).toList();
 
     String csv = const ListToCsvConverter().convert(rows);
 
-    // Save the CSV string
-    await FileSaver.instance.saveFile(
-      name: fileName,
-      bytes: Uint8List.fromList(csv.codeUnits),
-      ext: 'csv',
-      customMimeType: 'text/csv',
-    );
+    if (UniversalPlatform.isWeb) {
+      // Prepare
+      final bytes = utf8.encode(csv);
+      final blob = html.Blob([bytes]);
+
+      // Download
+      final url = html.Url.createObjectUrlFromBlob(blob);
+      final anchor = html.AnchorElement(href: url)
+        ..setAttribute('download', '$fileName.csv')
+        ..click();
+
+      // Cleanup
+      html.Url.revokeObjectUrl(url);
+    } else {
+      Directory? directory;
+
+      if (UniversalPlatform.isAndroid) {
+        directory = await getExternalStorageDirectory();
+      } else if (UniversalPlatform.isIOS) {
+        directory = await getApplicationDocumentsDirectory();
+      } else if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
+        directory = await getDownloadsDirectory();
+      }
+
+      if (directory == null) {
+        throw Exception('Could not access the directory');
+      }
+
+      // Create a file in the directory
+      File file = File('${directory.path}/$fileName.csv');
+
+      // Write the CSV string to the file
+      await file.writeAsString(csv);
+    }
 
     // Show a notification
     AwesomeNotifications().createNotification(
