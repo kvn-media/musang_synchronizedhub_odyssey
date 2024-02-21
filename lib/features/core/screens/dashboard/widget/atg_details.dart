@@ -27,15 +27,15 @@ class ATGDetailsPage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            GetBuilder<ATGBusinessLogic>(
-              builder: (controller) {
-                double? data = controller.data;
-                return DataAnimateWidget(level: data);
-              },
-            ),
+            // SizedBox(
+            //   height: 20.0,
+            // ),
+            // GetBuilder<ATGBusinessLogic>(
+            //   builder: (controller) {
+            //     double? data = controller.data;
+            //     return DataAnimateWidget(level: data);
+            //   },
+            // ),
             SizedBox(
               height: 30.0,
             ),
@@ -84,6 +84,8 @@ class ATGDetailsPage extends StatelessWidget {
               navigationMode: GridNavigationMode.cell,
               gridLinesVisibility: GridLinesVisibility.both,
               headerGridLinesVisibility: GridLinesVisibility.both,
+              allowPullToRefresh: true,
+              allowSwiping: true,
             ),
             SizedBox(
               height: 30.0,
