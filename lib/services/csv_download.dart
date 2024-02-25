@@ -1,16 +1,16 @@
 import 'dart:io';
-import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
+import 'dart:convert';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:csv/csv.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 import 'package:universal_html/html.dart' as html;
 
-Future<void> downloadCSV<T>({
-  required List<T> dataList,
+Future<void> downloadCSV({
+  required List<List<String>> dataRows,
   required String fileName,
-  required List<String> Function(T) mapDataToRow,
 }) async {
   try {
     // Request storage permission
@@ -21,20 +21,18 @@ Future<void> downloadCSV<T>({
       }
     }
 
-    List<List<String>> rows = dataList.map(mapDataToRow).toList();
-
-    String csv = const ListToCsvConverter().convert(rows);
+    String csv = const ListToCsvConverter().convert(dataRows);
 
     if (UniversalPlatform.isWeb) {
-      // Prepare
-      final bytes = utf8.encode(csv);
-      final blob = html.Blob([bytes]);
+      // Save CSV data using browser APIs
+      var encodedCsvData = utf8.encode(csv); // Convert CSV string to bytes
+      var blob = html.Blob([encodedCsvData]);
+      var url = html.Url.createObjectUrlFromBlob(blob);
 
-      // Download
-      final url = html.Url.createObjectUrlFromBlob(blob);
-      final anchor = html.AnchorElement(href: url)
-        ..setAttribute('download', '$fileName.csv')
-        ..click();
+      // Create an anchor element to trigger download
+      var anchor = html.AnchorElement(href: url);
+      anchor.download = '$fileName.csv';
+      anchor.click();
 
       // Cleanup
       html.Url.revokeObjectUrl(url);
@@ -53,23 +51,33 @@ Future<void> downloadCSV<T>({
         throw Exception('Could not access the directory');
       }
 
+      // Check if the directory exists and create it if not
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+
       // Create a file in the directory
       File file = File('${directory.path}/$fileName.csv');
 
-      // Write the CSV string to the file
+      // Write the CSV string to the file 
       await file.writeAsString(csv);
-    }
 
-    // Show a notification
-    AwesomeNotifications().createNotification(
-      content: NotificationContent(
-        id: 10,
-        channelKey: 'download_channel_id',
-        title: 'Download Complete',
-        body: '$fileName.csv has been downloaded.',
-        notificationLayout: NotificationLayout.BigText,
-      ),
-    );
+      // Check if the file exists
+      if (!await file.exists()) {
+        throw Exception('File not found');
+      }
+
+      // Show a notification
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 10,
+          channelKey: 'download_channel_id',
+          title: 'Download Complete',
+          body: '$fileName.csv has been downloaded.',
+          notificationLayout: NotificationLayout.BigText,
+        ),
+      );
+    }
   } catch (e) {
     print('An error occurred while downloading the CSV: $e');
     AwesomeNotifications().createNotification(
@@ -83,3 +91,4 @@ Future<void> downloadCSV<T>({
     );
   }
 }
+

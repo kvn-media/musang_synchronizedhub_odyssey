@@ -5,17 +5,25 @@ import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/wid
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/flowmeter_list.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/heading.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_list.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/navbar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controllers/atg_controller.dart';
 import '../../controllers/flowmeter_controller.dart';
 
-class DashBoard extends StatelessWidget {
+class DashBoard extends StatefulWidget {
   final ATGBusinessLogic atgLogic;
   final FlowMeterBusinessLogic flowmeterLogic;
 
   const DashBoard(
       {required this.atgLogic, required this.flowmeterLogic, super.key});
+
+  @override
+  State<DashBoard> createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +51,7 @@ class DashBoard extends StatelessWidget {
 
               //Categories
               DashboardCategories(
-                atgLogic: atgLogic,
+                atgLogic: widget.atgLogic,
               ),
               SizedBox(
                 height: 4.h,
@@ -68,7 +76,7 @@ class DashBoard extends StatelessWidget {
                 height: 2.h,
               ),
 
-              ATGDashboardData(logic: atgLogic),
+              ATGDashboardData(logic: widget.atgLogic),
 
               SizedBox(
                 height: 2.h,
@@ -87,10 +95,21 @@ class DashBoard extends StatelessWidget {
                 height: 2.h,
               ),
 
-              FlowMeterDashboardData(logic: flowmeterLogic),
+              FlowMeterDashboardData(logic: widget.flowmeterLogic),
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: NavBar(
+        selectedIndex: _selectedIndex,
+        context: context,
+        onTabChange: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        atgLogic: widget.atgLogic,
+        flowmeterLogic: widget.flowmeterLogic,
       ),
     );
   }

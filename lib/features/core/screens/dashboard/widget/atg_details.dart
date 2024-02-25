@@ -106,23 +106,28 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
           // Show date range picker and fetch data for the selected date range
           await atgLogic.selectDateRange(context);
 
-          // Get the filtered data
-          List<ATGModel> filteredData = atgLogic.detailsListData;
+          // Get the fetched data
+          List<ATGModel> fetchedData = atgLogic.detailsListData;
 
-          // Download CSV with filtered data
+          // Convert fetched data to CSV format
+          List<List<String>> csvData = fetchedData
+              .map((item) => [
+                    DateFormat('yyyy-MM-dd HH:mm:ss')
+                        .format(item.atg_timestamp), // Format timestamp
+                    item.tank_level.toString(),
+                    item.volume_change.toString(),
+                    item.avg_temp_celcius.toString(),
+                    item.water_level_meter.toString(),
+                    item.product_temp_celcius.toString(),
+                    item.alarm?.toString() ?? '',
+                    item.site_id.toString(),
+                  ])
+              .toList();
+
+          // Download CSV with fetched data
           await downloadCSV(
-            dataList: filteredData,
+            dataRows: csvData,
             fileName: 'atg_report',
-            mapDataToRow: (item) => [
-              DateFormat('yyyy-MM-dd hh:mm:ss').format(item.atg_timestamp),
-              item.tank_level.toString(),
-              item.volume_change.toString(),
-              item.avg_temp_celcius.toString(),
-              item.water_level_meter.toString(),
-              item.product_temp_celcius.toString(),
-              item.alarm?.toString() ?? '',
-              item.site_id.toString(),
-            ],
           );
         },
         child: Icon(Icons.download),
