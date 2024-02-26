@@ -1,16 +1,36 @@
-# musang_syncronizehub_odyssey
+# Musang Synchronized Hub Odyssey
 
-A new Flutter project.
+## Description
+Musang Synchronized Hub Odyssey is a dashboard for tank monitoring reports. It provides real-time data visualization and analysis of tank parameters, enabling efficient and effective management of tank resources.
 
-## Getting Started
+## Features
+- **Real-Time Monitoring**: Monitor your tanks in real-time with our intuitive dashboard.
+- **Data Analysis**: Analyze tank data with built-in analytical tools for better decision making.
+- **Alerts and Notifications**: Get notified about any critical changes in your tanks' status.
 
-This project is a starting point for a Flutter application.
+## Installation
+To install the project, follow these steps:
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Run `dart run build_runner` to build the project.
+4. Run `flutter run` to start the application.
 
-A few resources to get you started if this is your first Flutter project:
+## Usage
+1. Register first. You will receive a verification email.
+2. If you already have an account, simply log in.
+3. Navigate to the ATG page for detailed tank information.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Contributing
+We welcome contributions from the community. Here are some ways you can contribute:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Bug Reports**: Report bugs on the issue tracker.
+- **New Features**: Suggest new features or improvements to existing features.
+- **Code**: Make a pull request. Please make sure your code follows the existing style guide.
+
+Before contributing, please read our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+Provide contact information or links to your social media for users who may have further questions or need support.
