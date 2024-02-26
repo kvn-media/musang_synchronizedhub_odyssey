@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginHeaderWidget extends StatelessWidget {
   const LoginHeaderWidget({
@@ -13,14 +14,14 @@ class LoginHeaderWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image(
-          image: const AssetImage('assets/welcome.png'),
+        SvgPicture.asset(
+          'assets/images/logo-musang.svg',
           height: height * 0.2,
         ),
         const Text(
           'Welcome Back',
           style: TextStyle(
-            color: Color(0xFF4CC3D9),
+            color: Colors.white,
             fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
@@ -28,7 +29,7 @@ class LoginHeaderWidget extends StatelessWidget {
         Text(
           "Make it work, make it right, make it fast",
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Color(0xFF4CC3D9),
+                color: Colors.white,
               ),
           textAlign: TextAlign.center,
         ),

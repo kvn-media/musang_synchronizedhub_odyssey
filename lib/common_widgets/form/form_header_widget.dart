@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class FormHeaderWidget extends StatelessWidget {
   const FormHeaderWidget({
@@ -7,9 +8,10 @@ class FormHeaderWidget extends StatelessWidget {
     required this.title,
     required this.subTitle,
     this.imageColor,
-     this.imageHeight = 0.2,
+    this.imageHeight = 0.2,
     this.heightBetween,
-     this.crossAxisAlignment = CrossAxisAlignment.start, this.textAlign,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
+    this.textAlign,
   });
 
   final String image, title, subTitle;
@@ -25,12 +27,14 @@ class FormHeaderWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: crossAxisAlignment!,
       children: [
-        Image(
-          image: AssetImage(image),
+        SvgPicture.asset(
+          image,
           color: imageColor,
           height: size.height * imageHeight!,
         ),
-        SizedBox(height: heightBetween,),
+        SizedBox(
+          height: heightBetween,
+        ),
         Text(
           title,
           style: const TextStyle(

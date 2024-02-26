@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:musang_syncronizehub_odyssey/fade_in_animation/animation_design.dart';
 import 'package:musang_syncronizehub_odyssey/fade_in_animation/fade_in_animation_model.dart';
@@ -21,7 +22,7 @@ class WelcomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor:
-          isDarkMode ? const Color(0xff272727) : const Color(0xFFDC143C),
+          isDarkMode ? const Color(0xff272727) : const Color(0xFFA9A9A9),
       body: Stack(
         children: [
           TFadeInAnimation(
@@ -41,16 +42,16 @@ class WelcomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image(
-                    image: const AssetImage('assets/welcome.png'),
+                  SvgPicture.asset(
+                    'assets/images/logo-musang.svg',
                     height: height * 0.5,
                   ),
                   Column(
                     children: [
                       const Text(
-                        'Building Awesome Apps',
+                        'Musang Dashboard Apps',
                         style: TextStyle(
-                          color: Color(0xFF4CC3D9),
+                          color: Colors.white,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
@@ -59,7 +60,7 @@ class WelcomeScreen extends StatelessWidget {
                         "Let's start your journey with us on this "
                         "amazing and easy platform",
                         style: TextStyle(
-                          color: Color(0xFF4CC3D9),
+                          color: Colors.white,
                           fontSize: 15,
                         ),
                         textAlign: TextAlign.center,
@@ -73,7 +74,7 @@ class WelcomeScreen extends StatelessWidget {
                           onPressed: () => Get.to(() => const LoginScreen()),
                           style: ElevatedButton.styleFrom(
                             shape: const RoundedRectangleBorder(),
-                            foregroundColor: Color(0xFF4CC3D9),
+                            foregroundColor: Colors.white,
                             backgroundColor: const Color(0xff272727),
                             side: const BorderSide(
                               color: Colors.white,
@@ -92,7 +93,7 @@ class WelcomeScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             shape: const RoundedRectangleBorder(),
-                            foregroundColor: Color(0xFF4CC3D9),
+                            foregroundColor: Colors.white,
                             backgroundColor: const Color(0xff272727),
                             side: const BorderSide(
                               color: Colors.white,

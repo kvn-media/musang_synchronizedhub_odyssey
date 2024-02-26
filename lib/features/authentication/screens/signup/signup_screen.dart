@@ -16,14 +16,14 @@ class SignUpScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor:
-            isDarkMode ? const Color(0xff272727) : const Color(0xFFDC143C),
+            isDarkMode ? const Color(0xff272727) : const Color(0xFFA9A9A9),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(30),
             child: const Column(
               children: [
                 FormHeaderWidget(
-                  image: 'assets/welcome.png',
+                  image: 'assets/images/logo-musang.svg',
                   title: 'Get On Board',
                   subTitle: 'Create your profile to start your Journey.',
                 ),

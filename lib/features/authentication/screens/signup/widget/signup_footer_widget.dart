@@ -51,7 +51,7 @@ class SignUpFooterWidget extends StatelessWidget {
                 TextSpan(
                   text: 'Login'.toUpperCase(),
                   style: const TextStyle(
-                    color: Colors.blue,
+                    color: Colors.white,
                   ),
                 ),
               ],

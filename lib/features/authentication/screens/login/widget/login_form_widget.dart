@@ -32,7 +32,7 @@ class _LoginFormState extends State<LoginForm> {
               decoration: const InputDecoration(
                 prefixIcon: Icon(
                   Icons.person_outline_outlined,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 labelText: 'Email',
                 hintText: 'Email',
@@ -48,7 +48,7 @@ class _LoginFormState extends State<LoginForm> {
               decoration: InputDecoration(
                 prefixIcon: const Icon(
                   Icons.lock,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 labelText: 'Password',
                 hintText: 'Password',
@@ -77,7 +77,7 @@ class _LoginFormState extends State<LoginForm> {
                   },
                   child: const Text(
                     'Forget Password?',
-                    style: TextStyle(color: Color(0xFF4CC3D9)),
+                    style: TextStyle(color: Colors.white),
                   )),
             ),
             SizedBox(
@@ -93,7 +93,7 @@ class _LoginFormState extends State<LoginForm> {
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     shape: const RoundedRectangleBorder(),
-                    foregroundColor: Color(0xFF4CC3D9),
+                    foregroundColor: Colors.white,
                     backgroundColor: const Color(0xff272727),
                     side: const BorderSide(
                       color: Colors.white,
