@@ -90,7 +90,6 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
               gridLinesVisibility: GridLinesVisibility.both,
               headerGridLinesVisibility: GridLinesVisibility.both,
               allowPullToRefresh: true,
-              allowSwiping: true,
             ),
             SizedBox(
               height: 30.0,

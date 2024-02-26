@@ -1,4 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Add these lines for the permissions -->
+    <strong><uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /></strong>
+    <strong><uses-permission android:name="android.permission.INTERNET" /></strong>
+    <strong><uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /></strong>
+    <strong><uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /></strong>
+    <strong><uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /></strong>
+
     <application
         android:label="musang_syncronizehub_odyssey"
         android:name="${applicationName}"
@@ -30,8 +37,4 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-
-    <!-- Add these lines for the permissions -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 </manifest>

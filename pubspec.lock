@@ -205,26 +205,26 @@ packages:
     dependency: "direct main"
     description:
       name: cloud_firestore
-      sha256: "8bfbb5a2edbc6052452326d60de0113fea2bcbf081d34a3f8e45c8b38307b31c"
+      sha256: e51b896f23f96c541c29171ccfbe771696cc280767d1412df1237db4effea285
       url: "https://pub.dev"
     source: hosted
-    version: "4.14.0"
+    version: "4.15.5"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
-      sha256: "73ff438fe46028f0e19f55da18b6ddc6906ab750562cd7d9ffab77ff8c0c4307"
+      sha256: "8c5834277519f7e68d4bdf5ae04046ede3cb98ce7e3cfced3153fb83a16d2508"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.0"
+    version: "6.1.6"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
-      sha256: "232e45e95970d3a6baab8f50f9c3a6e2838d145d9d91ec9a7392837c44296397"
+      sha256: "4f5d9164cf9873d05573eddeec62210be0efa5e4cb047ea81253b6da25ebd9dc"
       url: "https://pub.dev"
     source: hosted
-    version: "3.9.0"
+    version: "3.10.5"
   code_builder:
     dependency: transitive
     description:
@@ -289,6 +289,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.4"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      sha256: "49af28382aefc53562459104f64d16b9dfd1e8ef68c862d5af436cc8356ce5a8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.1"
   fake_async:
     dependency: transitive
     description:
@@ -313,6 +321,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+  file_saver:
+    dependency: "direct main"
+    description:
+      name: file_saver
+      sha256: eb16c32d3eb5e4b6318ab9fa97138d6ea0b2d47a25c0af6540263e46979e1c57
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.11"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -354,7 +370,7 @@ packages:
     source: hosted
     version: "5.0.0"
   firebase_core_web:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_core_web
       sha256: "57e61d6010e253b36d38191cefd6199d7849152cdcd234b61ca290cdb278a0ba"

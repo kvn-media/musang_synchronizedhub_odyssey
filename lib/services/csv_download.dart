@@ -6,7 +6,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:csv/csv.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:universal_html/html.dart' as html;
+import 'package:file_saver/file_saver.dart';
 
 Future<void> downloadCSV({
   required List<List<String>> dataRows,
@@ -24,26 +24,19 @@ Future<void> downloadCSV({
     String csv = const ListToCsvConverter().convert(dataRows);
 
     if (UniversalPlatform.isWeb) {
-      // Save CSV data using browser APIs
+      // Save CSV data using file_saver package
       var encodedCsvData = utf8.encode(csv); // Convert CSV string to bytes
-      var blob = html.Blob([encodedCsvData]);
-      var url = html.Url.createObjectUrlFromBlob(blob);
-
-      // Create an anchor element to trigger download
-      var anchor = html.AnchorElement(href: url);
-      anchor.download = '$fileName.csv';
-      anchor.click();
-
-      // Cleanup
-      html.Url.revokeObjectUrl(url);
+      await FileSaver.instance.saveFile(
+          name: fileName,
+          bytes: encodedCsvData,
+          ext: 'csv',
+          customMimeType: "text/csv");
     } else {
       Directory? directory;
 
-      if (UniversalPlatform.isAndroid) {
-        directory = await getExternalStorageDirectory();
-      } else if (UniversalPlatform.isIOS) {
-        directory = await getApplicationDocumentsDirectory();
-      } else if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
+      if (UniversalPlatform.isAndroid ||
+          UniversalPlatform.isWindows ||
+          UniversalPlatform.isLinux) {
         directory = await getDownloadsDirectory();
       }
 
@@ -59,7 +52,7 @@ Future<void> downloadCSV({
       // Create a file in the directory
       File file = File('${directory.path}/$fileName.csv');
 
-      // Write the CSV string to the file 
+      // Write the CSV string to the file
       await file.writeAsString(csv);
 
       // Check if the file exists
@@ -91,4 +84,3 @@ Future<void> downloadCSV({
     );
   }
 }
-

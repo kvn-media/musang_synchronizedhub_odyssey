@@ -45,6 +45,7 @@ dependencies:
   csv: ^5.1.1
   syncfusion_flutter_charts: ^24.2.4
   shared_preferences: ^2.2.2
+  file_saver: ^0.2.11
   permission_handler: ^11.3.0
   awesome_notifications: ^0.8.2
   google_nav_bar: ^5.0.6
@@ -59,9 +60,9 @@ dependencies:
   google_fonts: ^6.1.0
   smooth_page_indicator: ^1.1.0
   flutter_otp_text_field: ^1.1.1
-  firebase_core_web: ^2.11.0
-  firebase_core: ^2.24.2
-  firebase_auth: ^4.15.3
+  firebase_core: ^2.25.4
+  cloud_firestore: ^4.15.2
+  firebase_auth: ^4.17.5
   line_awesome_flutter: ^2.0.0
   sizer: ^2.0.15
   postgrest: ^2.1.0
@@ -71,7 +72,6 @@ dependencies:
   supabase_flutter: ^2.3.3
   flutter_dotenv: ^5.1.0
   intl: ^0.18.0
-  cloud_firestore: ^4.13.6
   google_sign_in: ^6.2.1
   share: ^2.0.4
 
