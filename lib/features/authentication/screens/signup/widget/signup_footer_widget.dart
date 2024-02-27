@@ -30,7 +30,7 @@ class SignUpFooterWidget extends StatelessWidget {
             label: const Text('Sign In With Google'),
             style: OutlinedButton.styleFrom(
               shape: const RoundedRectangleBorder(),
-              foregroundColor: const Color(0xff272727),
+              foregroundColor: Colors.white,
               side: const BorderSide(
                 color: Color(0xff272727),
               ),
@@ -51,7 +51,7 @@ class SignUpFooterWidget extends StatelessWidget {
                 TextSpan(
                   text: 'Login'.toUpperCase(),
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Colors.blue,
                   ),
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/dashboard.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_details.dart';
@@ -11,15 +12,15 @@ class NavBar extends StatelessWidget {
   final int selectedIndex;
   final BuildContext context;
   final Function(int) onTabChange;
-  final ATGBusinessLogic atgLogic; // Add this
-  final FlowMeterBusinessLogic flowmeterLogic; // Add this
+  final ATGBusinessLogic atgLogic;
+  final FlowMeterBusinessLogic flowmeterLogic;
 
   NavBar(
       {required this.selectedIndex,
       required this.context,
       required this.onTabChange,
-      required this.atgLogic, // Add this
-      required this.flowmeterLogic, // Add this
+      required this.atgLogic,
+      required this.flowmeterLogic,
       super.key});
 
   @override
@@ -36,7 +37,7 @@ class NavBar extends StatelessWidget {
       tabBorderRadius: 15,
       tabActiveBorder:
           Border.all(color: Colors.black, width: 1), // tab button border
-      tabBorder: Border.all(color: Colors.grey, width: 1), // tab button border
+      // tabBorder: Border.all(color: Colors.grey, width: 1), // tab button border
       tabShadow: [
         BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)
       ], // tab button shadow
@@ -48,8 +49,8 @@ class NavBar extends StatelessWidget {
           ? Colors.white
           : Colors.black, // selected icon and text color
       iconSize: 24,
-      tabBackgroundColor:
-          Colors.red.withOpacity(0.1), // selected tab background color
+      tabBackgroundColor: Colors.blueGrey[400]!
+          .withOpacity(0.1), // selected tab background color
       padding: EdgeInsets.symmetric(
           horizontal: 20, vertical: 20), // navigation bar padding
       selectedIndex: selectedIndex,
@@ -91,10 +92,34 @@ class NavBar extends StatelessWidget {
           text: "Home",
         ),
         GButton(
-          icon: Icons.propane_tank_rounded,
+          icon: IconData(0x0020,
+              fontFamily: 'MaterialIcons'), // Transparent IconData
+          leading: SizedBox(
+            width: 24,
+            height: 24,
+            child: SvgPicture.asset(
+              'assets/icons/tanki.svg',
+              color: theme.brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black,
+            ),
+          ),
+          text: "ATG",
         ),
         GButton(
-          icon: Icons.gas_meter_rounded,
+          icon: IconData(0x0020,
+              fontFamily: 'MaterialIcons'), // Transparent IconData
+          leading: SizedBox(
+            width: 24,
+            height: 24,
+            child: SvgPicture.asset(
+              'assets/icons/flowmeter.svg',
+              color: theme.brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black,
+            ),
+          ),
+          text: "Flow Meter",
         ),
         // Add more GButton here for more tabs
       ],
