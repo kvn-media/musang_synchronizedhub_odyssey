@@ -13,7 +13,8 @@ To install the project, follow these steps:
 1. Clone the repository to your local machine.
 2. Navigate to the project directory.
 3. Run `dart run build_runner` to build the project.
-4. Run `flutter run` to start the application.
+4. If want to run for web, flutter config --enable-web
+5. Run `flutter run` to start the application.
 
 ## Usage
 1. Register first. You will receive a verification email.
