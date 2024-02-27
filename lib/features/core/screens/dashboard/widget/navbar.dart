@@ -92,7 +92,7 @@ class NavBar extends StatelessWidget {
           text: "Home",
         ),
         GButton(
-          icon: IconData(0x0020,
+          icon: const IconData(0x0020,
               fontFamily: 'MaterialIcons'), // Transparent IconData
           leading: SizedBox(
             width: 24,
@@ -107,7 +107,7 @@ class NavBar extends StatelessWidget {
           text: "ATG",
         ),
         GButton(
-          icon: IconData(0x0020,
+          icon: const IconData(0x0020,
               fontFamily: 'MaterialIcons'), // Transparent IconData
           leading: SizedBox(
             width: 24,
