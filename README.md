@@ -34,7 +34,9 @@ Before contributing, please read our [Contributing Guidelines](CONTRIBUTING.md) 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Application Demo
-This is demo for on going application Android version. [Demo](https://drive.google.com/file/d/1M4eaU_x5SOeYEHKJuJxjpvXMNSfbrgP8/view?usp=drive_link)
+This is demo for on going application Android version. [Demo Android](https://drive.google.com/file/d/1M4eaU_x5SOeYEHKJuJxjpvXMNSfbrgP8/view?usp=drive_link)
+
+This is demo for on going application Web version. [Demo Web](https://musang-syncronizehub-ody-3091b.web.app)
 
 <!-- ## Contact
 Provide contact information or links to your social media for users who may have further questions or need support. -->
