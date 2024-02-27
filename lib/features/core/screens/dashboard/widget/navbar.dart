@@ -14,18 +14,44 @@ class NavBar extends StatelessWidget {
   final ATGBusinessLogic atgLogic; // Add this
   final FlowMeterBusinessLogic flowmeterLogic; // Add this
 
-  NavBar({
-    required this.selectedIndex,
-    required this.context,
-    required this.onTabChange,
-    required this.atgLogic, // Add this
-    required this.flowmeterLogic, // Add this
-    super.key
-  });
+  NavBar(
+      {required this.selectedIndex,
+      required this.context,
+      required this.onTabChange,
+      required this.atgLogic, // Add this
+      required this.flowmeterLogic, // Add this
+      super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GNav(
+      rippleColor: theme.brightness == Brightness.dark
+          ? Colors.white
+          : Colors.black, // tab button ripple color when pressed
+      hoverColor: theme.brightness == Brightness.dark
+          ? Colors.white70
+          : Colors.black45, // tab button hover color
+      haptic: true, // haptic feedback
+      tabBorderRadius: 15,
+      tabActiveBorder:
+          Border.all(color: Colors.black, width: 1), // tab button border
+      tabBorder: Border.all(color: Colors.grey, width: 1), // tab button border
+      tabShadow: [
+        BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)
+      ], // tab button shadow
+      curve: Curves.easeOutExpo, // tab animation curves
+      duration: Duration(milliseconds: 500), // tab animation duration
+      gap: 8, // the tab button gap between icon and text
+      color: theme.brightness == Brightness.dark ? Colors.white : Colors.black,
+      activeColor: theme.brightness == Brightness.dark
+          ? Colors.white
+          : Colors.black, // selected icon and text color
+      iconSize: 24,
+      tabBackgroundColor:
+          Colors.red.withOpacity(0.1), // selected tab background color
+      padding: EdgeInsets.symmetric(
+          horizontal: 20, vertical: 20), // navigation bar padding
       selectedIndex: selectedIndex,
       onTabChange: (index) {
         switch (index) {
@@ -34,8 +60,8 @@ class NavBar extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => DashBoard(
-                  atgLogic: atgLogic, // Add this
-                  flowmeterLogic: flowmeterLogic, // Add this
+                  atgLogic: atgLogic,
+                  flowmeterLogic: flowmeterLogic,
                 ),
               ),
             );
@@ -56,12 +82,13 @@ class NavBar extends StatelessWidget {
               ),
             );
             break;
-        // Add more cases here for more tabs
+          // Add more cases here for more tabs
         }
       },
       tabs: [
         GButton(
           icon: Icons.home,
+          text: "Home",
         ),
         GButton(
           icon: Icons.propane_tank_rounded,
