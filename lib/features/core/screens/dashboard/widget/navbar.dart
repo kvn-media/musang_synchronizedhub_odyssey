@@ -26,103 +26,122 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return GNav(
-      rippleColor: theme.brightness == Brightness.dark
-          ? Colors.white
-          : Colors.black, // tab button ripple color when pressed
-      hoverColor: theme.brightness == Brightness.dark
-          ? Colors.white70
-          : Colors.black45, // tab button hover color
-      haptic: true, // haptic feedback
-      tabBorderRadius: 15,
-      tabActiveBorder:
-          Border.all(color: Colors.black, width: 1), // tab button border
-      // tabBorder: Border.all(color: Colors.grey, width: 1), // tab button border
-      tabShadow: [
-        BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)
-      ], // tab button shadow
-      curve: Curves.easeOutExpo, // tab animation curves
-      duration: Duration(milliseconds: 500), // tab animation duration
-      gap: 8, // the tab button gap between icon and text
-      color: theme.brightness == Brightness.dark ? Colors.white : Colors.black,
-      activeColor: theme.brightness == Brightness.dark
-          ? Colors.white
-          : Colors.black, // selected icon and text color
-      iconSize: 24,
-      tabBackgroundColor: Colors.blueGrey[400]!
-          .withOpacity(0.1), // selected tab background color
-      padding: EdgeInsets.symmetric(
-          horizontal: 20, vertical: 20), // navigation bar padding
-      selectedIndex: selectedIndex,
-      onTabChange: (index) {
-        switch (index) {
-          case 0:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DashBoard(
-                  atgLogic: atgLogic,
-                  flowmeterLogic: flowmeterLogic,
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      decoration: BoxDecoration(
+        color:
+            theme.brightness == Brightness.dark ? Colors.black : Colors.white,
+        borderRadius: BorderRadius.circular(40.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 0,
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: GNav(
+          backgroundColor: Colors.transparent,
+          rippleColor: theme.brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black, // tab button ripple color when pressed
+          hoverColor: theme.brightness == Brightness.dark
+              ? Colors.white70
+              : Colors.black45, // tab button hover color
+          haptic: true, // haptic feedback
+          tabBorderRadius: 15,
+          tabActiveBorder:
+              Border.all(color: Colors.black, width: 1), // tab button border
+          // tabBorder: Border.all(color: Colors.grey, width: 1), // tab button border
+          // tabShadow: [
+          //   BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)
+          // ], // tab button shadow
+          curve: Curves.easeOutExpo, // tab animation curves
+          duration: Duration(milliseconds: 500), // tab animation duration
+          gap: 8, // the tab button gap between icon and text
+          color:
+              theme.brightness == Brightness.dark ? Colors.white : Colors.black,
+          activeColor: theme.brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black, // selected icon and text color
+          iconSize: 24,
+          tabBackgroundColor:
+              Colors.transparent, // selected tab background color
+          padding: EdgeInsets.symmetric(
+              horizontal: 15, vertical: 15), // navigation bar padding
+          selectedIndex: selectedIndex,
+          onTabChange: (index) {
+            switch (index) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DashBoard(
+                      atgLogic: atgLogic,
+                      flowmeterLogic: flowmeterLogic,
+                    ),
+                  ),
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ATGDetailsPage(),
+                  ),
+                );
+                break;
+              case 2:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FlowmeterDetailsPage(),
+                  ),
+                );
+                break;
+              // Add more cases here for more tabs
+            }
+          },
+          tabs: [
+            GButton(
+              icon: Icons.home,
+              text: "Home",
+            ),
+            GButton(
+              icon: const IconData(0x0020,
+                  fontFamily: 'MaterialIcons'), // Transparent IconData
+              leading: SizedBox(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset(
+                  'assets/icons/tanki.svg',
+                  color: theme.brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
                 ),
               ),
-            );
-            break;
-          case 1:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ATGDetailsPage(),
-              ),
-            );
-            break;
-          case 2:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FlowmeterDetailsPage(),
-              ),
-            );
-            break;
-          // Add more cases here for more tabs
-        }
-      },
-      tabs: [
-        GButton(
-          icon: Icons.home,
-          text: "Home",
-        ),
-        GButton(
-          icon: const IconData(0x0020,
-              fontFamily: 'MaterialIcons'), // Transparent IconData
-          leading: SizedBox(
-            width: 24,
-            height: 24,
-            child: SvgPicture.asset(
-              'assets/icons/tanki.svg',
-              color: theme.brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black,
+              text: "ATG",
             ),
-          ),
-          text: "ATG",
-        ),
-        GButton(
-          icon: const IconData(0x0020,
-              fontFamily: 'MaterialIcons'), // Transparent IconData
-          leading: SizedBox(
-            width: 24,
-            height: 24,
-            child: SvgPicture.asset(
-              'assets/icons/flowmeter.svg',
-              color: theme.brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black,
+            GButton(
+              icon: const IconData(0x0020,
+                  fontFamily: 'MaterialIcons'), // Transparent IconData
+              leading: SizedBox(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset(
+                  'assets/icons/flowmeter.svg',
+                  color: theme.brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+                ),
+              ),
+              text: "Flow Meter",
             ),
-          ),
-          text: "Flow Meter",
+          ],
         ),
-        // Add more GButton here for more tabs
-      ],
+      ),
     );
   }
 }

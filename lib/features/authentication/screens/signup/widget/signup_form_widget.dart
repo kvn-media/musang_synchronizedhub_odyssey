@@ -29,6 +29,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               controller: controller.fullName,
               decoration: const InputDecoration(
                 label: Text('Full Name'),
+                border: const OutlineInputBorder(),
                 prefixIcon: Icon(
                   Icons.person_outline_rounded,
                 ),
@@ -41,6 +42,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               controller: controller.email,
               decoration: const InputDecoration(
                 label: Text('Email'),
+                border: const OutlineInputBorder(),
                 prefixIcon: Icon(
                   Icons.email_outlined,
                 ),
@@ -53,6 +55,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               controller: controller.phoneNumber,
               decoration: const InputDecoration(
                 label: Text('Phone Number'),
+                border: const OutlineInputBorder(),
                 prefixIcon: Icon(
                   Icons.numbers,
                 ),
@@ -110,7 +113,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 },
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
-                  shape: const RoundedRectangleBorder(),
+                  shape: const StadiumBorder(),
                   foregroundColor: Colors.white,
                   backgroundColor: const Color(0xff272727),
                   side: const BorderSide(

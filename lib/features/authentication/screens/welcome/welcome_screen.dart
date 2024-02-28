@@ -73,32 +73,34 @@ class WelcomeScreen extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () => Get.to(() => const LoginScreen()),
                           style: ElevatedButton.styleFrom(
-                            shape: const RoundedRectangleBorder(),
+                            shape: const StadiumBorder(),
                             foregroundColor: Colors.white,
                             backgroundColor: const Color(0xff272727),
                             side: const BorderSide(
                               color: Colors.white,
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 15),
                           ),
                           child: Text('Login'.toUpperCase()),
                         ),
                       ),
                       const SizedBox(
-                        width: 10,
+                        width: 15,
                       ),
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () => Get.to(() => const SignUpScreen()),
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
-                            shape: const RoundedRectangleBorder(),
+                            shape: const StadiumBorder(),
                             foregroundColor: Colors.white,
                             backgroundColor: const Color(0xff272727),
                             side: const BorderSide(
                               color: Colors.white,
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 15),
                           ),
                           child: Text('Sign Up'.toUpperCase()),
                         ),

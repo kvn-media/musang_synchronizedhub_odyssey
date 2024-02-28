@@ -92,7 +92,7 @@ class _LoginFormState extends State<LoginForm> {
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
-                    shape: const RoundedRectangleBorder(),
+                    shape: const StadiumBorder(),
                     foregroundColor: Colors.white,
                     backgroundColor: const Color(0xff272727),
                     side: const BorderSide(
