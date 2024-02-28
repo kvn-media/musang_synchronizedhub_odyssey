@@ -33,66 +33,54 @@ class _DashBoardState extends State<DashBoard> {
       appBar: const DashboardAppBar(),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(2.w),
+          padding: EdgeInsets.all(2.w),  // Use .w here
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Heading
               DashboardHeading(txtTheme: txtTheme),
               SizedBox(
-                height: 4.h,
+                height: 4.h,  // Use .h here
               ),
-
-              // //Search
-              // const DashboardSearch(),
-              // const SizedBox(
-              //   height: 20,
-              // ),
 
               //Categories
               DashboardCategories(
                 atgLogic: widget.atgLogic,
               ),
               SizedBox(
-                height: 4.h,
+                height: 4.h,  // Use .h here
               ),
-
-              // //Banner
-              // const DashboardBanner(),
-              // const SizedBox(
-              //   height: 20,
-              // ),
 
               // ATG data
               Text(
                 'ATG data',
                 style: TextStyle(
-                  fontSize: 20.sp,
+                  fontSize: 20.sp,  // Use .sp here
                   fontWeight: FontWeight.w800,
                 ),
               ),
 
               SizedBox(
-                height: 2.h,
+                height: 2.h,  // Use .h here
               ),
 
               ATGDashboardData(logic: widget.atgLogic),
 
               SizedBox(
-                height: 2.h,
+                height: 2.h,  // Use .h here
               ),
 
               // Flow Meter data
               Text(
                 'Flow Meter data',
                 style: TextStyle(
-                  fontSize: 20.sp,
+                  fontSize: 20.sp,  // Use .sp here
                   fontWeight: FontWeight.w800,
                 ),
               ),
 
               SizedBox(
-                height: 2.h,
+                height: 2.h,  // Use .h here
               ),
 
               FlowMeterDashboardData(logic: widget.flowmeterLogic),

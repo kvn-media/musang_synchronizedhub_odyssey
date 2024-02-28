@@ -32,16 +32,20 @@ class ATGBusinessLogic extends GetxController {
   final AtgSumDao _sumDao = AtgSumDao(Get.find<PostgrestService>());
   final AtgDao _AtgDao = AtgDao(Get.find<PostgrestService>());
 
+  var isLoading = false.obs;
+
   @override
   void onInit() {
     super.onInit();
     fetchData();
   }
 
-  Future<void> fetchData(
+  Future<List<ATGModel>> fetchData(
       {DateTimeRange? dateRange, int page = 1, int recordsPerPage = 20}) async {
+    isLoading.value = true;
     if (dateRange != null) {
-      sumListData = await _sumDao.read(page, recordsPerPage, dateRange: dateRange);
+      sumListData =
+          await _sumDao.read(page, recordsPerPage, dateRange: dateRange);
       detailsListData =
           await _AtgDao.read(page, recordsPerPage, dateRange: dateRange);
     } else {
@@ -91,6 +95,8 @@ class ATGBusinessLogic extends GetxController {
         print('${firstItem.product_temp_celcius} is null');
       }
     }
+    isLoading.value = false;
+    return detailsListData;
   }
 
   Future<void> selectDateRange(BuildContext context) async {
@@ -116,23 +122,28 @@ class ATGBusinessLogic extends GetxController {
     sumChartData = [
       ColumnSeries<ATGSummaryModel, String>(
         dataSource: sumListData,
-        xValueMapper: (ATGSummaryModel data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
-            .format(data.from_date ?? DateTime.now()),
+        xValueMapper: (ATGSummaryModel data, _) =>
+            DateFormat('yyyy-MM-dd hh:mm:ss')
+                .format(data.from_date ?? DateTime.now()),
         yValueMapper: (ATGSummaryModel data, _) => data.change ?? 0.0,
         name: "Berkurang",
       ),
       ColumnSeries<ATGSummaryModel, String>(
         dataSource: sumListData,
-        xValueMapper: (ATGSummaryModel data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
-            .format(data.end_date ?? DateTime.now()),
-        yValueMapper: (ATGSummaryModel data, _) => data.last_tank_position ?? 0.0,
+        xValueMapper: (ATGSummaryModel data, _) =>
+            DateFormat('yyyy-MM-dd hh:mm:ss')
+                .format(data.end_date ?? DateTime.now()),
+        yValueMapper: (ATGSummaryModel data, _) =>
+            data.last_tank_position ?? 0.0,
         name: "Posisi akhir",
       ),
       ColumnSeries<ATGSummaryModel, String>(
         dataSource: sumListData,
-        xValueMapper: (ATGSummaryModel data, _) => DateFormat('yyyy-MM-dd hh:mm:ss')
-            .format(data.from_date ?? DateTime.now()),
-        yValueMapper: (ATGSummaryModel data, _) => data.from_tank_position ?? 0.0,
+        xValueMapper: (ATGSummaryModel data, _) =>
+            DateFormat('yyyy-MM-dd hh:mm:ss')
+                .format(data.from_date ?? DateTime.now()),
+        yValueMapper: (ATGSummaryModel data, _) =>
+            data.from_tank_position ?? 0.0,
         name: "Posisi awal",
       ),
     ];

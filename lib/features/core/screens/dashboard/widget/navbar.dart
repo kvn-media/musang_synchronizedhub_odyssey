@@ -52,8 +52,11 @@ class NavBar extends StatelessWidget {
               : Colors.black45, // tab button hover color
           haptic: true, // haptic feedback
           tabBorderRadius: 15,
-          tabActiveBorder:
-              Border.all(color: Colors.black, width: 1), // tab button border
+          tabActiveBorder: Border.all(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black,
+              width: 1), // tab button border
           // tabBorder: Border.all(color: Colors.grey, width: 1), // tab button border
           // tabShadow: [
           //   BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)
@@ -66,7 +69,7 @@ class NavBar extends StatelessWidget {
           activeColor: theme.brightness == Brightness.dark
               ? Colors.white
               : Colors.black, // selected icon and text color
-          iconSize: 24,
+          iconSize: 25,
           tabBackgroundColor:
               Colors.transparent, // selected tab background color
           padding: EdgeInsets.symmetric(
@@ -108,13 +111,14 @@ class NavBar extends StatelessWidget {
             GButton(
               icon: Icons.home,
               text: "Home",
+              textStyle: TextStyle(fontSize: 17),
             ),
             GButton(
               icon: const IconData(0x0020,
                   fontFamily: 'MaterialIcons'), // Transparent IconData
               leading: SizedBox(
-                width: 24,
-                height: 24,
+                width: 25,
+                height: 25,
                 child: SvgPicture.asset(
                   'assets/icons/tanki.svg',
                   color: theme.brightness == Brightness.dark
@@ -123,13 +127,14 @@ class NavBar extends StatelessWidget {
                 ),
               ),
               text: "ATG",
+              textStyle: TextStyle(fontSize: 17),
             ),
             GButton(
               icon: const IconData(0x0020,
                   fontFamily: 'MaterialIcons'), // Transparent IconData
               leading: SizedBox(
-                width: 24,
-                height: 24,
+                width: 25,
+                height: 25,
                 child: SvgPicture.asset(
                   'assets/icons/flowmeter.svg',
                   color: theme.brightness == Brightness.dark
@@ -138,6 +143,7 @@ class NavBar extends StatelessWidget {
                 ),
               ),
               text: "Flow Meter",
+              textStyle: TextStyle(fontSize: 17),
             ),
           ],
         ),
