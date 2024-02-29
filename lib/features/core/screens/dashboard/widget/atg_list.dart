@@ -55,20 +55,25 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
 
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ElevatedButton(
-            onPressed: () => widget.logic.selectDateRange(context),
-            child: Text(
-              'Select Date Range',
-              style: TextStyle(fontSize: 2.h),
-            ),
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 1.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () => widget.logic.selectDateRange(context),
+                child: Text(
+                  'Select Date Range',
+                  style: TextStyle(fontSize: 2.h),
+                ),
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
           SizedBox(
             height: 4.h,
@@ -82,8 +87,8 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 return Container(
-                  width: 80.w,
-                  height: 25.h,
+                  height: 300, // You can adjust this value as needed
+                  width: 100.w,
                   padding: EdgeInsets.all(2.w),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
@@ -101,11 +106,11 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                   ),
                   child: SfCartesianChart(
                     series: [
-                      ...widget.logic.sumChartData,
+                      ...widget.logic.detailedChartData,
                     ],
                     primaryXAxis: CategoryAxis(
                       initialVisibleMinimum: 0,
-                      initialVisibleMaximum: 10,
+                      initialVisibleMaximum: 200,
                       labelStyle: TextStyle(
                         color: textColor,
                       ),
