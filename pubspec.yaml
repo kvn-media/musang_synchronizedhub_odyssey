@@ -49,6 +49,7 @@ dependencies:
   permission_handler: ^11.3.0
   awesome_notifications: ^0.8.2
   google_nav_bar: ^5.0.6
+  rive: ^0.12.4
   flutter_native_splash: ^2.2.16
   syncfusion_flutter_datagrid: ^24.2.7
   get: ^4.6.6

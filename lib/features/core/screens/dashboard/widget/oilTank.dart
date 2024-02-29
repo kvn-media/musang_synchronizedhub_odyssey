@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_controller.dart';
-
 class DataAnimateWidget extends StatefulWidget {
   final double level;
 
-  DataAnimateWidget({required this.level, super.key});
+  DataAnimateWidget({required this.level, Key? key}) : super(key: key);
 
   @override
   State<DataAnimateWidget> createState() => _DataAnimateWidgetState();
@@ -15,18 +13,9 @@ class DataAnimateWidget extends StatefulWidget {
 class _DataAnimateWidgetState extends State<DataAnimateWidget> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<double>(
-      stream: ATGBusinessLogic().dataStream,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return CustomPaint(
-            painter: TankPainter(widget.level),
-            child: Container(),
-          );
-        } else {
-          return CircularProgressIndicator();
-        }
-      },
+    return CustomPaint(
+      painter: TankPainter(widget.level),
+      child: Container(),
     );
   }
 }
@@ -47,26 +36,34 @@ class TankPainter extends CustomPainter {
       ..color = Colors.black
       ..style = PaintingStyle.fill;
 
-    // Gambar bentuk truk tangki menggunakan Path
-    final truckPath = Path()
-      ..moveTo(size.width * 0.2, size.height * 0.5) // Mulai dari titik ini
-      ..lineTo(size.width * 0.8, size.height * 0.5) // Garis ke titik ini
+    // Draw the tank using Path
+    final tankPath = Path()
+      ..moveTo(0, size.height * 0.1) // Start from this point
       ..arcTo(
           Rect.fromCenter(
-              center: Offset(size.width * 0.8, size.height * 0.5),
-              width: size.width * 0.2,
-              height: size.height * 0.5),
-          -pi / 2,
+              center: Offset(size.width * 0.5, size.height * 0.1),
+              width: size.width,
+              height: size.height * 0.2),
           pi,
-          false) // Gambar arc untuk bentuk tangki
-      ..lineTo(size.width * 0.2, size.height * 0.5); // Kembali ke titik awal
+          -pi,
+          false) // Draw arc for top of tank
+      ..lineTo(size.width, size.height) // Line to bottom right
+      ..arcTo(
+          Rect.fromCenter(
+              center: Offset(size.width * 0.5, size.height),
+              width: size.width,
+              height: size.height * 0.2),
+          0,
+          pi,
+          false) // Draw arc for bottom of tank
+      ..close(); // Close the path
 
-    // Gambar bentuk minyak di dalam tangki
+    // Draw the oil inside the tank
     final oilPath = Path()
-      ..addRect(Rect.fromLTWH(size.width * 0.2, size.height * (1 - level),
-          size.width * 0.6, size.height * level)); // Rect untuk minyak
+      ..addRect(Rect.fromLTWH(0, size.height * (1 - level), size.width,
+          size.height * level)); // Rect for oil
 
-    canvas.drawPath(truckPath, paint);
+    canvas.drawPath(tankPath, paint);
     canvas.drawPath(oilPath, oilPaint);
   }
 

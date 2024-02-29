@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/data_sources/atg_data_grid_source.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:get/get.dart';
+import 'package:rive/rive.dart';
 import 'package:intl/intl.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/oilTank.dart';
+// import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/oilTank.dart';
 import 'package:musang_syncronizehub_odyssey/services/csv_download.dart';
 
 import '../../../controllers/atg_controller.dart';
@@ -24,8 +25,6 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
     Color containerColor =
         (isDarkMode ? Colors.grey[800] : Colors.white) as Color;
 
-    ATGBusinessLogic atgLogic = Get.find<ATGBusinessLogic>();
-
     return Scaffold(
       appBar: AppBar(
         title: Text('ATG Details'),
@@ -44,15 +43,50 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  // SizedBox(
-                  //   height: 20.0,
-                  // ),
-                  // GetBuilder<ATGBusinessLogic>(
-                  //   builder: (controller) {
-                  //     double? data = controller.data;
-                  //     return DataAnimateWidget(level: data);
-                  //   },
-                  // ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  GetBuilder<ATGBusinessLogic>(
+                    builder: (controller) {
+                      if (controller.detailsListData.isNotEmpty) {
+                        var firstItem = controller.detailsListData.first;
+                        if (firstItem.tank_level != null) {
+                          double tankLevel = firstItem.tank_level!.toDouble();
+                          // Convert tankLevel to a value between 0 and 1 for the Rive animation
+                          double animationValue =
+                              tankLevel / 100; // Adjust this line as needed
+                          return Container(
+                            height: 200,
+                            child: RiveAnimation.asset(
+                              'assets/interactive-cylinder.riv',
+                              stateMachines: [
+                                'Animation 1'
+                              ], // Replace with the name of your state machine
+                              onInit: (Artboard artboard) {
+                                final controller =
+                                    StateMachineController.fromArtboard(artboard,
+                                        'Animation 1'); // Replace with the name of your state machine
+                                if (controller != null) {
+                                  artboard.addController(controller);
+                                  final input = controller.findInput(
+                                      'oil_level'); // Replace with the name of your parameter
+                                  if (input is SMIInput<double>) {
+                                    input.value = animationValue;
+                                  }
+                                }
+                              },
+                            ),
+                          );
+                        } else {
+                          print('Tank level is null');
+                          return CircularProgressIndicator();
+                        }
+                      } else {
+                        print('No data available');
+                        return CircularProgressIndicator();
+                      }
+                    },
+                  ),
                   SizedBox(
                     height: 30.0,
                   ),
