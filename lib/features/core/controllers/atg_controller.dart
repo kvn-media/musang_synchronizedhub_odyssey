@@ -15,6 +15,15 @@ class ATGBusinessLogic extends GetxController {
   List<ATGModel> detailsListData = [];
   List<ATGSummaryModel> sumListData = [];
 
+  final ZoomPanBehavior zoomPanBehavior = ZoomPanBehavior(
+    enablePanning: true,
+    enablePinching: true,
+    zoomMode: ZoomMode.x,
+    maximumZoomLevel: 0.5,
+    enableMouseWheelZooming: true,
+    enableDoubleTapZooming: true,
+  );
+
   double _data = 0.0;
 
   double get data => _data;
@@ -22,7 +31,7 @@ class ATGBusinessLogic extends GetxController {
   DateTimeRange? _dateRange;
   DateTimeRange? get dateRange => _dateRange;
 
-  late List<ColumnSeries<ATGModel, String>> detailedChartData;
+  late List<FastLineSeries<ATGModel, DateTime>> detailedChartData;
   late List<ColumnSeries<ATGSummaryModel, String>> sumChartData;
 
   final _dataController = StreamController<double>.broadcast();
@@ -38,6 +47,12 @@ class ATGBusinessLogic extends GetxController {
   void onInit() {
     super.onInit();
     fetchData();
+    setInitialZoomLevel();
+  }
+
+  void setInitialZoomLevel() {
+    double zoomLevel =
+        detailedChartData.length > 7 ? 7 / detailedChartData.length : 1;
   }
 
   Future<List<ATGModel>> fetchData(
@@ -82,37 +97,6 @@ class ATGBusinessLogic extends GetxController {
     super.dispose();
   }
 
-  // void updateSumChartData() {
-  //   sumChartData = [
-  //     ColumnSeries<ATGSummaryModel, String>(
-  //       dataSource: sumListData,
-  //       xValueMapper: (ATGSummaryModel data, _) =>
-  //           DateFormat('yyyy-MM-dd hh:mm:ss')
-  //               .format(data.from_date ?? DateTime.now()),
-  //       yValueMapper: (ATGSummaryModel data, _) => data.change ?? 0.0,
-  //       name: "Berkurang",
-  //     ),
-  //     ColumnSeries<ATGSummaryModel, String>(
-  //       dataSource: sumListData,
-  //       xValueMapper: (ATGSummaryModel data, _) =>
-  //           DateFormat('yyyy-MM-dd hh:mm:ss')
-  //               .format(data.end_date ?? DateTime.now()),
-  //       yValueMapper: (ATGSummaryModel data, _) =>
-  //           data.last_tank_position ?? 0.0,
-  //       name: "Posisi akhir",
-  //     ),
-  //     ColumnSeries<ATGSummaryModel, String>(
-  //       dataSource: sumListData,
-  //       xValueMapper: (ATGSummaryModel data, _) =>
-  //           DateFormat('yyyy-MM-dd hh:mm:ss')
-  //               .format(data.from_date ?? DateTime.now()),
-  //       yValueMapper: (ATGSummaryModel data, _) =>
-  //           data.from_tank_position ?? 0.0,
-  //       name: "Posisi awal",
-  //     ),
-  //   ];
-  // }
-
   Map<String, num> alarmMapping = {
     'None': 1,
     'High temperature': 2,
@@ -121,61 +105,61 @@ class ATGBusinessLogic extends GetxController {
 
   void updateChartData(ATGModel newData) {
     detailedChartData = [
-      ColumnSeries<ATGModel, String>(
+      FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.atg_timestamp),
+        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.tank_level != null ? data.tank_level : 0,
         name: "Level Barrel",
+        width: 2,
       ),
-      ColumnSeries<ATGModel, String>(
+      FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.atg_timestamp),
+        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.volume_change != null ? data.volume_change : 0,
         name: "Volume Change Barrel",
+        width: 2,
       ),
-      ColumnSeries<ATGModel, String>(
+      FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.atg_timestamp),
+        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.avg_temp_celcius != null ? data.avg_temp_celcius : 0,
         name: "Average Temperature",
+        width: 2,
       ),
-      ColumnSeries<ATGModel, String>(
+      FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.atg_timestamp),
+        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.water_level_meter != null ? data.water_level_meter : 0,
         name: "Water Level Meter",
+        width: 2,
       ),
-      ColumnSeries<ATGModel, String>(
+      FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.atg_timestamp),
+        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.product_temp_celcius != null ? data.product_temp_celcius : 0,
         name: "Product Temperature",
+        width: 2,
       ),
-      ColumnSeries<ATGModel, String>(
+      FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.atg_timestamp),
+        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.alarm != null ? alarmMapping[data.alarm] : 0,
         name: "Alarm Status",
+        width: 2,
       ),
-      ColumnSeries<ATGModel, String>(
+      FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) =>
-            DateFormat('yyyy-MM-dd hh:mm:ss').format(data.atg_timestamp),
+        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.site_id != null ? data.site_id : 0,
         name: "Site ID",
+        width: 2,
       ),
     ];
   }

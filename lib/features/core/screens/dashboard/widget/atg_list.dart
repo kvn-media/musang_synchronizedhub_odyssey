@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -108,9 +109,9 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                     series: [
                       ...widget.logic.detailedChartData,
                     ],
-                    primaryXAxis: CategoryAxis(
-                      initialVisibleMinimum: 0,
-                      initialVisibleMaximum: 200,
+                    primaryXAxis: DateTimeAxis(
+                      dateFormat: DateFormat('yyyy-MM-dd HH:mm:ss'),
+                      desiredIntervals: 5,
                       labelStyle: TextStyle(
                         color: textColor,
                       ),
@@ -128,6 +129,18 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                     ),
                     enableAxisAnimation: true,
                     legend: Legend(isVisible: true),
+                    zoomPanBehavior: widget.logic.zoomPanBehavior,
+                    trackballBehavior: TrackballBehavior(
+                      enable: true,
+                    ), // to enable trackball
+                    tooltipBehavior: TooltipBehavior(
+                      enable: true,
+                      canShowMarker: true,
+                      header: '',
+                      format: 'point.x : point.y',
+                    ),
+                    selectionType: SelectionType.point,
+                    selectionGesture: ActivationMode.singleTap,
                   ),
                 );
               }
