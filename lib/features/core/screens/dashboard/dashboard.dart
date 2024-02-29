@@ -55,7 +55,7 @@ class _DashBoardState extends State<DashBoard> {
               Text(
                 'ATG data',
                 style: TextStyle(
-                  fontSize: 20.sp,  // Use .sp here
+                  fontSize: 18.sp,  // Use .sp here
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -74,7 +74,7 @@ class _DashBoardState extends State<DashBoard> {
               Text(
                 'Flow Meter data',
                 style: TextStyle(
-                  fontSize: 20.sp,  // Use .sp here
+                  fontSize: 18.sp,  // Use .sp here
                   fontWeight: FontWeight.w800,
                 ),
               ),
