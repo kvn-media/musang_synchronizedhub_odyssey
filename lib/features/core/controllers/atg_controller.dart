@@ -12,8 +12,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../models/dashboard/atg_model.dart';
 
 class ATGBusinessLogic extends GetxController {
-  List<ATGModel> detailsListData = [];
-  List<ATGSummaryModel> sumListData = [];
+  late List<ATGModel> detailsListData = [];
+  late List<ATGSummaryModel> sumListData = [];
 
   final ZoomPanBehavior zoomPanBehavior = ZoomPanBehavior(
     enablePanning: true,
@@ -31,8 +31,8 @@ class ATGBusinessLogic extends GetxController {
   DateTimeRange? _dateRange;
   DateTimeRange? get dateRange => _dateRange;
 
-  late List<FastLineSeries<ATGModel, DateTime>> detailedChartData;
-  late List<ColumnSeries<ATGSummaryModel, String>> sumChartData;
+  late List<FastLineSeries<ATGModel, DateTime>> detailedChartData = [];
+  late List<ColumnSeries<ATGSummaryModel, String>> sumChartData = [];
 
   final _dataController = StreamController<double>.broadcast();
 
@@ -69,9 +69,13 @@ class ATGBusinessLogic extends GetxController {
       detailsListData = await _AtgDao.read(page, recordsPerPage);
     }
 
+    // Initialize chart data
+    detailedChartData = createDetailedChartData(detailsListData);
+    sumChartData = createSumChartData(sumListData);
+
     // Only update the chart data with the latest row
     if (detailsListData.isNotEmpty) {
-      updateChartData(detailsListData.last);
+      detailedChartData = createDetailedChartData(detailsListData);
     }
 
     isLoading.value = false;
@@ -103,23 +107,25 @@ class ATGBusinessLogic extends GetxController {
     'High temperature cleared': 3,
   };
 
-  void updateChartData(ATGModel newData) {
-    detailedChartData = [
+  List<FastLineSeries<ATGModel, DateTime>> createDetailedChartData(
+      List<ATGModel> data) {
+    // Your logic here to convert data into FastLineSeries
+    return [
       FastLineSeries<ATGModel, DateTime>(
-        dataSource: detailsListData,
+        dataSource: data,
         xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.tank_level != null ? data.tank_level : 0,
         name: "Level Barrel",
-        width: 2,
+        width: 6,
       ),
       FastLineSeries<ATGModel, DateTime>(
-        dataSource: detailsListData,
+        dataSource: data,
         xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.volume_change != null ? data.volume_change : 0,
         name: "Volume Change Barrel",
-        width: 2,
+        width: 6,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -127,7 +133,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.avg_temp_celcius != null ? data.avg_temp_celcius : 0,
         name: "Average Temperature",
-        width: 2,
+        width: 6,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -135,7 +141,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.water_level_meter != null ? data.water_level_meter : 0,
         name: "Water Level Meter",
-        width: 2,
+        width: 6,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -143,7 +149,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.product_temp_celcius != null ? data.product_temp_celcius : 0,
         name: "Product Temperature",
-        width: 2,
+        width: 6,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -151,7 +157,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.alarm != null ? alarmMapping[data.alarm] : 0,
         name: "Alarm Status",
-        width: 2,
+        width: 6,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -159,8 +165,14 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.site_id != null ? data.site_id : 0,
         name: "Site ID",
-        width: 2,
+        width: 6,
       ),
     ];
+  }
+
+  List<ColumnSeries<ATGSummaryModel, String>> createSumChartData(
+      List<ATGSummaryModel> data) {
+    // Your logic here to convert data into ColumnSeries
+    return [];
   }
 }

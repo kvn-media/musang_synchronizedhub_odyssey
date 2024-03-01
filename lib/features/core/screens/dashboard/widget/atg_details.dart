@@ -43,50 +43,50 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  GetBuilder<ATGBusinessLogic>(
-                    builder: (controller) {
-                      if (controller.detailsListData.isNotEmpty) {
-                        var firstItem = controller.detailsListData.first;
-                        if (firstItem.tank_level != null) {
-                          double tankLevel = firstItem.tank_level!.toDouble();
-                          // Convert tankLevel to a value between 0 and 1 for the Rive animation
-                          double animationValue =
-                              tankLevel / 100; // Adjust this line as needed
-                          return Container(
-                            height: 200,
-                            child: RiveAnimation.asset(
-                              'assets/interactive-cylinder.riv',
-                              stateMachines: [
-                                'Animation 1'
-                              ], // Replace with the name of your state machine
-                              onInit: (Artboard artboard) {
-                                final controller =
-                                    StateMachineController.fromArtboard(artboard,
-                                        'Animation 1'); // Replace with the name of your state machine
-                                if (controller != null) {
-                                  artboard.addController(controller);
-                                  final input = controller.findInput(
-                                      'oil_level'); // Replace with the name of your parameter
-                                  if (input is SMIInput<double>) {
-                                    input.value = animationValue;
-                                  }
-                                }
-                              },
-                            ),
-                          );
-                        } else {
-                          print('Tank level is null');
-                          return CircularProgressIndicator();
-                        }
-                      } else {
-                        print('No data available');
-                        return CircularProgressIndicator();
-                      }
-                    },
-                  ),
+                  // SizedBox(
+                  //   height: 20.0,
+                  // ),
+                  // GetBuilder<ATGBusinessLogic>(
+                  //   builder: (controller) {
+                  //     if (controller.detailsListData.isNotEmpty) {
+                  //       var firstItem = controller.detailsListData.first;
+                  //       if (firstItem.tank_level != null) {
+                  //         double tankLevel = firstItem.tank_level!.toDouble();
+                  //         // Convert tankLevel to a value between 0 and 1 for the Rive animation
+                  //         double animationValue =
+                  //             tankLevel / 100; // Adjust this line as needed
+                  //         return Container(
+                  //           height: 200,
+                  //           child: RiveAnimation.asset(
+                  //             'assets/interactive-cylinder.riv',
+                  //             stateMachines: [
+                  //               'Animation 1'
+                  //             ], // Replace with the name of your state machine
+                  //             onInit: (Artboard artboard) {
+                  //               final controller =
+                  //                   StateMachineController.fromArtboard(artboard,
+                  //                       'Animation 1'); // Replace with the name of your state machine
+                  //               if (controller != null) {
+                  //                 artboard.addController(controller);
+                  //                 final input = controller.findInput(
+                  //                     'oil_level'); // Replace with the name of your parameter
+                  //                 if (input is SMIInput<double>) {
+                  //                   input.value = animationValue;
+                  //                 }
+                  //               }
+                  //             },
+                  //           ),
+                  //         );
+                  //       } else {
+                  //         print('Tank level is null');
+                  //         return CircularProgressIndicator();
+                  //       }
+                  //     } else {
+                  //       print('No data available');
+                  //       return CircularProgressIndicator();
+                  //     }
+                  //   },
+                  // ),
                   SizedBox(
                     height: 30.0,
                   ),
