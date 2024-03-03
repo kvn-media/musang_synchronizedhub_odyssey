@@ -136,7 +136,7 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                     tooltipBehavior: TooltipBehavior(
                       enable: true,
                       canShowMarker: true,
-                      header: '',
+                      header: 'Default',
                       format: 'point.x : point.y',
                     ),
                     selectionType: SelectionType.point,

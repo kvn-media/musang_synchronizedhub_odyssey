@@ -51,7 +51,7 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
                   //     if (controller.detailsListData.isNotEmpty) {
                   //       var firstItem = controller.detailsListData.first;
                   //       if (firstItem.tank_level != null) {
-                  //         double tankLevel = firstItem.tank_level!.toDouble();
+                  //         double tankLevel = firstItem.volume_change!.toDouble();
                   //         // Convert tankLevel to a value between 0 and 1 for the Rive animation
                   //         double animationValue =
                   //             tankLevel / 100; // Adjust this line as needed
@@ -64,12 +64,13 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
                   //             ], // Replace with the name of your state machine
                   //             onInit: (Artboard artboard) {
                   //               final controller =
-                  //                   StateMachineController.fromArtboard(artboard,
-                  //                       'Animation 1'); // Replace with the name of your state machine
+                  //                   StateMachineController.fromArtboard(
+                  //                       artboard,
+                  //                       'Changes'); // Replace with the name of your state machine
                   //               if (controller != null) {
                   //                 artboard.addController(controller);
                   //                 final input = controller.findInput(
-                  //                     'oil_level'); // Replace with the name of your parameter
+                  //                     'Volume Changes'); // Replace with the name of your parameter
                   //                 if (input is SMIInput<double>) {
                   //                   input.value = animationValue;
                   //                 }

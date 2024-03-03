@@ -19,7 +19,7 @@ class ATGBusinessLogic extends GetxController {
     enablePanning: true,
     enablePinching: true,
     zoomMode: ZoomMode.x,
-    maximumZoomLevel: 0.5,
+    maximumZoomLevel: 1.0,
     enableMouseWheelZooming: true,
     enableDoubleTapZooming: true,
   );
@@ -117,7 +117,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.tank_level != null ? data.tank_level : 0,
         name: "Level Barrel",
-        width: 6,
+        width: 5,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: data,
@@ -125,7 +125,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.volume_change != null ? data.volume_change : 0,
         name: "Volume Change Barrel",
-        width: 6,
+        width: 5,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -133,7 +133,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.avg_temp_celcius != null ? data.avg_temp_celcius : 0,
         name: "Average Temperature",
-        width: 6,
+        width: 5,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -141,7 +141,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.water_level_meter != null ? data.water_level_meter : 0,
         name: "Water Level Meter",
-        width: 6,
+        width: 5,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -149,7 +149,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.product_temp_celcius != null ? data.product_temp_celcius : 0,
         name: "Product Temperature",
-        width: 6,
+        width: 5,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -157,7 +157,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.alarm != null ? alarmMapping[data.alarm] : 0,
         name: "Alarm Status",
-        width: 6,
+        width: 5,
       ),
       FastLineSeries<ATGModel, DateTime>(
         dataSource: detailsListData,
@@ -165,7 +165,7 @@ class ATGBusinessLogic extends GetxController {
         yValueMapper: (ATGModel data, _) =>
             data.site_id != null ? data.site_id : 0,
         name: "Site ID",
-        width: 6,
+        width: 5,
       ),
     ];
   }

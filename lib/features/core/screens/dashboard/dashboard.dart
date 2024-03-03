@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/appbar.dart';
 // import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/banners.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/categories.dart';
+// import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/categories.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/flowmeter_list.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/heading.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_list.dart';
@@ -33,54 +33,55 @@ class _DashBoardState extends State<DashBoard> {
       appBar: const DashboardAppBar(),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(2.w),  // Use .w here
+          padding: EdgeInsets.all(2.w), // Use .w here
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Heading
               DashboardHeading(txtTheme: txtTheme),
+
               SizedBox(
-                height: 4.h,  // Use .h here
+                height: 4.h, // Use .h here
               ),
 
-              //Categories
-              DashboardCategories(
-                atgLogic: widget.atgLogic,
-              ),
-              SizedBox(
-                height: 4.h,  // Use .h here
-              ),
+              // //Categories
+              // DashboardCategories(
+              //   atgLogic: widget.atgLogic,
+              // ),
+              // SizedBox(
+              //   height: 4.h,  // Use .h here
+              // ),
 
               // ATG data
               Text(
                 'ATG data',
                 style: TextStyle(
-                  fontSize: 18.sp,  // Use .sp here
+                  fontSize: 18.sp, // Use .sp here
                   fontWeight: FontWeight.w800,
                 ),
               ),
 
               SizedBox(
-                height: 2.h,  // Use .h here
+                height: 2.h, // Use .h here
               ),
 
               ATGDashboardData(logic: widget.atgLogic),
 
               SizedBox(
-                height: 2.h,  // Use .h here
+                height: 2.h, // Use .h here
               ),
 
               // Flow Meter data
               Text(
                 'Flow Meter data',
                 style: TextStyle(
-                  fontSize: 18.sp,  // Use .sp here
+                  fontSize: 18.sp, // Use .sp here
                   fontWeight: FontWeight.w800,
                 ),
               ),
 
               SizedBox(
-                height: 2.h,  // Use .h here
+                height: 2.h, // Use .h here
               ),
 
               FlowMeterDashboardData(logic: widget.flowmeterLogic),
