@@ -4,7 +4,6 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:get/get.dart';
 import 'package:rive/rive.dart';
 import 'package:intl/intl.dart';
-// import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/oilTank.dart';
 import 'package:musang_syncronizehub_odyssey/services/csv_download.dart';
 
 import '../../../controllers/atg_controller.dart';
@@ -51,10 +50,10 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
                   //     if (controller.detailsListData.isNotEmpty) {
                   //       var firstItem = controller.detailsListData.first;
                   //       if (firstItem.tank_level != null) {
-                  //         double tankLevel = firstItem.volume_change!.toDouble();
+                  //         double tankVolume = firstItem.volume_change!.toDouble();
                   //         // Convert tankLevel to a value between 0 and 1 for the Rive animation
                   //         double animationValue =
-                  //             tankLevel / 100; // Adjust this line as needed
+                  //             tankVolume / 100; // Adjust this line as needed
                   //         return Container(
                   //           height: 200,
                   //           child: RiveAnimation.asset(
@@ -66,11 +65,11 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
                   //               final controller =
                   //                   StateMachineController.fromArtboard(
                   //                       artboard,
-                  //                       'Changes'); // Replace with the name of your state machine
+                  //                       'State Tank'); // Replace with the name of your state machine
                   //               if (controller != null) {
                   //                 artboard.addController(controller);
                   //                 final input = controller.findInput(
-                  //                     'Volume Changes'); // Replace with the name of your parameter
+                  //                     'Volume Change'); // Replace with the name of your parameter
                   //                 if (input is SMIInput<double>) {
                   //                   input.value = animationValue;
                   //                 }
