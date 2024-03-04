@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/data_sources/atg_data_grid_source.dart';
+import 'package:musang_syncronizehub_odyssey/features/oil_volume_animation/oil_volume_animation.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:get/get.dart';
 import 'package:rive/rive.dart';
@@ -42,51 +43,10 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  // SizedBox(
-                  //   height: 20.0,
-                  // ),
-                  // GetBuilder<ATGBusinessLogic>(
-                  //   builder: (controller) {
-                  //     if (controller.detailsListData.isNotEmpty) {
-                  //       var firstItem = controller.detailsListData.first;
-                  //       if (firstItem.tank_level != null) {
-                  //         double tankVolume = firstItem.volume_change!.toDouble();
-                  //         // Convert tankLevel to a value between 0 and 1 for the Rive animation
-                  //         double animationValue =
-                  //             tankVolume / 100; // Adjust this line as needed
-                  //         return Container(
-                  //           height: 200,
-                  //           child: RiveAnimation.asset(
-                  //             'assets/interactive-cylinder.riv',
-                  //             stateMachines: [
-                  //               'Animation 1'
-                  //             ], // Replace with the name of your state machine
-                  //             onInit: (Artboard artboard) {
-                  //               final controller =
-                  //                   StateMachineController.fromArtboard(
-                  //                       artboard,
-                  //                       'State Tank'); // Replace with the name of your state machine
-                  //               if (controller != null) {
-                  //                 artboard.addController(controller);
-                  //                 final input = controller.findInput(
-                  //                     'Volume Change'); // Replace with the name of your parameter
-                  //                 if (input is SMIInput<double>) {
-                  //                   input.value = animationValue;
-                  //                 }
-                  //               }
-                  //             },
-                  //           ),
-                  //         );
-                  //       } else {
-                  //         print('Tank level is null');
-                  //         return CircularProgressIndicator();
-                  //       }
-                  //     } else {
-                  //       print('No data available');
-                  //       return CircularProgressIndicator();
-                  //     }
-                  //   },
-                  // ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  OilVolumeAnimationPage(atgController: atgLogic),
                   SizedBox(
                     height: 30.0,
                   ),

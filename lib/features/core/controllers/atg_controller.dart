@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:musang_syncronizehub_odyssey/dao/atg_dao.dart';
 import 'package:musang_syncronizehub_odyssey/dao/atg_sum_dao.dart';
-import 'package:musang_syncronizehub_odyssey/features/core/models/dashboard/atgSummary_model.dart';
 import 'package:musang_syncronizehub_odyssey/services/postgrest_service.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -13,7 +12,6 @@ import '../models/dashboard/atg_model.dart';
 
 class ATGBusinessLogic extends GetxController {
   late List<ATGModel> detailsListData = [];
-  late List<ATGSummaryModel> sumListData = [];
 
   final ZoomPanBehavior zoomPanBehavior = ZoomPanBehavior(
     enablePanning: true,
@@ -24,15 +22,10 @@ class ATGBusinessLogic extends GetxController {
     enableDoubleTapZooming: true,
   );
 
-  double _data = 0.0;
-
-  double get data => _data;
-
   DateTimeRange? _dateRange;
   DateTimeRange? get dateRange => _dateRange;
 
   late List<FastLineSeries<ATGModel, DateTime>> detailedChartData = [];
-  late List<ColumnSeries<ATGSummaryModel, String>> sumChartData = [];
 
   final _dataController = StreamController<double>.broadcast();
 
@@ -59,23 +52,22 @@ class ATGBusinessLogic extends GetxController {
       {DateTimeRange? dateRange, int page = 1, int recordsPerPage = 20}) async {
     isLoading.value = true;
     if (dateRange != null) {
-      sumListData =
-          await _sumDao.read(page, recordsPerPage, dateRange: dateRange);
       detailsListData =
           await _AtgDao.read(page, recordsPerPage, dateRange: dateRange);
     } else {
       // If dateRange is null, get all data
-      sumListData = await _sumDao.read(page, recordsPerPage);
       detailsListData = await _AtgDao.read(page, recordsPerPage);
     }
 
     // Initialize chart data
     detailedChartData = createDetailedChartData(detailsListData);
-    sumChartData = createSumChartData(sumListData);
+    // sumChartData = createSumChartData(sumListData);
 
     // Only update the chart data with the latest row
     if (detailsListData.isNotEmpty) {
       detailedChartData = createDetailedChartData(detailsListData);
+      // Emit the latest tank level value
+      _dataController.add(detailsListData.first.tank_level.toDouble());
     }
 
     isLoading.value = false;
@@ -168,11 +160,5 @@ class ATGBusinessLogic extends GetxController {
         width: 5,
       ),
     ];
-  }
-
-  List<ColumnSeries<ATGSummaryModel, String>> createSumChartData(
-      List<ATGSummaryModel> data) {
-    // Your logic here to convert data into ColumnSeries
-    return [];
   }
 }

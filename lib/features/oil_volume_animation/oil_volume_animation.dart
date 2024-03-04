@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_controller.dart';
 import 'package:musang_syncronizehub_odyssey/features/oil_volume_animation/volume_animation_controller.dart';
 import 'package:musang_syncronizehub_odyssey/features/oil_volume_animation/volume_slide_icon.dart';
 
 class OilVolumeAnimationPage extends StatefulWidget {
-  const OilVolumeAnimationPage({super.key});
+  final ATGBusinessLogic atgController;
 
-  static PageRoute route() =>
-      MaterialPageRoute(builder: (_) => const OilVolumeAnimationPage());
+  OilVolumeAnimationPage({required this.atgController, super.key});
+
+  static PageRoute route(ATGBusinessLogic atgController) => MaterialPageRoute(
+      builder: (_) => OilVolumeAnimationPage(atgController: atgController));
 
   @override
-  State<OilVolumeAnimationPage> createState() => _WaterWaveAnimationPageState();
+  _OilVolumeAnimationPageState createState() => _OilVolumeAnimationPageState();
 }
 
-class _WaterWaveAnimationPageState extends State<OilVolumeAnimationPage> {
+class _OilVolumeAnimationPageState extends State<OilVolumeAnimationPage> {
   double height = 0.47;
   final double min = 0.47;
   final double max = 0.02;
@@ -32,7 +35,7 @@ class _WaterWaveAnimationPageState extends State<OilVolumeAnimationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black38,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -94,14 +97,27 @@ class _WaterWaveAnimationPageState extends State<OilVolumeAnimationPage> {
                           ),
                         ),
                       ),
-                      VolumeAnimationContainer(
-                        height: MediaQuery.of(context).size.height * height,
-                        seconds: height <= (min / 2) ? 1000 : 1500,
-                        colors: const [
-                          Colors.blue,
-                          Colors.blueAccent,
-                          Color.fromARGB(255, 5, 39, 97),
-                        ],
+                      StreamBuilder<double>(
+                        stream: widget.atgController.dataStream,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<double> snapshot) {
+                          if (snapshot.hasData) {
+                            double tankLevel = snapshot.data!;
+                            // Use tankLevel to update the VolumeAnimationContainer
+                            return VolumeAnimationContainer(
+                              height:
+                                  MediaQuery.of(context).size.height * height,
+                              seconds: height <= (min / 2) ? 1000 : 1500,
+                              colors: const [
+                                Colors.blue,
+                                Colors.blueAccent,
+                                Color.fromARGB(255, 5, 39, 97),
+                              ],
+                            );
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        },
                       ),
                     ],
                   ),
