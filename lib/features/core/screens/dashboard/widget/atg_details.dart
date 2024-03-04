@@ -46,7 +46,19 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  OilVolumeAnimationPage(atgController: atgLogic),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => OilVolumeAnimationPage(
+                            atgController:
+                                atgLogic, // Pass the ATGBusinessLogic instance
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text('Go to Oil Volume Animation Page'),
+                  ),
                   SizedBox(
                     height: 30.0,
                   ),

@@ -9,7 +9,7 @@ class VolumeAnimationContainer extends StatefulWidget {
       required this.colors,
       required this.height,
       this.seconds = 2000,
-      this.width = 200});
+      this.width = 400});
 
   final List<Color> colors;
   final double height;
@@ -17,7 +17,8 @@ class VolumeAnimationContainer extends StatefulWidget {
   final int seconds;
 
   @override
-  State<VolumeAnimationContainer> createState() => _WaveAnimationContainerState();
+  State<VolumeAnimationContainer> createState() =>
+      _WaveAnimationContainerState();
 }
 
 class _WaveAnimationContainerState extends State<VolumeAnimationContainer>
@@ -77,6 +78,7 @@ class _WaveAnimationContainerState extends State<VolumeAnimationContainer>
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.5,
+      width: MediaQuery.of(context).size.width * 0.8,
       decoration: BoxDecoration(
         color: Colors.black38,
         border: Border.all(
@@ -96,17 +98,15 @@ class _WaveAnimationContainerState extends State<VolumeAnimationContainer>
                 100,
                 (index) => ((index + 1) % 10 == 0)
                     ? Expanded(
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                            child: Text(
-                              '${index + 1}',
-                              overflow: TextOverflow.visible,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text(
+                            '${index + 1}',
+                            overflow: TextOverflow.visible,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),

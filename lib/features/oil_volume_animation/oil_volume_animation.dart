@@ -42,7 +42,7 @@ class _OilVolumeAnimationPageState extends State<OilVolumeAnimationPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                'Volume LEVEL (0-10000)',
+                'Volume LEVEL (0-100)',
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -60,7 +60,7 @@ class _OilVolumeAnimationPageState extends State<OilVolumeAnimationPage> {
                         padding: const EdgeInsets.only(right: 10),
                         child: SizedBox(
                           height:
-                              (MediaQuery.of(context).size.height * 0.5) * 0.9,
+                              (MediaQuery.of(context).size.height * 0.55) * 0.9,
                           width: 5,
                           child: Column(
                             children: [
@@ -97,32 +97,19 @@ class _OilVolumeAnimationPageState extends State<OilVolumeAnimationPage> {
                           ),
                         ),
                       ),
-                      StreamBuilder<double>(
-                        stream: widget.atgController.dataStream,
-                        builder: (BuildContext context,
-                            AsyncSnapshot<double> snapshot) {
-                          if (snapshot.hasData) {
-                            double tankLevel = snapshot.data!;
-                            // Use tankLevel to update the VolumeAnimationContainer
-                            return VolumeAnimationContainer(
-                              height:
-                                  MediaQuery.of(context).size.height * height,
-                              seconds: height <= (min / 2) ? 1000 : 1500,
-                              colors: const [
-                                Colors.blue,
-                                Colors.blueAccent,
-                                Color.fromARGB(255, 5, 39, 97),
-                              ],
-                            );
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        },
+                      VolumeAnimationContainer(
+                        height: MediaQuery.of(context).size.height * height,
+                        seconds: height <= (min / 2) ? 1000 : 1500,
+                        colors: const [
+                          Colors.blue,
+                          Colors.blueAccent,
+                          Color.fromARGB(255, 5, 39, 97),
+                        ],
                       ),
                     ],
                   ),
                   Positioned(
-                    left: (MediaQuery.of(context).size.width / 2) + 88,
+                    left: (MediaQuery.of(context).size.width / 2) + 140,
                     top: (MediaQuery.of(context).size.height - 20) * height,
                     child: GestureDetector(
                       onVerticalDragUpdate: (details) {
