@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:musang_syncronizehub_odyssey/dao/atg_dao.dart';
 import 'package:musang_syncronizehub_odyssey/dao/atg_sum_dao.dart';
 import 'package:musang_syncronizehub_odyssey/services/postgrest_service.dart';

@@ -3,7 +3,7 @@ import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/dat
 import 'package:musang_syncronizehub_odyssey/features/oil_volume_animation/oil_volume_animation.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:get/get.dart';
-import 'package:rive/rive.dart';
+// import 'package:rive/rive.dart';
 import 'package:intl/intl.dart';
 import 'package:musang_syncronizehub_odyssey/services/csv_download.dart';
 
@@ -16,7 +16,8 @@ class ATGDetailsPage extends StatefulWidget {
 }
 
 class _ATGDetailsPageState extends State<ATGDetailsPage> {
-  final ATGBusinessLogic atgLogic = Get.put(ATGBusinessLogic());
+  final ATGBusinessLogic atgLogic =
+      Get.put(ATGBusinessLogic());
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
                         ),
                       );
                     },
-                    child: Text('Go to Oil Volume Animation Page'),
+                    child: Text('Go to Oil Tank Overview'),
                   ),
                   SizedBox(
                     height: 30.0,
@@ -143,7 +144,7 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
                     item.avg_temp_celcius.toString(),
                     item.water_level_meter.toString(),
                     item.product_temp_celcius.toString(),
-                    item.alarm?.toString() ?? '',
+                    item.alarm.toString() ?? '',
                     item.site_id.toString(),
                   ])
               .toList();

@@ -24,7 +24,7 @@ class AtgSumDao {
 
       final response = await query;
 
-      List<Map<String, dynamic>> data = response as List<Map<String, dynamic>>;
+      List<Map<String, dynamic>> data = response;
 
       if (dateRange != null) {
         data = data.where((item) {

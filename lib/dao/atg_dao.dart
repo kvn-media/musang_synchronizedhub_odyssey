@@ -28,7 +28,7 @@ class AtgDao {
         final response = await query;
 
         List<Map<String, dynamic>> data =
-            response as List<Map<String, dynamic>>;
+            response;
 
         if (dateRange != null) {
           data = data.where((item) {

@@ -8,13 +8,15 @@ class VolumeAnimationContainer extends StatefulWidget {
       {super.key,
       required this.colors,
       required this.height,
+      required this.tankLevel,
       this.seconds = 2000,
-      this.width = 400});
+      this.width = 300});
 
   final List<Color> colors;
   final double height;
   final double width;
   final int seconds;
+  final double tankLevel;
 
   @override
   State<VolumeAnimationContainer> createState() =>
@@ -77,44 +79,44 @@ class _WaveAnimationContainerState extends State<VolumeAnimationContainer>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.5,
-      width: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.height * 0.50,
+      width: MediaQuery.of(context).size.width * 0.56,
       decoration: BoxDecoration(
         color: Colors.black38,
         border: Border.all(
           color: Colors.white,
           width: 2,
         ),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(1000),
       ),
       child: Stack(
         children: [
-          SizedBox(
-            height: (MediaQuery.of(context).size.height * 0.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                100,
-                (index) => ((index + 1) % 10 == 0)
-                    ? Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: Text(
-                            '${index + 1}',
-                            overflow: TextOverflow.visible,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-              ).reversed.toList(),
-            ),
-          ),
+          // SizedBox(
+          //   height: (MediaQuery.of(context).size.height * 0.50),
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: List.generate(
+          //       100,
+          //       (index) => ((index + 1) % 10 == 0)
+          //           ? Expanded(
+          //               child: Padding(
+          //                 padding: const EdgeInsets.only(left: 5),
+          //                 child: Text(
+          //                   '${index + 1}',
+          //                   overflow: TextOverflow.visible,
+          //                   style: const TextStyle(
+          //                     fontSize: 12,
+          //                     color: Colors.white,
+          //                     fontWeight: FontWeight.bold,
+          //                   ),
+          //                 ),
+          //               ),
+          //             )
+          //           : const SizedBox.shrink(),
+          //     ).reversed.toList(),
+          //   ),
+          // ),
           AnimatedBuilder(
             animation: _controller.drive(
               CurveTween(curve: Curves.easeInOut),
@@ -126,7 +128,7 @@ class _WaveAnimationContainerState extends State<VolumeAnimationContainer>
                 ),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 500),
-                  height: MediaQuery.of(context).size.height * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.50,
                   width: widget.width,
                   decoration: BoxDecoration(
                     color: Colors.black38,

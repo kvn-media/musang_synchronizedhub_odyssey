@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/models/dashboard/flowmeter_model.dart';
-import 'package:musang_syncronizehub_odyssey/services/csv_download.dart';
 
 class FlowmeterDetailsPage extends StatelessWidget {
   const FlowmeterDetailsPage({super.key});

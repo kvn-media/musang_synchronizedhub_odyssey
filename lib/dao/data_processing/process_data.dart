@@ -4,18 +4,14 @@ import 'package:musang_syncronizehub_odyssey/features/core/models/dashboard/atg_
 List<ATGModel> sortAtgData(List<ATGModel> data) {
   data.sort((a, b) {
     int compare = 0;
-    if (a.tank_level != null && b.tank_level != null) {
-      compare = a.tank_level!.compareTo(b.tank_level!);
-    }
-    if (compare != 0) {
+    compare = a.tank_level.compareTo(b.tank_level);
+      if (compare != 0) {
       // If levelBarrel is not the same, sort by levelBarrel
       return compare;
     } else {
       // If levelBarrel is the same, sort by volumeChangeBarrel
-      if (a.volume_change != null && b.volume_change != null) {
-        return a.volume_change!.compareTo(b.volume_change!);
-      }
-    }
+      return a.volume_change.compareTo(b.volume_change);
+        }
     return 0;
   });
   return data;
