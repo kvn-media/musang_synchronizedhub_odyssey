@@ -16,7 +16,6 @@ class ATGBusinessLogic extends GetxController {
     enablePanning: true,
     enablePinching: true,
     zoomMode: ZoomMode.x,
-    maximumZoomLevel: 1.0,
     enableMouseWheelZooming: true,
     enableDoubleTapZooming: true,
   );
@@ -45,6 +44,15 @@ class ATGBusinessLogic extends GetxController {
   void setInitialZoomLevel() {
     double zoomLevel =
         detailedChartData.length > 7 ? 7 / detailedChartData.length : 1;
+  }
+
+  DateTime getLatestTimestamp() {
+    if (detailsListData.isNotEmpty) {
+      return detailsListData.first.atg_timestamp;
+    } else {
+      // Handle the case when there's no data
+      return DateTime.now();
+    }
   }
 
   Future<List<ATGModel>> fetchData(
@@ -107,57 +115,57 @@ class ATGBusinessLogic extends GetxController {
         xValueMapper: (ATGModel data, _) => data.atg_timestamp,
         yValueMapper: (ATGModel data, _) =>
             data.tank_level != null ? data.tank_level : 0,
-        name: "Level Barrel",
+        name: "Tank Level",
         width: 5,
       ),
-      FastLineSeries<ATGModel, DateTime>(
-        dataSource: data,
-        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
-        yValueMapper: (ATGModel data, _) =>
-            data.volume_change != null ? data.volume_change : 0,
-        name: "Volume Change Barrel",
-        width: 5,
-      ),
-      FastLineSeries<ATGModel, DateTime>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
-        yValueMapper: (ATGModel data, _) =>
-            data.avg_temp_celcius != null ? data.avg_temp_celcius : 0,
-        name: "Average Temperature",
-        width: 5,
-      ),
-      FastLineSeries<ATGModel, DateTime>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
-        yValueMapper: (ATGModel data, _) =>
-            data.water_level_meter != null ? data.water_level_meter : 0,
-        name: "Water Level Meter",
-        width: 5,
-      ),
-      FastLineSeries<ATGModel, DateTime>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
-        yValueMapper: (ATGModel data, _) =>
-            data.product_temp_celcius != null ? data.product_temp_celcius : 0,
-        name: "Product Temperature",
-        width: 5,
-      ),
-      FastLineSeries<ATGModel, DateTime>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
-        yValueMapper: (ATGModel data, _) =>
-            data.alarm != null ? alarmMapping[data.alarm] : 0,
-        name: "Alarm Status",
-        width: 5,
-      ),
-      FastLineSeries<ATGModel, DateTime>(
-        dataSource: detailsListData,
-        xValueMapper: (ATGModel data, _) => data.atg_timestamp,
-        yValueMapper: (ATGModel data, _) =>
-            data.site_id != null ? data.site_id : 0,
-        name: "Site ID",
-        width: 5,
-      ),
+      // FastLineSeries<ATGModel, DateTime>(
+      //   dataSource: data,
+      //   xValueMapper: (ATGModel data, _) => data.atg_timestamp,
+      //   yValueMapper: (ATGModel data, _) =>
+      //       data.volume_change != null ? data.volume_change : 0,
+      //   name: "Volume Change",
+      //   width: 5,
+      // ),
+      // FastLineSeries<ATGModel, DateTime>(
+      //   dataSource: detailsListData,
+      //   xValueMapper: (ATGModel data, _) => data.atg_timestamp,
+      //   yValueMapper: (ATGModel data, _) =>
+      //       data.avg_temp_celcius != null ? data.avg_temp_celcius : 0,
+      //   name: "Average Temperature",
+      //   width: 5,
+      // ),
+      // FastLineSeries<ATGModel, DateTime>(
+      //   dataSource: detailsListData,
+      //   xValueMapper: (ATGModel data, _) => data.atg_timestamp,
+      //   yValueMapper: (ATGModel data, _) =>
+      //       data.water_level_meter != null ? data.water_level_meter : 0,
+      //   name: "Water Level Meter",
+      //   width: 5,
+      // ),
+      // FastLineSeries<ATGModel, DateTime>(
+      //   dataSource: detailsListData,
+      //   xValueMapper: (ATGModel data, _) => data.atg_timestamp,
+      //   yValueMapper: (ATGModel data, _) =>
+      //       data.product_temp_celcius != null ? data.product_temp_celcius : 0,
+      //   name: "Product Temperature",
+      //   width: 5,
+      // ),
+      // FastLineSeries<ATGModel, DateTime>(
+      //   dataSource: detailsListData,
+      //   xValueMapper: (ATGModel data, _) => data.atg_timestamp,
+      //   yValueMapper: (ATGModel data, _) =>
+      //       data.alarm != null ? alarmMapping[data.alarm] : 0,
+      //   name: "Alarm Status",
+      //   width: 5,
+      // ),
+      // FastLineSeries<ATGModel, DateTime>(
+      //   dataSource: detailsListData,
+      //   xValueMapper: (ATGModel data, _) => data.atg_timestamp,
+      //   yValueMapper: (ATGModel data, _) =>
+      //       data.site_id != null ? data.site_id : 0,
+      //   name: "Site ID",
+      //   width: 5,
+      // ),
     ];
   }
 }

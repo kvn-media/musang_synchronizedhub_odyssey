@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/data_sources/atg_data_grid_source.dart';
+import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_list.dart';
 import 'package:musang_syncronizehub_odyssey/features/oil_volume_animation/oil_volume_animation.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:get/get.dart';
@@ -47,19 +48,7 @@ class _ATGDetailsPageState extends State<ATGDetailsPage> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => OilVolumeAnimationPage(
-                            atgController:
-                                atgLogic, // Pass the ATGBusinessLogic instance
-                          ),
-                        ),
-                      );
-                    },
-                    child: Text('Go to Oil Tank Overview'),
-                  ),
+                  ATGDashboardData(logic: atgLogic),
                   SizedBox(
                     height: 30.0,
                   ),

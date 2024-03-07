@@ -7,6 +7,7 @@ import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/wid
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/heading.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/atg_list.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/widget/navbar.dart';
+import 'package:musang_syncronizehub_odyssey/features/oil_volume_animation/oil_volume_animation.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controllers/atg_controller.dart';
@@ -27,10 +28,23 @@ class _DashBoardState extends State<DashBoard> {
   int _selectedIndex = 0;
   String lastUpdated = DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now());
 
+  @override
+  void initState() {
+    super.initState();
+    _refreshData();
+  }
+
   Future<void> _refreshData() async {
-    setState(() {
-      lastUpdated = DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now());
-    });
+    try {
+      await widget.atgLogic.fetchData();
+      setState(() {
+        lastUpdated = DateFormat('yyyy-MM-dd hh:mm:ss')
+            .format(widget.atgLogic.getLatestTimestamp());
+      });
+    } catch (e) {
+      // Handle error
+      print("Error occurred: $e");
+    }
   }
 
   @override
@@ -54,20 +68,36 @@ class _DashBoardState extends State<DashBoard> {
                   height: 4.h, // Use .h here
                 ),
 
-                // ATG data
+                // // ATG data
+                // Text(
+                //   'ATG data',
+                //   style: TextStyle(
+                //     fontSize: 18.sp, // Use .sp here
+                //     fontWeight: FontWeight.w800,
+                //   ),
+                // ),
+
+                // SizedBox(
+                //   height: 2.h, // Use .h here
+                // ),
+
+                // ATGDashboardData(logic: widget.atgLogic),
+
+                // Tank Overview
                 Text(
-                  'ATG data',
-                  style: TextStyle(
-                    fontSize: 18.sp, // Use .sp here
-                    fontWeight: FontWeight.w800,
-                  ),
+                  'Oil Tank Overview',
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                 ),
 
                 SizedBox(
                   height: 2.h, // Use .h here
                 ),
 
-                ATGDashboardData(logic: widget.atgLogic),
+                OilVolumeAnimationPage(
+                  atgController:
+                      widget.atgLogic, // Pass the ATGBusinessLogic instance
+                ),
 
                 SizedBox(
                   height: 2.h, // Use .h here

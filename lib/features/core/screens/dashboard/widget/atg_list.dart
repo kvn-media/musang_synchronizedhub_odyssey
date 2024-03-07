@@ -136,7 +136,7 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
                     tooltipBehavior: TooltipBehavior(
                       enable: true,
                       canShowMarker: true,
-                      header: 'Default',
+                      header: 'Data',
                       format: 'point.x : point.y',
                     ),
                     selectionType: SelectionType.point,
@@ -146,31 +146,31 @@ class _ATGDashboardDataState extends State<ATGDashboardData> {
               }
             },
           ),
-          SizedBox(
-            height: 4.h,
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: DataTable(columns: <DataColumn>[
-              DataColumn(
-                label: Text('Posisi Awal', style: TextStyle(fontSize: 2.h)),
-              ),
-              DataColumn(
-                label: Text('Posisi Akhir', style: TextStyle(fontSize: 2.h)),
-              ),
-              DataColumn(
-                label: Text('Berkurang', style: TextStyle(fontSize: 2.h)),
-              ),
-            ], rows: <DataRow>[
-              DataRow(
-                cells: [
-                  DataCell(Text('1000', style: TextStyle(fontSize: 2.h))),
-                  DataCell(Text('930', style: TextStyle(fontSize: 2.h))),
-                  DataCell(Text('-70', style: TextStyle(fontSize: 2.h))),
-                ],
-              ),
-            ]),
-          ),
+          // SizedBox(
+          //   height: 4.h,
+          // ),
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: DataTable(columns: <DataColumn>[
+          //     DataColumn(
+          //       label: Text('Posisi Awal', style: TextStyle(fontSize: 2.h)),
+          //     ),
+          //     DataColumn(
+          //       label: Text('Posisi Akhir', style: TextStyle(fontSize: 2.h)),
+          //     ),
+          //     DataColumn(
+          //       label: Text('Berkurang', style: TextStyle(fontSize: 2.h)),
+          //     ),
+          //   ], rows: <DataRow>[
+          //     DataRow(
+          //       cells: [
+          //         DataCell(Text('1000', style: TextStyle(fontSize: 2.h))),
+          //         DataCell(Text('930', style: TextStyle(fontSize: 2.h))),
+          //         DataCell(Text('-70', style: TextStyle(fontSize: 2.h))),
+          //       ],
+          //     ),
+          //   ]),
+          // ),
           SizedBox(
             height: 4.h,
           ),

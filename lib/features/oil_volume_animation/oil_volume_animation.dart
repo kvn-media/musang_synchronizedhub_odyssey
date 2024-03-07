@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/screens/dashboard/data_sources/atg_data_grid_source.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:musang_syncronizehub_odyssey/features/core/controllers/atg_controller.dart';
@@ -42,12 +43,12 @@ class _OilVolumeAnimationPageState extends State<OilVolumeAnimationPage> {
       backgroundColor: Theme.of(context).brightness == Brightness.dark
           ? Colors.black
           : Colors.white,
-      appBar: AppBar(
-        title: Text('Oil Tank Overview'),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      // appBar: AppBar(
+      //   title: Text('Oil Tank Overview'),
+      //   centerTitle: true,
+      //   elevation: 0,
+      //   backgroundColor: Colors.transparent,
+      // ),
       body: FutureBuilder<List<ATGModel>>(
         future: widget.atgController.fetchData(),
         builder:

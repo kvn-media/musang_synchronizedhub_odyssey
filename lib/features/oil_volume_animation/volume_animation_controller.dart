@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:sizer/sizer.dart';
 
 import 'package:musang_syncronizehub_odyssey/features/oil_volume_animation/volume_clipper.dart';
 
@@ -10,7 +11,7 @@ class VolumeAnimationContainer extends StatefulWidget {
       required this.height,
       required this.tankLevel,
       this.seconds = 2000,
-      this.width = 300});
+      this.width = 1300});
 
   final List<Color> colors;
   final double height;
@@ -79,44 +80,44 @@ class _WaveAnimationContainerState extends State<VolumeAnimationContainer>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.50,
-      width: MediaQuery.of(context).size.width * 0.56,
+      height: 50.h,
+      width: 50.w,
       decoration: BoxDecoration(
         color: Colors.black38,
         border: Border.all(
           color: Colors.white,
           width: 2,
         ),
-        borderRadius: BorderRadius.circular(1000),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Stack(
         children: [
-          // SizedBox(
-          //   height: (MediaQuery.of(context).size.height * 0.50),
-          //   child: Column(
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: List.generate(
-          //       100,
-          //       (index) => ((index + 1) % 10 == 0)
-          //           ? Expanded(
-          //               child: Padding(
-          //                 padding: const EdgeInsets.only(left: 5),
-          //                 child: Text(
-          //                   '${index + 1}',
-          //                   overflow: TextOverflow.visible,
-          //                   style: const TextStyle(
-          //                     fontSize: 12,
-          //                     color: Colors.white,
-          //                     fontWeight: FontWeight.bold,
-          //                   ),
-          //                 ),
-          //               ),
-          //             )
-          //           : const SizedBox.shrink(),
-          //     ).reversed.toList(),
-          //   ),
-          // ),
+          SizedBox(
+            height: 50.h,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: List.generate(
+                100,
+                (index) => ((index + 1) % 10 == 0)
+                    ? Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text(
+                            '${index + 1}',
+                            overflow: TextOverflow.visible,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ).reversed.toList(),
+            ),
+          ),
           AnimatedBuilder(
             animation: _controller.drive(
               CurveTween(curve: Curves.easeInOut),
